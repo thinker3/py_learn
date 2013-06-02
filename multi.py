@@ -19,4 +19,5 @@ t1 = Myclass('abcde')
 t2 = Myclass('12345')
 
 t1.start()
+print
 t2.start()
