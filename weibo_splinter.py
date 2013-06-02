@@ -3,7 +3,6 @@ from splinter import Browser
 import sys
 
 content = unicode(sys.argv[1], 'utf-8')
-print content
 url = 'http://weibo.com'
 
 browser = Browser('firefox', extensions=['firebug.xpi',])
