@@ -12,6 +12,7 @@ class Myclass(threading.Thread):
 		for l in self.name:
 			print l
 			time.sleep(1)
+		print
 		lock.release()
 
 
@@ -19,5 +20,4 @@ t1 = Myclass('abcde')
 t2 = Myclass('12345')
 
 t1.start()
-print
 t2.start()
