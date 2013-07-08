@@ -11,6 +11,7 @@ obj.age = 27
 obj.height = 163
 obj.weight = 60
 
+_dict = {'name':'chenkun', 'age':27, 'height':163, 'weight':61.5}
 
 columns = [
         ['name', u'姓名', 8],
@@ -19,9 +20,11 @@ columns = [
         ['weight', u'体重', 6],
     ]
 
+dicts = []
 objs = []
 for i in xrange(33):
     objs.append(obj)
+    dicts.append(_dict)
 
 
 def make_xls(sheetname='sheet_1', filename='filename.xls', columns=[], objs=[]):
@@ -43,7 +46,11 @@ def make_xls(sheetname='sheet_1', filename='filename.xls', columns=[], objs=[]):
         sheet.col(i).width = columns[i][2] * 256
     for i, obj in enumerate(objs, start=1):
         for attr in attrs:
-            sheet.write(i, index_of(attr, columns), obj.__getattribute__(attr))
+            if isinstance(obj, dict):
+                sheet.write(i, index_of(attr, columns), obj[attr])
+            else:
+                sheet.write(i, index_of(attr, columns), obj.__getattribute__(attr))
+
 
     book.save(filename)
 
