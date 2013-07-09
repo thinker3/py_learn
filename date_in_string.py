@@ -1,5 +1,7 @@
 from datetime import date
 day = date.today()
+#year = day.year()
+
 print 'hello (%s) world' % day
 
 import sqlite3 as lite
