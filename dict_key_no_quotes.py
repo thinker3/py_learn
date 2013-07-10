@@ -1,11 +1,9 @@
-a = [1, 2, 3]
-b = ('chen', 'kun')
-a = b
+a = (1, 2, 3)
+b = ('jack', 'tom')
 d = {
         a: 'abc',
         b: 'edf',
         }
 
-for k in d:
-    print k
-print d
+for k, v in d.items():
+    print k, v
