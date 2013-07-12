@@ -5,8 +5,8 @@ def main():
     p[0] = '/'.join(p[0].split('/')[:-1])
     print p[0]
 
-    from base.basic_functions import get_html
-    print get_html
+    from base.retrospect import get_source_code, get_methods
+    print get_source_code(get_methods)
 
     p[0] = '/home/chenkun/work/'
     print p[0]
@@ -35,4 +35,4 @@ def minor():
     from base.basic_functions import get_html
     print get_html
 
-minor()
+main()
