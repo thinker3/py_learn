@@ -1,5 +1,12 @@
 #coding=utf8
 import re
+a='abc'
+aa='aabc'
+b=re.search(r'aa?b', a).group()
+c=re.search(r'aa?b', aa).group()
+print b, c
+
+
 x=u'需'
 print x.encode('utf8').__repr__()
 a=u'不要家私的勿扰'.encode('utf8')
