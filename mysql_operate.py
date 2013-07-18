@@ -19,9 +19,12 @@ meaning = u'哈哈3'
 example = u'哈哈4'
 meaning = meaning.encode('utf8')
 example = example.encode('utf8')
-sql = "update words set meaning=%s, example=%s where id<2"
+sql = "update words set meaning=%s, example=%s where id=%d"
 #sql = "delete from words where id>2"
-r = cur.execute(sql, [meaning, example])
+try:
+    r = cur.execute(sql, [meaning, example, 2])
+except:
+    r = 0
 conn.commit()
 cur.close()
 conn.close()
