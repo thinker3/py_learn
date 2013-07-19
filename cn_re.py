@@ -1,18 +1,12 @@
 #coding=utf8
 import re
-a='abc'
-aa='aabc'
-b=re.search(r'aa?b', a).group()
-c=re.search(r'aa?b', aa).group()
-print b, c
-
-
-x=u'需'
-print x.encode('utf8').__repr__()
-a=u'不要家私的勿扰'.encode('utf8')
-aa=u'不需要家私的勿扰'.encode('utf8')
-p=u'不需?要'.encode('utf8')
-print p.__repr__()
-b=re.findall(p, a, re.I)
-for one in b:
-    print one
+a=u'不要家私的勿扰'
+aa=u'不需要家私的勿扰'
+aaa=u'不要家私者勿扰'
+aaaa=u'不需要家私者勿扰'
+p=ur'不需?要家私[的|者]勿扰'
+b=re.search(p, a, re.I).group()
+c=re.search(p, aa, re.I).group()
+d=re.search(p, aaa, re.I).group()
+e=re.search(p, aaaa, re.I).group()
+print b, c, d, e
