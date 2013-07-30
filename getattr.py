@@ -11,8 +11,11 @@ class Person(object):
 
 p = Person()
 
-attr = getattr(p, 'show')()
-print attr
+attr = getattr(p, 'show')
+if callable(attr):
+    print attr()
+else:
+    print attr
 
 
 attr = getattr(p, 'country')
