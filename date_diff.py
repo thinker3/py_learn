@@ -11,3 +11,5 @@ day_delta = (today - other_day).days
 print abs(day_delta)
 
 print type(today.year)
+
+print datetime.now() # fit for django datetime field
