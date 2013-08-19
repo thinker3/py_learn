@@ -1,7 +1,8 @@
 import sqlalchemy
 from sqlalchemy import create_engine
 print sqlalchemy.__version__ 
-engine = create_engine('sqlite:///:memory:', echo=True)
+#engine = create_engine('sqlite:///:memory:', echo=True)
+engine = create_engine('sqlite:///:memory:', echo=False)
 print engine.execute("select 1").scalar()
 
 print
@@ -23,13 +24,14 @@ class User(Base):
         return "<User('%s', '%s')>" % (self.name, self.password)
 
 
+Base.metadata.create_all(engine)
 print repr(User.__table__)
 u1 = User('Jack', '1234')
 print repr(u1.__table__)
 print u1.id, u1
 
 
-Base.metadata.create_all(engine)
+#Base.metadata.create_all(engine)
 
 from sqlalchemy.orm import sessionmaker
 #Session = sessionmaker(bind=engine)
