@@ -29,12 +29,15 @@ print repr(u1.__table__)
 print u1.id, u1
 
 
+Base.metadata.create_all(engine)
+
 from sqlalchemy.orm import sessionmaker
 #Session = sessionmaker(bind=engine)
 Session = sessionmaker()
 Session.configure(bind=engine)
 s1 = Session()
 s1.add(u1)
+#s1.add_all([u1, ])
 s1.commit()
 print u1.id, u1
 
