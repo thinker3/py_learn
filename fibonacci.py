@@ -1,31 +1,33 @@
-def fibonacci(n):
-	a=b=1
-	yield a
-	yield b
-	i=1
-	while i<=n-2:
-		a,b = b,a+b
-		i += 1
-		yield b
+def fibonacci_generator(n):
+    a=b=1
+    yield a
+    yield b
+    i=1
+    while i<=n-2:
+        a,b = b,a+b
+        i += 1
+        yield b
 
-t = fibonacci(9)
+t = fibonacci_generator(9)
+print type(t)
 for one in t:
-	print one
+    print one
 
 
-def fibonacci_(n):
-	a=b=1
-	print a
-	print b
-	i=1
-	while i<=n-2:
-		a,b = b,a+b
-		i += 1
-		print b
+def fibonacci_list(n):
+    temp = []
+    a=b=1
+    temp.append(a)
+    temp.append(b)
+    i=1
+    while i<=n-2:
+        a,b = b,a+b
+        i += 1
+        temp.append(b)
+    return temp
 
-fibonacci_(9)
-
-m = map(lambda x:2*x,fibonacci(9))
-print type(m)
-print m
-
+print
+t = fibonacci_list(9)
+print type(t)
+for one in t:
+    print one
