@@ -1,10 +1,5 @@
 import os
 
-print __file__
-print type(__file__)
-print os.path.abspath(__file__)
-
-print
 print os.getcwd()
 print os.walk(os.getcwd())
 for one in os.walk(os.getcwd()):
@@ -22,3 +17,11 @@ for one in os.listdir(os.getcwd()):
     #if os.path.isdir((os.path.join(os.getcwd(), one))):
     if os.path.isdir(one):
         print one
+
+print
+print __file__
+print type(__file__)
+print os.path.abspath(__file__)
+print os.path.dirname(__file__)
+print os.path.dirname(os.path.abspath(__file__))
+print os.path.basename(__file__)
