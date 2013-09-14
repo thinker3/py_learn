@@ -19,3 +19,8 @@ print p.findall(s)
 p = re.compile(r'<li>(.*?)</li>')
 print p.findall(s)
 
+def process_match(m):
+    return '<li></li>'
+
+print p.sub(process_match, s, re.S)
+
