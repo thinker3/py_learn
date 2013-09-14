@@ -10,7 +10,7 @@ for i, row in enumerate(y):
     temp = []
     for j, col in enumerate(row):
         if col != 0:
-            temp.append('x' + str(i) + str(j))
+            temp.append(str(col) + '*x' + str(i) + str(j))
         else:
             temp.append(col)
     x.append(temp)
@@ -43,6 +43,9 @@ def solve(eq, var='x'):
 
 import re
 from time import sleep
+from copy import deepcopy
+
+equ_bak = deepcopy(equtions)
 
 ans = {}
 while(len(equtions) != 0):
@@ -64,21 +67,36 @@ while(len(equtions) != 0):
 
 
 
+import re
 
+p_var = re.compile(r'x\d\d')
+vars = set([])
+for one in equ_bak:
+    m = p_var.findall(one)
+    vars |= set(m)
+vars = sorted(list(vars))
 
+p_ef = re.compile(r'([+-]* *\d*)\*(x\d\d)')
+effs = []
+for one in equ_bak:
+    m = p_ef.findall(one)
+    #print m
+    temp = [0] * len(vars)
+    for num, var in m:
+        try:
+            temp[vars.index(var)] = float(num.replace(' ', ''))
+        except:
+            pass
+    effs.append(tuple(temp))
 
+#for one in effs:
+#    print one
 
-
-
-
-
-
-
-
-
-
-
-
+import numpy as np
+A = np.array(effs)
+x = np.linalg.lstsq(A,B)
+print vars
+print x[0]
 
 
 
