@@ -24,3 +24,5 @@ def process_match(m):
 
 print p.sub(process_match, s, re.S)
 
+print p.sub('<li></li>', s, re.S)
+print re.sub(r'<li>.*?</li>', '<li></li>', s, re.S)
