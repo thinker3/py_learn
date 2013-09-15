@@ -30,5 +30,6 @@ hxs = HtmlXPathSelector(text=text)
 #trs = hxs.select('//table/tbody/tr[not(contains(td, "Specifications"))]') # wrong
 #trs = hxs.select('//table/tbody/tr[not(contains(.|./@*, "Specifications"))]') # wrong
 trs = hxs.select('//table/tbody/tr[not(.//text()|./@*[contains(., "Specifications")])]')
+trs = hxs.select('//table/tbody/tr[not(.//text() or ./@*[contains(., "Specifications")])]')
 for one in trs.extract():
     print one
