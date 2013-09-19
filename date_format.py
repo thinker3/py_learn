@@ -16,3 +16,14 @@ now = datetime.now()
 delta = now - before
 print '%s seconds' % delta.total_seconds()
 print '%f seconds' % delta.total_seconds()
+
+print
+some_day = datetime.strptime('07/13/2007', '%m/%d/%Y')
+some_day = some_day.strftime('%m %B %Y')
+print some_day
+
+some_day = datetime.strptime('May 5 2007', '%B %d %Y').date()
+first_day = datetime.strptime('01/01/2007', '%m/%d/%Y').date()
+day_delta = (some_day - first_day).days + 1
+print some_day, first_day
+print day_delta
