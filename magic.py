@@ -93,7 +93,7 @@ print '-' * 100
 class Meta(type):
     def __call__(cls):
         obj = cls.__new__(cls)
-        #obj.__init__()
+        obj.__init__()
         return obj
 
 class Foo(object):
@@ -106,12 +106,20 @@ class Foo(object):
     def __init__(self):
         print 2
 
-    def show(self): print 'hello'
+    @classmethod
+    def show(cls): print cls
 
 f = Foo()
 f.show()
-
+f.__new__(Foo)
+f.__init__()
 Foo.__new__(Foo)
+print f.__new__
+print Foo.__new__
+print f.__init__
+print Foo.__init__
+print f.show
+print Foo.show
 #Foo.__new__()
 #Foo.__init__(Foo)
 
