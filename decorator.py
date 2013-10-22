@@ -54,3 +54,40 @@ sayhi = tag_i(tag_b(sayhi))
 print sayhi()
 
 
+def table(name):
+    def _table(cls):
+        cls.__table__ = name
+        return cls
+    return _table
+
+@table('u')
+class User(object): pass
+
+print User
+abc = User()
+print abc.__table__
+
+class User(object): pass
+User = table('v')(User)
+abc = User()
+print abc.__table__
+
+
+def tag(name):
+    def _tag(f):
+        def newf():
+            return "<{tag}>{res}</{tag}>".format(res=f(), tag=name)
+        return newf
+    return _tag
+
+@tag('b')
+@tag('i')
+def sayhi():
+    return 'hi'
+
+print sayhi()
+
+
+
+
+
