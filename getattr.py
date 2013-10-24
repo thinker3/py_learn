@@ -21,4 +21,60 @@ else:
 attr = getattr(p, 'country')
 print attr
 
+print '-' * 30
+class A(object):
+    def __init__(self):
+        self.a = 1
+
+    def __getattr__(self, name):
+        print 'calling __getattr__ ...'
+        if name == 'x':
+            return 'x'
+        else:
+            raise AttributeError('No such attribute: %s' % name)
+
+    def __getattribute__(self, name):
+        print 'calling __getattribute__ ...'
+        return object.__getattribute__(self, name)
+
+a = A()
+print a.__dict__
+print a.a
+print getattr(a, 'a')
+print a.x
+print a.__dict__
+try:
+    print getattr(a, 'y')
+except AttributeError as e:
+    print e.message
+
+
+print '-' * 30
+class A():
+    def __init__(self):
+        self.a = 1
+
+    def __getattr__(self, name):
+        print 'calling __getattr__ ...'
+        if name == 'x':
+            return 'x'
+        else:
+            raise AttributeError('No such attribute: %s' % name)
+
+    def __getattribute__(self, name):
+        print 'calling __getattribute__ ...'
+        return object.__getattribute__(self, name)
+
+a = A()
+print a.__dict__
+print a.a
+print getattr(a, 'a')
+print a.x
+print a.__dict__
+try:
+    print getattr(a, 'y')
+except AttributeError as e:
+    print e.message
+
+
 
