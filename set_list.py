@@ -9,8 +9,10 @@ print t
 
 s=set()
 print s
+s.add(1)
+s.add('a')
+print s
 
 t=tuple()
 print t
-t.append(1) #no attr append
-print t
+# t.append(1) #no attr append, since tuples are immutable
