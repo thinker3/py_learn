@@ -1,3 +1,5 @@
-import sys
-for arg in sys.argv:
+from sys import argv
+
+print len(argv)
+for arg in argv:
     print arg
