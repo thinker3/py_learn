@@ -24,15 +24,8 @@ while True:
             pass
     examples = hxs.select('//div[@id="bilingual"]/ul/li')
     for li in examples:
-        spans = li.select('./p[1]/span')
-        example_en = []
-        for span in spans:
-            one = span.select('./text()').extract()
-            if len(one) == 0:
-                one = span.select('./b/text()').extract()
-            example_en.extend(one)
-
-        example_cn = li.select('./p[2]/span/text()').extract()
+        example_en = li.select('./p[1]/span//text()').extract()
+        example_cn = li.select('./p[2]/span//text()').extract()
 
         print ''.join(example_en)
         print ''.join(example_cn)
