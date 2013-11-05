@@ -2,7 +2,7 @@ from time import sleep
 import os, sys
 import atexit
 
-filepath = os.path.expanduser('~/num.txt')
+filepath = os.path.expanduser('~/num.txt') # for home dir
 try:
     f = open(filepath, 'r')
     num = f.readline()
