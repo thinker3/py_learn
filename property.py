@@ -23,4 +23,22 @@ n.show_str()
 n.num = 321
 n.show_int()
 n.show_str()
+print '*' * 30
+
+class CallProperty(object):
+    '''
+        A property can not be called
+    '''
+    @property
+    def name(self):
+        return 'John'
+
+    @property
+    def full_name(self):
+        #return self.name() + ' Kennedy'
+        return self.name + ' Kennedy'
+
+obj = CallProperty()
+print obj.name
+print obj.full_name
 
