@@ -13,7 +13,20 @@ def show():
             if one:
                 yield one
     request = delimiter.join(clear_request(request))
-    request += delimiter
+    request += delimiter * 2
     print request
 
 show()
+
+s = 'a b\r\n'
+print s.split()
+print s.split(' ')
+s = 'a b\r'
+print s.split()
+print s.split(' ')
+s = 'a b\n'
+print s.split()
+print s.split(' ')
+s = 'a b '
+print s.split()
+print s.split(' ')
