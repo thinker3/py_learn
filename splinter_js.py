@@ -1,4 +1,5 @@
 from splinter.browser import Browser
+from time import sleep
 b = Browser('firefox')
 b.visit('http://www.baidu.com')
 #b.fill('wd', 'test\r')
@@ -14,4 +15,7 @@ script = '''
     document.getElementsByName('wd')[0].dispatchEvent(e)
 '''
 b.execute_script(script)
+#sleep(5)
+b.type('wd', ' python')
+#b.type('wd', ' python', slowly=True) # slowly not working
 
