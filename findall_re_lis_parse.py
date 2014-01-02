@@ -26,3 +26,8 @@ print p.sub(process_match, s, re.S)
 
 print p.sub('<li></li>', s, re.S)
 print re.sub(r'<li>.*?</li>', '<li></li>', s, re.S)
+
+# re does not have 'find' method
+print re.findall(r'\d+', 'abc12dfe')
+print re.search(r'\d+', 'abc12dfe')
+print re.match(r'\d+', 'abc12dfe')
