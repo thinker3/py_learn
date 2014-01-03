@@ -1,6 +1,11 @@
 from datetime import date, timedelta, datetime
 from time import sleep
 
+the_last_day = date.today() + timedelta(days=19)
+print the_last_day
+print the_last_day.year
+print the_last_day.month
+print the_last_day.day
 
 
 
@@ -24,3 +29,4 @@ print delta.total_seconds(), type(delta.total_seconds())
 print delta.days, type(delta.days)
 print delta.seconds, type(delta.seconds)
 print delta.microseconds, type(delta.microseconds)
+
