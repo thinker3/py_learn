@@ -28,3 +28,9 @@ print os.path.abspath(__file__)
 print os.path.dirname(__file__) # chenkun@chenkun-P43T-ES3G:~/git$ py py_learn/os_path.py
 print os.path.dirname(os.path.abspath(__file__)) # ends without '/' # /home/chenkun/git/py_learn
 print os.path.basename(__file__)
+
+print '-' * 50
+print os.path.join('/home', 'abc')
+print os.path.join(['/home', 'abc']) # ['/home', 'abc']
+print '/'.join(['/home', 'abc'])
+#print '/'.join('/home', 'abc') # TypeError: join() takes exactly one argument (2 given)
