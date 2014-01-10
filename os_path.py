@@ -2,15 +2,18 @@ import os
 
 print os.getcwd()
 print os.walk(os.getcwd())
-for one in os.walk(os.getcwd()):
-    print one
+#for one in os.walk(os.getcwd()): # too many
+    #print one
 
-dirname = os.path.dirname(__file__)
+#dirname = os.path.dirname(__file__)
+dirname = os.path.dirname(os.path.abspath(__file__))
+print dirname 
 test = os.path.join(dirname, 'test/')
+print test
 if not os.path.exists(test):
     os.makedirs(test)
 
-print
+print '-' * 50
 for one in os.listdir(os.getcwd()):
     if one.endswith('~'):
         print one
@@ -18,7 +21,7 @@ for one in os.listdir(os.getcwd()):
     if os.path.isdir(one):
         print one
 
-print
+print '-' * 50
 print __file__
 print type(__file__)
 print os.path.abspath(__file__)
