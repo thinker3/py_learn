@@ -25,6 +25,6 @@ print '-' * 50
 print __file__
 print type(__file__)
 print os.path.abspath(__file__)
-print os.path.dirname(__file__)
+print os.path.dirname(__file__) # chenkun@chenkun-P43T-ES3G:~/git$ py py_learn/os_path.py
 print os.path.dirname(os.path.abspath(__file__)) # ends without '/' # /home/chenkun/git/py_learn
 print os.path.basename(__file__)
