@@ -27,6 +27,38 @@ try:
     test()
 except:
     traceback.print_exc()
-
 print '-' * 20
-print total
+
+
+def test():
+    total += 0
+
+import traceback
+try:
+    test()
+except:
+    traceback.print_exc()
+print '-' * 20
+
+
+def outer(num):
+    def inner():
+        global num
+        num = 2
+        print num, 'inner'
+    print num
+    inner()
+
+outer(1)
+print num + 1
+print '-' * 20
+
+#def test(num):
+#    global num # SyntaxError: name 'num' is local and global
+
+
+
+
+
+
+
