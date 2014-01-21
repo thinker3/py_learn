@@ -1,8 +1,8 @@
 from sys import argv
-import re
 
 false = 'false'
 true = 'true'
+zero = (0, 0)
 
 def subtract(a, b):
     return b[0]-a[0], b[1]-a[1]
@@ -28,42 +28,35 @@ def is_square(a, b, c, d):
     ad = subtract(a, d)
     i = is_equal_or_opposite(ab, cd)
     if i == 1:
-        if dot(ab, ac) == 0 and is_length_equal(ab, ac):
+        if dot(ab, ac) == 0 and is_length_equal(ab, ac) and ab != zero:
             return true
         else:
             return false
     elif i:
-        if dot(ab, ad) == 0 and is_length_equal(ab, ad):
+        if dot(ab, ad) == 0 and is_length_equal(ab, ad) and ab != zero:
             return true
         else:
             return false
 
     i = is_equal_or_opposite(ac, bd)
     if i == 1:
-        if dot(ab, ac) == 0 and is_length_equal(ab, ac):
+        if dot(ab, ac) == 0 and is_length_equal(ab, ac) and ab != zero:
             return true
         else:
             return false
     elif i:
-        if dot(ad, ac) == 0 and is_length_equal(ad, ac):
+        if dot(ad, ac) == 0 and is_length_equal(ad, ac) and ad != zero:
             return true
         else:
             return false
     else:
         return false
 
-def get_points(one):
-    nums = map(int, re.findall(r'-?\d+', one))
-    points= []
-    for i in range(4):
-        points.append((nums[i*2], nums[i*2+1]))
-    return points
-
-
 f = open(argv[1], 'r')
 for one in f.readlines():
-    if one not in ['\n']:
-        print is_square(*get_points(one))
+    if one.strip():
+        points = map(eval, one.split(', '))
+        print is_square(*points)
 f.close()
 print
 
@@ -71,7 +64,7 @@ print
 import sys 
 cases = open(sys.argv[1], 'r')
 for case in cases:
-    if case != '\n':
+    if case.strip():
         a, b, c, d = map(eval, case.split(', '))
         ab = b[0]-a[0], b[1]-a[1]
         dc = c[0]-d[0], c[1]-d[1]
@@ -82,20 +75,30 @@ for case in cases:
         cd = d[0]-c[0], d[1]-c[1]
         ad = d[0]-a[0], d[1]-a[1]
         cb = b[0]-c[0], b[1]-c[1]
+        zero = (0, 0)
         if ab == dc:
             if ab[0]*bc[0] + ab[1]*bc[1] == 0:
                 if ac[0]*bd[0] + ac[1]*bd[1] == 0:
-                    print 'true'
+                    if ab == zero:
+                        print 'false'
+                    else:
+                        print 'true'
                     continue
         if ab == cd:
             if ab[0]*ac[0] + ab[1]*ac[1] == 0:
                 if ad[0]*bc[0] + ad[1]*bc[1] == 0:
-                    print 'true'
+                    if ab == zero:
+                        print 'false'
+                    else:
+                        print 'true'
                     continue
         if ad == cb:
             if ad[0]*ac[0] + ad[1]*ac[1] == 0:
                 if ab[0]*dc[0] + ab[1]*dc[1] == 0:
-                    print 'true'
+                    if ad == zero:
+                        print 'false'
+                    else:
+                        print 'true'
                     continue
         print 'false'
 
