@@ -16,8 +16,8 @@ def get_mines(m, n, s):
             yield str(total)
 
 f = open(argv[1], 'r')
-for one in f.readlines():
-    if one not in ['\n']:
+for one in f:
+    if one != '\n':
         mn, s = one.split(';')
         m, n = map(int, mn.split(','))
         print ''.join(get_mines(m, n, s))
