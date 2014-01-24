@@ -15,7 +15,7 @@ def get_down(a, b):
 def get_paths():
     paths = [[(0, 0)]]
     ans = []
-    j = 2*n-2
+    j = 2*n-3
     for i in range(j):
         for one in paths:
             temp = get_right(*one[-1])
@@ -44,7 +44,7 @@ def get_min():
         total = get_num_list(one, False)
         if ans is None or ans > total:
             ans = total 
-    print ans
+    print ans + matrix[n-1][n-1]
 
 f = open(argv[1], 'r')
 n = i = 0 
