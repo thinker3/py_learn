@@ -32,7 +32,6 @@ def get_one_min(a, b):
     return get_min_of_paths(paths)
 
 def get_min_of_paths(paths):
-    print paths
     ans = None
     for i in paths:
         total = 0
@@ -67,10 +66,4 @@ for one in f:
             matrix.append(map(int, one.split(',')))
             i -= 1
 f.close()
-
-
-
-
-
-
 
