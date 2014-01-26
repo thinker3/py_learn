@@ -7,6 +7,12 @@ l = range(5)
 t = itertools.permutations(l)
 s=0
 for i in t:
-		print i
-		s+=1
+    print i
+    s+=1
+print s
+
+s=0
+for one in itertools.combinations(l, 3):
+    print one
+    s+=1
 print s
