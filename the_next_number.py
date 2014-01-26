@@ -5,22 +5,18 @@ def get_the_next(one):
     for b in range(n-1,0,-1):
         for a in range(b-1,-1,-1):
             if one[a] < one[b]:
-                return one[:a] + one[b] + get_min(one[a:b] + one[b+1:])
-    return get_min(one, False)
+                return one[:a] + one[b] + (one[a+1:b] + one[a] + one[b+1:])[::-1]
+    return get_next(list(one))
 
-def get_min(left, flag=True):
-    left = [i for i in left]
-    left.sort()
-    if flag:
-        return ''.join(left)
-    else:
-        n = 0
-        while left[0] == '0':
-            left.pop(0)
-            n += 1
-        for i in range(n+1):
-            left.insert(1, '0')
-        return ''.join(left)
+def get_next(left):
+    left.reverse()
+    n = 0
+    while left[0] == '0':
+        left.pop(0)
+        n += 1
+    for i in range(n+1):
+        left.insert(1, '0')
+    return ''.join(left)
 
 f = open(argv[1], 'r')
 for one in f:
