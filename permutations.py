@@ -16,3 +16,15 @@ for one in itertools.combinations(l, 3):
     print one
     s+=1
 print s
+
+print '*' * 20
+more = ['a', 'b', 'c', 'd', 'e']
+less = [1, 2, 3]
+s=0
+for one in itertools.combinations(more, len(less)):
+    for two in itertools.permutations(one):
+        for a, b in zip(two, less):
+            print a, b
+        print
+        s+=1
+print s
