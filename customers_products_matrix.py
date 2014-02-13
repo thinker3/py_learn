@@ -1,6 +1,5 @@
 from sys import argv
 import itertools
-import datetime
 
 
 def done(one):
@@ -18,17 +17,25 @@ def done(one):
     col_num = len(row)
     max_ss = 0
     less = row_num
+    k = 0
+    k_max = 3600*10
     if row_num > col_num:
         less = col_num 
         for one in itertools.combinations(range(row_num), less):
             for two in itertools.permutations(range(col_num)):
                 total = get_total(one, two, less)
                 max_ss = total if max_ss < total else max_ss
+                k += 1
+                if k > k_max:
+                    return max_ss
     else:
         for one in itertools.combinations(range(col_num), less):
             for two in itertools.permutations(range(row_num)):
                 total = get_total(two, one, less)
                 max_ss = total if max_ss < total else max_ss
+                k += 1
+                if k > k_max:
+                    return max_ss
     return max_ss
 
 def get_total(one, two, less):
@@ -75,7 +82,6 @@ def has_common_factor(less, more):
     return False
 
 
-now = datetime.datetime.now()
 f = open(argv[1], 'r')
 for one in f:
     if one.strip():
@@ -83,11 +89,6 @@ for one in f:
         max_ss = done(one)
         print '%.2f' % max_ss
 f.close()
-delta = (datetime.datetime.now() - now)
-print delta.total_seconds()
-
-
-
 
 
 
