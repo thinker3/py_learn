@@ -1,4 +1,5 @@
 from sys import argv
+import datetime
 
 
 def prepare(one):
@@ -79,6 +80,7 @@ def get_max_ss(customers, products):
                 max_ss = ss if ss > max_ss else max_ss
     return max_ss
 
+now = datetime.datetime.now()
 f = open(argv[1], 'r')
 for one in f:
     if one.strip():
@@ -87,6 +89,8 @@ for one in f:
         max_ss = get_max_ss(customers, products)
         print '%.2f' % max_ss
 f.close()
+delta = (datetime.datetime.now() - now)
+print delta.total_seconds()
 
 
 
