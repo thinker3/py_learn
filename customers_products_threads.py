@@ -14,7 +14,9 @@ class Dosomething(threading.Thread):
 
     def run(self):
         ss = self.done(self.one)
-        ans.append([self.index, ss])
+        while len(ans) <= self.index:
+            ans.append(0)
+        ans[self.index] = ss
 
     def done(self, one):
         customers, products = one.split(';')
@@ -92,14 +94,15 @@ f = open(argv[1], 'r')
 for one in f:
     if one.strip():
         doer = Dosomething(one, index)
-        doer.start() # thread.error: can't start new thread
+        while threading.active_count() >= 2:
+            sleep(0.001)
+        doer.start() # threading does not help here!!!
         index += 1
 f.close()
-while index != len(ans):
+while threading.active_count() >= 2:
     sleep(0.001)
-ans.sort(key=lambda x: x[0])
 for one in ans:
-    print '%.2f' % one[1]
+    print '%.2f' % one
 
 
 
