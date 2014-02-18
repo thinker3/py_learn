@@ -28,3 +28,59 @@ for one in itertools.combinations(more, len(less)):
         print
         s+=1
 print s
+
+def my_permutations(n):
+    ans = [[0]]
+    if n <= 0:
+        return ans
+    i = 1
+    temp = []
+    while i < n+1:
+        for one in ans:
+            for j in range(i+1):
+                two = one[:]
+                two.insert(j, i)
+                temp.append(two)
+        ans = temp 
+        temp = []
+        i += 1
+    return ans
+
+ans = my_permutations(3)
+print ans, len(ans)
+
+
+def my_permutations_generator(n):
+    ans = [[0]]
+    if n <= 0:
+        yield ans[0]
+    i = 1
+    temp = []
+    while i < n+1:
+        for one in ans:
+            for j in range(i+1):
+                two = one[:]
+                two.insert(j, i)
+                if i == n+1:
+                    yield two
+                else:
+                    temp.append(two)
+        ans = temp 
+        temp = []
+        i += 1
+
+for one in my_permutations(4):
+    print one
+
+
+
+
+
+
+
+
+
+
+
+
+
