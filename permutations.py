@@ -117,7 +117,7 @@ def permute_in_place(a):
     >>> a
     [0, 1, 8, 9, 10]
     '''
-    yield list(a)
+    yield a
 
     if len(a) <= 1:
         return
@@ -125,26 +125,27 @@ def permute_in_place(a):
     last = len(a)
     while 1:
         i = last - 1
-
         while 1:
             i = i - 1
             if a[i] < a[i+1]:
                 j = last - 1
-                while not (a[i] < a[j]):
+                while a[i] >= a[j]:
                     j = j - 1
                 a[i], a[j] = a[j], a[i]
                 r = a[i+1:last]
                 r.reverse()
                 a[i+1:last] = r
-                yield list(a)
+                yield a
                 break
             if i == 0:
-                a.reverse()
                 return
 
 for one in permute_in_place(range(4)):
     print one
 
+print '*' * 20
+for one in itertools.permutations(range(4)):
+    print one
 
 
 
