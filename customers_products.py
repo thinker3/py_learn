@@ -63,21 +63,19 @@ import itertools
 def get_max_ss(customers, products):
     max_ss = 0
     if len(customers) <= len(products):
-        for some_products in itertools.combinations(products, len(customers)):
-            for one in itertools.permutations(some_products):
-                option = zip(one, customers) 
-                ss = 0
-                for product, customer in option:
-                    ss += get_ss(product, customer)
-                max_ss = ss if ss > max_ss else max_ss
+        for one in itertools.permutations(products, len(customers)):
+            option = zip(one, customers) 
+            ss = 0
+            for product, customer in option:
+                ss += get_ss(product, customer)
+            max_ss = ss if ss > max_ss else max_ss
     else:
-        for some_customers in itertools.combinations(customers, len(products)):
-            for one in itertools.permutations(some_customers):
-                option = zip(products, one) 
-                ss = 0
-                for product, customer in option:
-                    ss += get_ss(product, customer)
-                max_ss = ss if ss > max_ss else max_ss
+        for one in itertools.permutations(customers, len(products)):
+            option = zip(products, one) 
+            ss = 0
+            for product, customer in option:
+                ss += get_ss(product, customer)
+            max_ss = ss if ss > max_ss else max_ss
     return max_ss
 
 now = datetime.datetime.now()

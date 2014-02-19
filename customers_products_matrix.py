@@ -17,25 +17,17 @@ def done(one):
     col_num = len(row)
     max_ss = 0
     less = row_num
-    k = 0
-    k_max = 3600*10
     if row_num > col_num:
         less = col_num 
-        for one in itertools.combinations(range(row_num), less):
-            for two in itertools.permutations(range(col_num)):
-                total = get_total(one, two, less)
-                max_ss = total if max_ss < total else max_ss
-                k += 1
-                if k > k_max:
-                    return max_ss
+        for one in itertools.permutations(range(row_num), less):
+            two = range(col_num)
+            total = get_total(one, two, less)
+            max_ss = total if max_ss < total else max_ss
     else:
-        for one in itertools.combinations(range(col_num), less):
-            for two in itertools.permutations(range(row_num)):
-                total = get_total(two, one, less)
-                max_ss = total if max_ss < total else max_ss
-                k += 1
-                if k > k_max:
-                    return max_ss
+        for one in itertools.permutations(range(col_num), less):
+            two = range(row_num)
+            total = get_total(two, one, less)
+            max_ss = total if max_ss < total else max_ss
     return max_ss
 
 def get_total(one, two, less):
