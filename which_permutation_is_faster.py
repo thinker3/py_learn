@@ -1,8 +1,8 @@
 import datetime
 import itertools
 
-num = 9
 num = 10
+num = 9
 
 def my_inductive_permutations_generator(n):
     ans = [[0]]
@@ -87,18 +87,21 @@ def permute_in_place(n):
 
 def get_time_delta(f):
     now = datetime.datetime.now()
+    s = 0
     for one in f:
-        #print one
-        pass
+        s += 1
     delta = (datetime.datetime.now() - now)
-    print delta
+    return delta
 
 def main():
-    get_time_delta(itertools.permutations(range(num)))
-    get_time_delta(my_permutations_generator_faster(num))
-    get_time_delta(my_inductive_permutations_generator(num))
-    get_time_delta(permute_in_place(num))
-    get_time_delta(python_permutations(num))
+    times = []
+    times.append(get_time_delta(itertools.permutations(range(num))))
+    times.append(get_time_delta(my_permutations_generator_faster(num)))
+    times.append(get_time_delta(my_inductive_permutations_generator(num)))
+    times.append(get_time_delta(permute_in_place(num)))
+    times.append(get_time_delta(python_permutations(num)))
+    for one in times:
+        print one
 
 main()
 
