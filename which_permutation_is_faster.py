@@ -1,15 +1,15 @@
 import datetime
 import itertools
 
-num = 11
 num = 9
+num = 10
 
 def my_inductive_permutations_generator(n):
     ans = [[0]]
     if n <= 1:
         yield ans[0]
     temp = []
-    for i in range(1, n):
+    for i in xrange(1, n):
         for one in ans:
             for j in xrange(i,-1,-1):
                 two = one[:]
@@ -27,25 +27,23 @@ def my_permutations_generator_faster(n):
     if n<=1:
         return
     while 1:
-        for i in range(n-1, 0, -1):
+        for i in xrange(n-1, 0, -1):
             l[i], l[i-1] = l[i-1], l[i]
             yield l
-            if i==1:
-                index = -1
-                sub_max = 0
-                for i in range(1,n):
-                    if l[i] != n-i-1 and index == -1:
-                        index = i
-                        sub_max = n-i-1
-                    if sub_max and l[i] == sub_max:
-                        l[i], l[i-1] = l[i-1], l[i]
-                        left = l[:index]
-                        left.reverse()
-                        l = l[index:] + left
-                        yield l
-                        break
-                else:
-                    return
+        index = 0 
+        for i in xrange(1, n):
+            if not index and l[i] != n-i-1:
+                index = i
+                continue
+            if index and l[i] == n-index-1:
+                l[i], l[i-1] = l[i-1], l[i]
+                left = l[:index]
+                left.reverse()
+                l = l[index:] + left
+                yield l
+                break
+        else:
+            return
 
 def python_permutations(n):
     indices = range(n)
