@@ -1,3 +1,4 @@
+#coding=utf8
 import itertools
 
 a = [1, 2]
@@ -11,10 +12,9 @@ for one in itertools.product(a, b, c):
 print '*' * 20
 def my_product(*args):
     for one in args:
-        if (isinstance(one, list) or isinstance(one, tuple)) and len(one):
+        if (isinstance(one, list) or isinstance(one, tuple) or isinstance(one, unicode) or isinstance(one, str)) and len(one):
             continue 
         else:
-            yield tuple()
             return
 
     n = len(args)
