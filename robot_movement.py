@@ -6,25 +6,16 @@ def go_to(point, a, b):
     a = point[0]+a
     b = point[1]+b
     if -1 < a < n and -1 < b < n:
-        return [(a, b)]
-    else:
-        return []
+        return (a, b)
 
+four = [(0, 1), (1, 0), (0, -1), (-1, 0)]
 def go_next(route):
     routes = []
     last = route[-1]
-    right = go_to(last, 0, 1)
-    if right:
-        routes.append(route + right)
-    down = go_to(last, 1, 0)
-    if down:
-        routes.append(route + down)
-    up = go_to(last, 0, -1)
-    if up:
-        routes.append(route + up)
-    left = go_to(last, -1, 0)
-    if left:
-        routes.append(route + left)
+    for one in four:
+        p = go_to(last, *one)
+        if p:
+            routes.append(route + [p])
     return routes
 
 while temp:
