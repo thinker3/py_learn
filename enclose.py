@@ -44,25 +44,6 @@ print total
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 total = 0
 for i in xrange(1, 299):
     for j in xrange(299):
