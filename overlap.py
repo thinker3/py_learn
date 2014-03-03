@@ -11,7 +11,7 @@ for one in f:
     if one.strip():
         i, s = one.split(':')
         index.append(int(i))
-        floats = re.findall(r"[-+]?\d*\.\d+|\d+", s)
+        floats = re.findall(r"[-+]?\d+\.\d+", s)
         a, b, c, d = map(float, floats)
         arclines.append(([a, b], [c, d]))
 f.close()
@@ -23,7 +23,7 @@ def get_direction(x):
 
 def two_three(point):
     a, b = map(radians, point)
-    return (cos(b), sin(b), sin(a))
+    return (abs(cos(a))*cos(b), abs(cos(a))*sin(b), sin(a))
 
 def cross(a, b):
     return [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
@@ -42,13 +42,9 @@ def get_cross_points(x):
 
 def get_angle(a, b):
     ab = sum(i*j for i, j in zip(a, b))
-    mag_a = sqrt(sum(map(lambda x: x**2, a)))
-    mag_b = sqrt(sum(map(lambda x: x**2, b)))
-    mag_ab = mag_a * mag_b
-    angle = ab/mag_ab
-    return degrees(acos(angle))
+    return degrees(acos(ab))
 
-error = 0.001
+error = 0.00001
 
 def is_overlap(m, n):
     p1 = cross(directions[m], directions[n])
