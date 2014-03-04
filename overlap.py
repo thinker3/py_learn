@@ -1,4 +1,4 @@
-from math import cos, sin, radians, sqrt, acos, degrees
+from math import cos, sin, radians, sqrt, acos
 import itertools, re
 from sys import argv
 
@@ -26,25 +26,17 @@ def two_three(point):
     return (abs(cos(a))*cos(b), abs(cos(a))*sin(b), sin(a))
 
 def cross(a, b):
-    return [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
+    return [a[1]*b[2] - a[2]*b[1],
+            a[2]*b[0] - a[0]*b[2],
+            a[0]*b[1] - a[1]*b[0]]
 
 def unit(p):
     s = sqrt(sum(map(lambda x: x**2, p)))
     return map(lambda x: x/s, p)
 
-def get_cross_points(x):
-    x = map(two_three, x)
-    p1 = cross(*x)
-    p1 = unit(p1)
-    p2 = map(lambda x: -x, p1)
-    points = (p1, p2)
-    return points
-
 def get_angle(a, b):
     ab = sum(i*j for i, j in zip(a, b))
-    return degrees(acos(ab))
-
-error = 0.00001
+    return acos(ab)
 
 def is_overlap(m, n):
     p1 = cross(directions[m], directions[n])
@@ -53,15 +45,23 @@ def is_overlap(m, n):
     m12 = get_angle(arclines[m][0], arclines[m][1])
     n12 = get_angle(arclines[n][0], arclines[n][1])
 
-    s1 = get_angle(p1, arclines[m][0]) + get_angle(p1, arclines[m][1])
-    s2 = get_angle(p1, arclines[n][0]) + get_angle(p1, arclines[n][1])
-    if s1 < m12 + error and s2 < n12 + error:
+    m0_p1 = get_angle(p1, arclines[m][0])
+    m1_p1 = get_angle(p1, arclines[m][1])
+    n0_p1 = get_angle(p1, arclines[n][0])
+    n1_p1 = get_angle(p1, arclines[n][1])
+    if max(m0_p1, m1_p1) > m12 or max(n0_p1, n1_p1) > n12:
+        pass
+    else:
         return True
-    s3 = get_angle(p2, arclines[m][0]) + get_angle(p2, arclines[m][1])
-    s4 = get_angle(p2, arclines[n][0]) + get_angle(p2, arclines[n][1])
-    if s3 < m12 + error and s4 < n12 + error:
+
+    m0_p2 = get_angle(p2, arclines[m][0])
+    m1_p2 = get_angle(p2, arclines[m][1])
+    n0_p2 = get_angle(p2, arclines[n][0])
+    n1_p2 = get_angle(p2, arclines[n][1])
+    if max(m0_p2, m1_p2) > m12 or max(n0_p2, n1_p2) > n12:
+        return False
+    else:
         return True
-    return False
 
 arclines = map(lambda x: map(two_three, x), arclines)
 directions = map(get_direction, arclines)
