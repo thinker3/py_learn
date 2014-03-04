@@ -11,7 +11,7 @@ for one in f:
     if one.strip():
         i, s = one.split(':')
         index.append(int(i))
-        floats = re.findall(r"[-+]?\d+\.\d+", s)
+        floats = re.findall(r"[-+]?\d*\.\d+|[-+]?\d+\.?", s)
         a, b, c, d = map(float, floats)
         arclines.append(([a, b], [c, d]))
 f.close()
@@ -23,8 +23,8 @@ def get_direction(x):
 
 def two_three(point):
     a, b = map(radians, point)
-    #p = (cos(a)*cos(b), cos(a)*sin(b), sin(a))
-    p = unit((cos(b), sin(b), sin(a)))
+    p = (cos(a)*cos(b), cos(a)*sin(b), sin(a))
+    #p = unit((cos(b), sin(b), sin(a)))
     return p
 
 def cross(a, b):

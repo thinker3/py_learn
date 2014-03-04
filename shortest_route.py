@@ -21,6 +21,7 @@ f = open(argv[1], 'r')
 for one in f:
     if one.strip():
         floats = re.findall(r"[-+]?\d+\.\d+", one)
+        #floats = re.findall(r"[-+]?\d*\.\d+|[-+]?\d+\.?", one)[-2:]
         a, b = map(float, floats)
         points.append((a, b))
 f.close()
