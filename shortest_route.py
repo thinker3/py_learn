@@ -1,10 +1,16 @@
-from math import cos, sin, radians, acos
+from math import cos, sin, radians, acos, sqrt
 import itertools, re
 from sys import argv
 
 def two_three(point):
     a, b = map(radians, point)
-    return (abs(cos(a))*cos(b), abs(cos(a))*sin(b), sin(a))
+    p = unit((cos(b), sin(b), sin(a)))
+    #p = (cos(a)*cos(b), cos(a)*sin(b), sin(a))
+    return p
+
+def unit(p):
+    s = sqrt(sum(map(lambda x: x**2, p)))
+    return map(lambda x: x/s, p)
 
 def get_angle(a, b):
     ab = sum(i*j for i, j in zip(a, b))

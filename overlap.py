@@ -23,7 +23,9 @@ def get_direction(x):
 
 def two_three(point):
     a, b = map(radians, point)
-    return (abs(cos(a))*cos(b), abs(cos(a))*sin(b), sin(a))
+    #p = (cos(a)*cos(b), cos(a)*sin(b), sin(a))
+    p = unit((cos(b), sin(b), sin(a)))
+    return p
 
 def cross(a, b):
     return [a[1]*b[2] - a[2]*b[1],
