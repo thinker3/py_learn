@@ -15,6 +15,8 @@ Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
 
 CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E']
+
+
 class Hand(object):
     def __init__(self, cards, name):
         self.cards = cards
@@ -33,7 +35,7 @@ class Hand(object):
         return VALUES.index(a) - VALUES.index(b)
 
     def compared_results(self):
-        deltas= []
+        deltas = []
         for i in range(4):
             res = self.compare(self.values[i], self.values[i+1])
             deltas.append(res)
@@ -48,7 +50,7 @@ class Hand(object):
             return self.number == 15
         except:
             self.number = int(''.join(map(
-                lambda x: '1' if x>0 else '0', self.deltas)), 2)
+                lambda x: '1' if x > 0 else '0', self.deltas)), 2)
             return False
 
     def has_4_the_same_value(self):
@@ -100,6 +102,7 @@ def get_cards(one):
     right = Hand(right, 'right')
     return [left, right]
 
+
 def get_winner(one):
     winners = []
     for i in range(2):
@@ -111,7 +114,7 @@ def get_winner(one):
         if winners[0].values[0] == winners[1].values[0]:
             return None
         else:
-            (return winners[0]
+            return (winners[0]
                     if winners[0].values[0] > winners[1].values[0]
                     else winners[1])
 
@@ -201,7 +204,7 @@ def get_winner(one):
                     else winners[1])
 
     for x in one:
-        if x.has_2_pairs()
+        if x.has_2_pairs():
             winners.append(x)
     if len(winners) == 1:
         return winners[0]
@@ -214,7 +217,7 @@ def get_winner(one):
                     else winners[1])
 
     for x in one:
-        if x.has_1_pairs()
+        if x.has_1_pairs():
             winners.append(x)
     if len(winners) == 1:
         return winners[0]
@@ -244,12 +247,3 @@ for one in f:
         else:
             print 'none'
 f.close()
-
-
-
-
-
-
-
-
-
