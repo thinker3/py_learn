@@ -37,7 +37,7 @@ class Hand(object):
     def compared_results(self):
         deltas = []
         for i in range(4):
-            res = self.compare(self.values[i], self.values[i+1])
+            res = self.compare(self.values[i], self.values[i + 1])
             deltas.append(res)
         self.deltas = deltas
 
@@ -90,7 +90,7 @@ class Hand(object):
             i = self.deltas.index(0)
             self.pair = self.values[i]
             self.values.pop(i)
-            self.values.pop(i)
+            self.value = ''.join(reversed(self.values))
         return flag
 
 
@@ -217,7 +217,7 @@ def get_winner(one):
                     else winners[1])
 
     for x in one:
-        if x.has_1_pairs():
+        if x.has_1_pair():
             winners.append(x)
     if len(winners) == 1:
         return winners[0]
@@ -236,6 +236,7 @@ def get_winner(one):
         return (winners[0]
                 if winners[0].value > winners[1].value
                 else winners[1])
+
 
 f = open(argv[1], 'r')
 for one in f:
