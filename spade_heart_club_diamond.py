@@ -53,7 +53,6 @@ class Hand(object):
         if self.number == 8:
             self.value = self.values[1] + self.values[0]
             return True
-        return False
 
     def is_full_house(self):
         flag = self.number in (2, 4)
@@ -78,9 +77,9 @@ class Hand(object):
         if flag:
             i = self.deltas.index(0)
             three = self.values[i]
-            self.value = ''.join(
+            value = ''.join(
                 [one for one in self.values if one != three])
-            self.value = three + self.value
+            self.value = three + value
         return flag
 
     def has_2_pairs(self):
@@ -88,17 +87,16 @@ class Hand(object):
         if flag:
             indexes = [i for i, x in enumerate(self.deltas) if x == 0]
             pairs = ''.join([self.values[i] for i in indexes])
-            self.value = ''.join(
+            value = ''.join(
                 [one for one in self.values if one not in pairs])
-            self.value = pairs + self.value
+            self.value = pairs + value
         return flag
 
     def has_1_pair(self):
-        flag = self.deltas.count(0) == 1
+        flag = (self.deltas.count(0) == 1)
         if flag:
             i = self.deltas.index(0)
-            pair = self.values[i]
-            self.values.pop(i)
+            pair = self.values.pop(i)
             self.values.pop(i)
             self.value = pair + ''.join(self.values)
         return flag
@@ -114,13 +112,13 @@ def get_cards(one):
 
 
 def get_winner_sub(winners):
-    if len(winners) == 1:
+    n = len(winners)
+    if n == 1:
         return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value != winners[1].value:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
+    elif n == 2:
+        a, b = winners
+        if a.value != b.value:
+            return a if a.value > b.value else b
 
 
 def get_winner(one):
