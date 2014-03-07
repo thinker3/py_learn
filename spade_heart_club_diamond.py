@@ -117,9 +117,7 @@ def get_winner_sub(winners):
     if len(winners) == 1:
         return winners[0]
     elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
+        if winners[0].value != winners[1].value:
             return (winners[0]
                     if winners[0].value > winners[1].value
                     else winners[1])
@@ -135,6 +133,7 @@ def get_winner(one):
         'has_3_the_same_value',
         'has_2_pairs',
         'has_1_pair',
+        'value',
     ]
     winners = []
     for attr in attrs:
@@ -148,8 +147,6 @@ def get_winner(one):
         winner = get_winner_sub(winners)
         if winner:
             return winner
-    winner = get_winner_sub(one)
-    return winner
 
 
 f = open(argv[1], 'r')
