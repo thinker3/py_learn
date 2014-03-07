@@ -18,6 +18,7 @@ VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E']
 
 
 class Hand(object):
+
     def __init__(self, cards, name):
         self.cards = cards
         self.name = name
@@ -29,6 +30,7 @@ class Hand(object):
         values = map(lambda x: VALUES[CARDS.index(x)], values)
         values = sorted(values, key=lambda x: - VALUES.index(x))
         self.values = values
+        self.value = ''.join(values)
         self.compared_results()
 
     def compare(self, a, b):
@@ -44,6 +46,24 @@ class Hand(object):
     def is_flush_and_straight(self):
         return self.is_straight() and self.is_flush
 
+    def has_4_the_same_value(self):
+        if self.number == 1:
+            self.value = self.values[0] + self.values[-1]
+            return True
+        if self.number == 8:
+            self.value = self.values[1] + self.values[0]
+            return True
+        return False
+
+    def is_full_house(self):
+        flag = self.number in (2, 4)
+        if flag:
+            if self.number == 2:
+                self.value = self.values[0] + self.values[-1]
+            else:
+                self.value = self.values[-1] + self.values[0]
+        return flag
+
     def is_straight(self):
         try:
             self.number = int(''.join(map(str, self.deltas)), 2)
@@ -53,44 +73,34 @@ class Hand(object):
                 lambda x: '1' if x > 0 else '0', self.deltas)), 2)
             return False
 
-    def has_4_the_same_value(self):
-        if self.number == 1:
-            self.four = self.values[0]
-            self.one = self.values[-1]
-            return True
-        if self.number == 8:
-            self.four = self.values[1]
-            self.one = self.values[0]
-            return True
-        return False
-
-    def is_full_house(self):
-        return self.number in (2, 4)
-
     def has_3_the_same_value(self):
-        return self.number in (3, 9, 12)
+        flag = self.number in (3, 9, 12)
+        if flag:
+            i = self.deltas.index(0)
+            three = self.values[i]
+            self.value = ''.join(
+                [one for one in self.values if one != three])
+            self.value = three + self.value
+        return flag
 
     def has_2_pairs(self):
         flag = self.number in (5, 6, 10)
         if flag:
-            i = self.deltas.index(0)
-            self.pair = [self.values[i]]
-            self.values.pop(i)
-            self.values.pop(i)
-            self.deltas.pop(i)
-            i = self.deltas.index(0)
-            self.pair.append(self.values[i])
-            self.values.pop(i)
-            self.values.pop(i)
+            indexes = [i for i, x in enumerate(self.deltas) if x == 0]
+            pairs = ''.join([self.values[i] for i in indexes])
+            self.value = ''.join(
+                [one for one in self.values if one not in pairs])
+            self.value = pairs + self.value
         return flag
 
     def has_1_pair(self):
         flag = self.deltas.count(0) == 1
         if flag:
             i = self.deltas.index(0)
-            self.pair = self.values[i]
+            pair = self.values[i]
             self.values.pop(i)
-            self.value = ''.join(reversed(self.values))
+            self.values.pop(i)
+            self.value = pair + ''.join(self.values)
         return flag
 
 
@@ -103,139 +113,43 @@ def get_cards(one):
     return [left, right]
 
 
+def get_winner_sub(winners):
+    if len(winners) == 1:
+        return winners[0]
+    elif len(winners) == 2:
+        if winners[0].value == winners[1].value:
+            return None
+        else:
+            return (winners[0]
+                    if winners[0].value > winners[1].value
+                    else winners[1])
+
+
 def get_winner(one):
+    attrs = [
+        'is_flush_and_straight',
+        'has_4_the_same_value',
+        'is_full_house',
+        'is_flush',
+        'is_straight',
+        'has_3_the_same_value',
+        'has_2_pairs',
+        'has_1_pair',
+    ]
     winners = []
-    for i in range(2):
-        if one[i].is_flush_and_straight():
-            winners.append(one[i])
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].values[0] == winners[1].values[0]:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].values[0] > winners[1].values[0]
-                    else winners[1])
-
-    for x in one:
-        if x.has_4_the_same_value():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].four == winners[1].four:
-            if winners[0].one == winners[1].one:
-                if winners[0].is_flush == winners[1].is_flush:
-                    return None
-                else:
-                    return (winners[0]
-                            if winners[0].is_flush
-                            else winners[1])
-            else:
-                return (winners[0]
-                        if winners[0].one > winners[1].one
-                        else winners[1])
-        else:
-            return (winners[0]
-                    if winners[0].four > winners[1].Four
-                    else winners[1])
-
-    for x in one:
-        if x.is_full_house():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].three == winners[1].three:
-            if winners[0].two == winners[1].two:
-                if winners[0].is_flush == winners[1].is_flush:
-                    return None
-                else:
-                    return (winners[0]
-                            if winners[0].is_flush
-                            else winners[1])
-            else:
-                return (winners[0]
-                        if winners[0].two > winners[1].two
-                        else winners[1])
-        else:
-            return (winners[0]
-                    if winners[0].three > winners[1].three
-                    else winners[1])
-
-    for x in one:
-        if x.is_flush:
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
-
-    for x in one:
-        if x.is_straight():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
-
-    for x in one:
-        if x.has_3_the_same_value():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
-
-    for x in one:
-        if x.has_2_pairs():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
-
-    for x in one:
-        if x.has_1_pair():
-            winners.append(x)
-    if len(winners) == 1:
-        return winners[0]
-    elif len(winners) == 2:
-        if winners[0].value == winners[1].value:
-            return None
-        else:
-            return (winners[0]
-                    if winners[0].value > winners[1].value
-                    else winners[1])
-
-    winners = one
-    if winners[0].value == winners[1].value:
-        return None
-    else:
-        return (winners[0]
-                if winners[0].value > winners[1].value
-                else winners[1])
+    for attr in attrs:
+        for x in one:
+            m = getattr(x, attr)
+            if callable(m):
+                if m():
+                    winners.append(x)
+            elif m:
+                winners.append(x)
+        winner = get_winner_sub(winners)
+        if winner:
+            return winner
+    winner = get_winner_sub(one)
+    return winner
 
 
 f = open(argv[1], 'r')
