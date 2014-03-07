@@ -1,18 +1,5 @@
 from sys import argv
 
-'''
-High Card: Highest value card.
-One Pair: Two cards of the same value.
-Two Pairs: Two different pairs.
-Three of a Kind: Three cards of the same value.
-Straight: All cards are consecutive values.
-Flush: All cards of the same suit.
-Full House: Three of a kind and a pair.
-Four of a Kind: Four cards of the same value.
-Straight Flush: All cards are consecutive values of same suit.
-Royal Flush: Ten, Jack, Queen, King, Ace, in same suit.
-'''
-
 CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E']
 
@@ -20,27 +7,25 @@ VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E']
 class Hand(object):
 
     def __init__(self, cards, name):
-        self.cards = cards
         self.name = name
         self.is_flush = False
-        suits = map(lambda x: x[1], self.cards)
+        suits = map(lambda x: x[1], cards)
         if len(set(suits)) == 1:
             self.is_flush = True
-        values = map(lambda x: x[0], self.cards)
+        values = map(lambda x: x[0], cards)
         values = map(lambda x: VALUES[CARDS.index(x)], values)
-        values = sorted(values, key=lambda x: - VALUES.index(x))
-        self.values = values
-        self.value = ''.join(values)
+        self.values = sorted(values, key=lambda x: - VALUES.index(x))
+        self.value = ''.join(self.values)
         self.compared_results()
 
     def compare(self, a, b):
         return VALUES.index(a) - VALUES.index(b)
 
     def compared_results(self):
-        deltas = []
+        deltas = ''
         for i in range(4):
             res = self.compare(self.values[i], self.values[i + 1])
-            deltas.append(res)
+            deltas += str(res)
         self.deltas = deltas
 
     def is_flush_and_straight(self):
@@ -65,17 +50,16 @@ class Hand(object):
 
     def is_straight(self):
         try:
-            self.number = int(''.join(map(str, self.deltas)), 2)
+            self.number = int(self.deltas, 2)
             return self.number == 15
         except:
             self.number = int(''.join(map(
-                lambda x: '1' if x > 0 else '0', self.deltas)), 2)
-            return False
+                lambda x: '1' if x > '0' else '0', self.deltas)), 2)
 
     def has_3_the_same_value(self):
         flag = self.number in (3, 9, 12)
         if flag:
-            i = self.deltas.index(0)
+            i = self.deltas.index('0')
             three = self.values[i]
             value = ''.join(
                 [one for one in self.values if one != three])
@@ -85,17 +69,15 @@ class Hand(object):
     def has_2_pairs(self):
         flag = self.number in (5, 6, 10)
         if flag:
-            indexes = [i for i, x in enumerate(self.deltas) if x == 0]
-            pairs = ''.join([self.values[i] for i in indexes])
-            value = ''.join(
-                [one for one in self.values if one not in pairs])
-            self.value = pairs + value
+            indexes = [i for i, x in enumerate(self.deltas) if x == '0']
+            indexes = [i for i in range(5) if i not in indexes]
+            self.value = ''.join([self.values[i] for i in indexes])
         return flag
 
     def has_1_pair(self):
-        flag = (self.deltas.count(0) == 1)
+        flag = (self.deltas.count('0') == 1)
         if flag:
-            i = self.deltas.index(0)
+            i = self.deltas.index('0')
             pair = self.values.pop(i)
             self.values.pop(i)
             self.value = pair + ''.join(self.values)
