@@ -4,6 +4,10 @@ CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 VALUES = ['2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E']
 
 
+def compare(a, b):
+    return VALUES.index(a) - VALUES.index(b)
+
+
 class Hand(object):
 
     def __init__(self, cards, name):
@@ -18,13 +22,10 @@ class Hand(object):
         self.value = ''.join(self.values)
         self.compared_results()
 
-    def compare(self, a, b):
-        return VALUES.index(a) - VALUES.index(b)
-
     def compared_results(self):
         deltas = ''
         for i in range(4):
-            res = self.compare(self.values[i], self.values[i + 1])
+            res = compare(self.values[i], self.values[i + 1])
             deltas += str(res)
         self.deltas = deltas
 
