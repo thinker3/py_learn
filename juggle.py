@@ -30,14 +30,14 @@ def assign(j):
             groups[p] = [j]
             break
         else:
-            circuit = groups[p]
-            if len(circuit) < group_len:
-                circuit.append(j)
+            group = groups[p]
+            if len(group) < group_len:
+                group.append(j)
                 break
             else:
-                circuit.append(j)
-                circuit.sort(key=lambda j: dot(j.hep, circuits[p]))
-                loser = circuit.pop(0)
+                group.append(j)
+                group.sort(key=lambda j: dot(j.hep, circuits[p]))
+                loser = group.pop(0)
                 if loser.preference:
                     j = loser
                 else:
