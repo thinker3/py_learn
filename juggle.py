@@ -2,12 +2,8 @@ from sys import argv
 import re
 
 
-class Circuit(object):
-    def __init__(self, circuit):
-        self.hep = circuit[1:]
-
-
 class Juggler(object):
+
     def __init__(self, juggler):
         self.index = juggler[0]
         self.hep = juggler[1:4]
@@ -25,25 +21,27 @@ wanted = 1970
 group_len = 4
 wanted = 2
 groups = {}
-losers = []
 
 
 def assign(j):
-    p = j.preference.pop(0)
-    if p not in groups:
-        groups[p] = [j]
-    else:
-        circuit = groups[p]
-        if len(circuit) < group_len:
-            circuit.append(j)
+    while 1:
+        p = j.preference.pop(0)
+        if p not in groups:
+            groups[p] = [j]
+            break
         else:
-            circuit.append(j)
-            circuit.sort(key=lambda j: dot(j.hep, circuits[p].hep))
-            loser = circuit.pop(0)
-            if not loser.preference:
-                losers.append(loser)
+            circuit = groups[p]
+            if len(circuit) < group_len:
+                circuit.append(j)
+                break
             else:
-                assign(loser)
+                circuit.append(j)
+                circuit.sort(key=lambda j: dot(j.hep, circuits[p]))
+                loser = circuit.pop(0)
+                if loser.preference:
+                    j = loser
+                else:
+                    break
 
 
 circuits = []
@@ -52,9 +50,8 @@ f = open(argv[1], 'r')
 for one in f:
     if one.strip():
         if not circuits_over:
-            circuit = map(int, re.findall(r'\d+', one))
-            c = Circuit(circuit)
-            circuits.append(c)
+            circuit = map(int, re.findall(r'\d+', one))[1:]
+            circuits.append(circuit)
         else:
             juggler = map(int, re.findall(r'\d+', one))
             j = Juggler(juggler)
@@ -65,5 +62,4 @@ f.close()
 
 c = groups[wanted]
 s = sum(map(lambda j: j.index, c))
-print losers
 print s
