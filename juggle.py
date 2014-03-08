@@ -36,8 +36,8 @@ def assign(j):
                 break
             else:
                 group.append(j)
-                group.sort(key=lambda j: dot(j.hep, circuits[p]))
-                loser = group.pop(0)
+                loser = min(group, key=lambda j: dot(j.hep, circuits[p]))
+                group.remove(loser)
                 if loser.preference:
                     j = loser
                 else:
