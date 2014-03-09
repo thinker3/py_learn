@@ -1,45 +1,45 @@
 from sys import argv
 import re
+import itertools
+
+
+def find_no(m, options):
+    for i in xrange(m, 1, -1):
+        for one in itertools.combinations(options, i):
+            temp = []
+            for j in one:
+                for k in j:
+                    if k not in temp:
+                        temp.append(k)
+            yield len(temp) < i
+
+
+def find_yes(m, options):
+    for one in itertools.product(*options):
+        s = set(one)
+        yield len(s) == m
 
 
 def is_it_possible(one):
     n, options = one.split(';')
-    n = int(n)
+    #n = int(n)
     options = options.split('],')
     options = map(lambda x: re.findall(r'\d+', x)[1:], options)
-    options.sort(key=len)
-    temp = []
-    one = options.pop(0)
-    if len(one) == n:
-        return 'Yes'
-    for i in one:
-        temp.append([i])
-    ans = []
     m = len(options)
-    while m > 1:
-        option = options.pop(0)
-        m = len(options)
-        if len(option) == n:
-            continue
-        for a in temp:
-            for b in option:
-                if b not in a:
-                    c = a + [b]
-                    ans.append(c)
-        if not ans:
-            return 'No'
+
+    yes = find_yes(m, options)
+    no = find_no(m, options)
+    while 1:
+        for i in yes:
+            if i:
+                return 'Yes'
+            break
         else:
-            temp = ans
-            ans = []
-    else:
-        if m:
-            option = options[0]
-            for a in temp:
-                for b in option:
-                    if b not in a:
-                        return 'Yes'
-            else:
+            return 'No'
+        for i in no:
+            if i:
                 return 'No'
+            break
         else:
             return 'Yes'
 
