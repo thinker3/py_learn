@@ -26,3 +26,12 @@ print a, b
 print a | b
 print a & b
 print a - b
+
+a = set([1, 2, 3, 4])
+b = set([1, 4, 7])
+c = set([2, 4])
+
+d = [a, b, c]
+
+print set.intersection(*d)
+print set.union(*d)
