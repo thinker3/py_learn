@@ -3,8 +3,7 @@ import itertools
 
 
 def done(one):
-    col_num = fill_matrix(one)
-    row_num = len(matrix)
+    row_num, col_num = fill_matrix(one)
     max_ss = 0
     less = row_num
     if row_num > col_num:
@@ -13,13 +12,15 @@ def done(one):
             total = 0
             for i in range(less):
                 total += matrix[one[i]][i]
-            max_ss = total if max_ss < total else max_ss
+            if max_ss < total:
+                max_ss = total
     else:
         for one in itertools.permutations(range(col_num), less):
             total = 0
             for i in range(less):
                 total += matrix[i][one[i]]
-            max_ss = total if max_ss < total else max_ss
+            if max_ss < total:
+                max_ss = total
     return max_ss
 
 
@@ -27,6 +28,8 @@ def fill_matrix(one):
     customers, products = one.split(';')
     customers = customers.split(',')
     products = map(get_letters, products.split(','))
+    row_num = len(customers)
+    col_num = len(products)
     for customer in customers:
         row = []
         letters = get_letters(customer)
@@ -34,8 +37,7 @@ def fill_matrix(one):
         for product in products:
             row.append(get_ss(product, letters, vowels))
         matrix.append(row)
-    col_num = len(row)
-    return col_num
+    return row_num, col_num
 
 
 def get_letters(name):
@@ -73,7 +75,7 @@ def has_common_factor(less, more):
         return False
     elif more % less == 0:
         return True
-    for i in range(2, less/2 + 1):
+    for i in range(2, less / 2 + 1):
         if less % i == more % i == 0:
             return True
     return False
