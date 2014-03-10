@@ -4,24 +4,41 @@ import itertools
 
 def done(one):
     row_num, col_num = fill_matrix(one)
+    if row_num < col_num:
+        transpose(row_num, col_num)
+        row_num, col_num = col_num, row_num
+    row_num = remove_rows_if_possible(row_num, col_num)
     max_ss = 0
-    less = row_num
-    if row_num > col_num:
-        less = col_num
-        for one in itertools.permutations(range(row_num), less):
-            total = 0
-            for i in range(less):
-                total += matrix[one[i]][i]
-            if max_ss < total:
-                max_ss = total
-    else:
-        for one in itertools.permutations(range(col_num), less):
-            total = 0
-            for i in range(less):
-                total += matrix[i][one[i]]
-            if max_ss < total:
-                max_ss = total
+    for one in itertools.permutations(range(row_num), col_num):
+        total = 0
+        for i in range(col_num):
+            total += matrix[one[i]][i]
+        if max_ss < total:
+            max_ss = total
     return max_ss
+
+
+def transpose(row_num, col_num):
+    temp = []
+    for i in xrange(col_num):
+        row = tuple(map(lambda j: matrix[j][i], range(row_num)))
+        temp.append(row)
+    global matrix
+    matrix = temp
+
+
+def remove_rows_if_possible(row_num, col_num):
+    while row_num > col_num:
+        s = set([])
+        for i in range(3):
+            matrix.sort(key=lambda x: x[i])
+            s.add(matrix[0])
+        if len(s) == 1:
+            matrix.pop(0)
+            row_num -= 1
+        else:
+            break
+    return row_num
 
 
 def fill_matrix(one):
@@ -36,7 +53,7 @@ def fill_matrix(one):
         vowels = get_vowels(customer)
         for product in products:
             row.append(get_ss(product, letters, vowels))
-        matrix.append(row)
+        matrix.append(tuple(row))
     return row_num, col_num
 
 
