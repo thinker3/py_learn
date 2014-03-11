@@ -1,22 +1,24 @@
 import copy
 
+
 def arrange(n):
-    if n <= 0: return
-    
+    if n <= 0:
+        return
     result = [[]]
     for i in range(n):
         temp = []
         for each in result:
-            for j in range(i+1):
+            for j in range(i + 1):
                 t = copy.copy(each)
-                t.insert(j,i)
+                t.insert(j, i)
                 temp.append(t)
         result = copy.deepcopy(temp)
     return result
 
+
 def arrangestr(s):
-    n=len(s)
-    list_n = arrange(n)   
+    n = len(s)
+    list_n = arrange(n)
     list_s = s[:]
     temp = []
     for L in list_n:
@@ -27,4 +29,4 @@ def arrangestr(s):
     print len(list_n)
 
 
-arrangestr('abcdefg')     
+arrangestr('abcdefg')
