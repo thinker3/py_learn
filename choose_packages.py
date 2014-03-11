@@ -1,5 +1,6 @@
 from sys import argv
 import itertools
+import re
 
 
 def prepare(one):
@@ -7,8 +8,7 @@ def prepare(one):
     weight_limit = float(weight_limit)
     if weight_limit > 100:
         weight_limit = 100
-    packages = packages[:-1].replace('(', '').replace('$', '')
-    packages = map(str.strip, packages.split(')'))
+    packages = re.findall(r'\((.+?)\)', packages.replace('$', ''))
     packages = map(lambda x: x.split(','), packages)
 
     def my_filter(t):
