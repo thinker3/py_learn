@@ -4,14 +4,14 @@ keyed_alphabet = "BHISOECRTMGWYVALUZDNFJKPQX"
 message = list(message)
 caps = string.letters[26:]
 
-ans = ''
+ans = []
 while message:
     one = message.pop(0)
     if one == ' ':
-        ans += one
+        ans.append(one)
     else:
         one += message.pop(0)
         char = caps[int(one)]
         i = keyed_alphabet.index(char)
-        ans += caps[i]
-print ans
+        ans.append(caps[i])
+print ''.join(ans)
