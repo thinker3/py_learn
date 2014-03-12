@@ -4,22 +4,14 @@ keyed_alphabet = "BHISOECRTMGWYVALUZDNFJKPQX"
 message = list(message)
 caps = string.letters[26:]
 
-
-indexes = []
-for one in caps:
-    i = keyed_alphabet.index(one)
-    indexes.append(i)
-
-
-def get_message():
-    while message:
-        one = message.pop(0)
-        if one == ' ':
-            yield 26
-        else:
-            one += message.pop(0)
-            one = int(one)
-            yield indexes[one]
-
-caps += ' '
-print ''.join(map(lambda x: caps[x], get_message()))
+ans = ''
+while message:
+    one = message.pop(0)
+    if one == ' ':
+        ans += one
+    else:
+        one += message.pop(0)
+        char = caps[int(one)]
+        i = keyed_alphabet.index(char)
+        ans += caps[i]
+print ans
