@@ -80,6 +80,7 @@ def tag(name):
         return newf
     return _tag
 
+
 @tag('b')
 @tag('i')
 def sayhi():
@@ -88,6 +89,49 @@ def sayhi():
 print sayhi()
 
 
+def tag(name):
+    '''
+    tag is a function which need an argument
+    and return _tag, which is a decorator
+    '''
+    def _tag(f):
+        def newf(*args):
+            return "<{tag}>{res}</{tag}>".format(res=f(*args), tag=name)
+        return newf
+    return _tag
 
 
+@tag('b')
+@tag('i')
+def sayhi(person, time):
+    return 'hi %s, good %s.' % (person, time)
 
+print sayhi('tom', 'night')
+
+
+def sayhi(person, time):
+    return 'hi %s, good %s.' % (person, time)
+
+print tag('b')(tag('i')(sayhi))('tom', 'night')
+
+
+def tags(*names):
+    '''
+    tag is a function which can take many arguments
+    and return _tag, which is a decorator
+    '''
+    def _tag(f):
+        def newf(*args):
+            res = f(*args)
+            for name in names:
+                res = "<{tag}>{res}</{tag}>".format(res=res, tag=name)
+            return res
+        return newf
+    return _tag
+
+
+@tags('span', 'div', 'body')
+def sayhi(person, time):
+    return 'hi %s, good %s.' % (person, time)
+
+print sayhi('tom', 'night')
