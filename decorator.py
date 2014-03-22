@@ -117,21 +117,22 @@ print tag('b')(tag('i')(sayhi))('tom', 'night')
 
 def tags(*names):
     '''
-    tag is a function which can take many arguments
-    and return _tag, which is a decorator
+    tags is a function which can take many arguments and return _tags,
+    which is a decorator that can decorate a function,
+    which can take many arguments.
     '''
-    def _tag(f):
+    def _tags(f):
         def newf(*args):
             res = f(*args)
             for name in names:
                 res = "<{tag}>{res}</{tag}>".format(res=res, tag=name)
             return res
         return newf
-    return _tag
+    return _tags
 
 
 @tags('span', 'div', 'body')
 def sayhi(person, time):
-    return 'hi %s, good %s.' % (person, time)
+    return 'Hi %s, good %s.' % (person, time)
 
-print sayhi('tom', 'night')
+print sayhi('Tom', 'morning')
