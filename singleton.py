@@ -72,15 +72,24 @@ print h.a, h.b
 
 
 class SingletonDecorator(object):
-
-    def __call__(self, cls):
+    '''
+    def __init__(self, cls):
         cls.instance = None
+        self.cls = cls
 
-        def new_cls(*args, **kwargs):
-            if cls.instance is None:
-                cls.instance = cls(*args, **kwargs)
-            return cls.instance
-        return new_cls
+    def __call__(self, *args, **kwargs):
+        if self.cls.instance is None:
+            self.cls.instance = self.cls(*args, **kwargs)
+        return self.cls.instance
+    '''
+    def __init__(self, cls):
+        self.cls = cls
+        self.instance = None
+
+    def __call__(self, *args, **kwargs):
+        if self.instance is None:
+            self.instance = self.cls(*args, **kwargs)
+        return self.instance
 
 
 @SingletonDecorator
