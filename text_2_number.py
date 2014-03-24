@@ -54,14 +54,13 @@ def to_number(one):
                 ans = (ans + sub_ans + sum(temp)) * i
                 sub_ans = 0
                 last_max_multipler = i
-                last_multiplier = i
             elif i > last_multiplier:
                 sub_ans = (sub_ans + sum(temp)) * i
-                last_multiplier = i
             else:
                 ans += sub_ans
                 sub_ans = sum(temp) * i
             temp = []
+            last_multiplier = i
         else:
             temp.append(i)
     ans += sum(temp) + sub_ans
