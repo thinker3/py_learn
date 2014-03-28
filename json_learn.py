@@ -20,3 +20,13 @@ print obj, type(obj)
 
 obj = json.dumps(obj)
 print obj, type(obj)
+
+import ast
+json_str = "['foo', 'bar']"
+obj = ast.literal_eval(json_str)
+print obj, type(obj)
+
+#json_str = '[true, false, null]'  # ValueError: malformed string
+json_str = '[True, False, None]'
+obj = ast.literal_eval(json_str)
+print obj, type(obj)
