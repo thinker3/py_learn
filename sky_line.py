@@ -7,7 +7,6 @@ class Building(object):
         self.left = l
         self.right = r
         self.height = h
-        self.line = (l, h, r)
 
     def contain_left(self, another):
         return self.left <= another.left < self.right
@@ -43,16 +42,36 @@ class SkyLine(object):
     def merge(self, begin_building, end_building, new_building):
         if (begin_building or end_building) is None:
             self.insert(new_building)
+        elif begin_building:
+            if begin_building.height > new_building.height:
+                new_building.left = begin_building.right
+                self.insert(new_building)
+            elif begin_building.height == new_building.height:
+                begin_building.right = new_building.right
+            else:
+                begin_building.right = new_building.left
+                self.insert(new_building)
+        elif end_building:
+            if end_building.height > new_building.height:
+                new_building.right = end_building.left
+                self.insert(new_building)
+            elif end_building.height == new_building.height:
+                end_building.left = new_building.left
+            else:
+                end_building.left = new_building.right
+                self.insert(new_building)
 
     def get_sky_line(self):
         previous = self.buildings.pop(0)
         sky_line = [previous.left, previous.height]
+        building = None
         for building in self.buildings:
             if previous.next_to(building):
                 sky_line += [building.left, building.height]
             else:
                 sky_line += [previous.right, 0, building.left, building.height]
             previous = building
+        building = building or previous
         sky_line += [building.right, 0]
         sky_line = map(str, sky_line)
         return ' '.join(sky_line)
