@@ -91,16 +91,17 @@ class SkyLine(object):
     def merge_middle(self, begin_index, begin_building, new_building):
         if begin_building.height < new_building.height:
             self.buildings.insert(begin_index + 1, new_building)
-            right = begin_building.right
-            if begin_building.left < new_building.left:
-                begin_building.right = new_building.left
-            if new_building.right < right:
+            if new_building.right < begin_building.right:
                 temp = Building(
                     new_building.right,
                     begin_building.height,
-                    right,
+                    begin_building.right,
                 )
                 self.buildings.insert(begin_index + 2, temp)
+            if begin_building.left < new_building.left:
+                begin_building.right = new_building.left
+            else:
+                self.buildings.pop(begin_index)
 
     def merge_begin(self, begin_index, begin_building, new_building):
         if begin_building:
