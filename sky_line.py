@@ -8,11 +8,12 @@ class Building(object):
         self.right = r
         self.height = h
 
-    '''
     @property
     def line(self):
         return (self.left, self.height, self.right)
-    '''
+
+    def __repr__(self):
+        return str(self.line)
 
     def contain_left(self, another):
         return self.left <= another.left < self.right
@@ -28,10 +29,8 @@ class SkyLine(object):
     def __init__(self, building):
         self.buildings = [building]
 
-    '''
-    def print_buildings(self):
-        print [one.line for one in self.buildings]
-    '''
+    def __str__(self):
+        return str([one.line for one in self.buildings])
 
     def add_building(self, new_building):
         begin_building = None
@@ -48,6 +47,10 @@ class SkyLine(object):
                 end_building = building
                 self.end_index = i
                 break
+        '''
+        '''
+        import pudb
+        pudb.set_trace()
         if (begin_building or end_building) is None:
             self.insert(new_building)
             return
@@ -153,7 +156,8 @@ class SkyLine(object):
         previous = self.buildings.pop(0)
         sky_line = [previous.left, previous.height]
         building = None
-        for building in self.buildings:
+        while self.buildings:
+            building = self.buildings.pop(0)
             if previous.parallel_to(building):
                 continue
             else:
@@ -177,7 +181,8 @@ def to_buildings(one):
 def to_sky_line(buildings):
     building = buildings.pop(0)
     sky_line = SkyLine(building)
-    for building in buildings:
+    while buildings:
+        building = buildings.pop(0)
         sky_line.add_building(building)
         #sky_line.print_buildings()
     return sky_line.get_sky_line()
