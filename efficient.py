@@ -14,38 +14,26 @@ for one in f:
         if one.startswith('#'):
             continue
         tankers = map(int, re.findall(r'\d+', one))
-        '''
-        import pudb
-        pudb.set_trace()
-        '''
         amount = tankers.pop(-1)
         ans = []
-        remainders = []
-        max_of_each = map(lambda x: amount / x + 1, tankers)
+        last = tankers.pop(-1)
+        max_of_each = map(lambda x: amount / x + 2, tankers)
         vectors = map(xrange, max_of_each)
-        '''
-        first = tankers.pop(0)
+        min_diff = tankers[0] - 1
         for vector in itertools.product(*vectors):
-            remainder = (amount - dot(tankers, vector)) % first
+            remainder = (amount - dot(tankers, vector)) % last
+            tail = (amount - dot(tankers, vector)) / last
+            full_vector = list(vector) + [tail]
             if remainder == 0:
-                head = (amount - dot(tankers, vector)) / first
-                if head >= 0:
-                    ans.append([head] + list(vector))
+                if tail >= 0:
+                    ans.append(full_vector)
             else:
-                min_remainder.append(remainder)
-                #if remainder < min_remainder:
-                #    min_remainder = remainder
-        '''
-        for vector in itertools.product(*vectors):
-            remainder = amount - dot(tankers, vector)
-            if remainder == 0:
-                ans.append(list(vector))
-            elif remainder < 0:
-                remainders.append(-remainder)
+                full_vector[-1] += 1
+                diff = dot(tankers + [last], full_vector) - amount
+                min_diff = diff if diff < min_diff else min_diff
         ans = map(str, ans)
         if ans:
-            #ans.sort()
             print ''.join(ans)
         else:
-            print min(remainders)
+            print min_diff
 f.close()
