@@ -16,6 +16,7 @@ def resize(im):
     y = x
     # im = im.resize((x, y), Image.ANTIALIAS)
     im = im.resize((x, y))  # smaller
+    assert isinstance(im, Image.Image)  # im.format == None
     im.save(output)
 
 
@@ -31,11 +32,12 @@ def thumbnail(im):
     im.save(output, im.format)
 
 
-def main(filename='oxygen.png'):
+def main(filename):
     im = Image.open(filename)
     assert isinstance(im, clz)
-    resize(im)
-    # thumbnail(im)
+    # resize(im)
+    thumbnail(im)
 
+filename = 'oxygen.png'
 filename = 'rail.jpg'
 main(filename)
