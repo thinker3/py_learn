@@ -54,3 +54,41 @@ def multiply(n):
 add(100)
 print '*' * 20
 multiply(4)
+
+
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
+
+
+def lcm(a, b):
+    return a * b // gcd(a, b)
+
+
+def lgcd(*args):
+    return reduce(gcd, args)
+
+
+def llcm(*args):
+    return reduce(lcm, args)
+
+print '*' * 20
+print lgcd(100, 80, 36)
+print llcm(100, 80, 36)
+
+
+def dot(self, path):
+    return functools.reduce(dict.__getitem__, path.split('.'), self)
+
+deep = {
+        'he': {
+            'she': {
+                'you': {
+                    'they': 'here'
+                }
+            }
+        }
+    }
+print '*' * 20
+print functools.reduce(dict.__getitem__, 'he.she.you.they'.split('.'), deep)
