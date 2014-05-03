@@ -77,18 +77,77 @@ print '*' * 20
 print lgcd(100, 80, 36)
 print llcm(100, 80, 36)
 
-
-def dot(self, path):
-    return functools.reduce(dict.__getitem__, path.split('.'), self)
-
 deep = {
-        'he': {
-            'she': {
-                'you': {
-                    'they': 'here'
-                }
+    'he': {
+        'she': {
+            'you': {
+                'they': 'here'
             }
         }
     }
+}
 print '*' * 20
 print functools.reduce(dict.__getitem__, 'he.she.you.they'.split('.'), deep)
+
+
+class Dict(object):
+
+    def __init__(self, d):
+        self.d = d
+
+    def dot(self, path):
+        return functools.reduce(dict.__getitem__, path.split('.'), self.d)
+
+deep = Dict(deep)
+print deep.dot('he.she.you')
+
+
+def tags(*names):
+    '''
+    tags is a function which can take many arguments and return _tags,
+    which is a decorator that can decorate a function,
+    which can take many arguments.
+    '''
+    def _tags(f):
+        @functools.wraps(f)  # dd to see diff
+        def newf(*args):
+            res = f(*args)
+            for name in names:
+                res = "<{tag}>{res}</{tag}>".format(res=res, tag=name)
+            return res
+        return newf
+    return _tags
+
+
+@tags('span', 'div', 'body')
+def sayhi(person, time):
+    return 'Hi %s, good %s.' % (person, time)
+
+print '*' * 20
+print sayhi('Tom', 'morning')
+print sayhi.__name__
+
+
+def tags(*names):
+    '''
+    tags is a function which can take many arguments and return _tags,
+    which is a decorator that can decorate a function,
+    which can take many arguments.
+    '''
+    def _tags(f):
+        def newf(*args):
+            res = f(*args)
+            for name in names:
+                res = "<{tag}>{res}</{tag}>".format(res=res, tag=name)
+            return res
+        return functools.wraps(f)(newf)
+        #return functools.update_wrapper(newf, f)
+    return _tags
+
+
+@tags('span', 'div', 'body')
+def sayhi(person, time):
+    return 'Hi %s, good %s.' % (person, time)
+
+print sayhi('Tom', 'morning')
+print sayhi.__name__
