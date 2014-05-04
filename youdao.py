@@ -1,38 +1,33 @@
 #!/usr/bin/env python
-#coding=utf8
+#coding: utf8
 
 import urllib2 as u
 import re
-from scrapy.selector import HtmlXPathSelector
+from scrapy.selector import Selector
 while True:
     query = raw_input('q to quit, input the word: ')
     if query.lower() == 'q': break
-    url = "http://dict.youdao.com/search?tab=\
-    chn&keyfrom=dict.top&q=" + query
+    url = "http://dict.youdao.com/search?tab=chn&keyfrom=dict.top&q=" + query
     html = u.urlopen(url).read()
-    hxs = HtmlXPathSelector(text = html)
-    phonetics = hxs.select('//div[@id="phrsListTab"]/h2[1]/div[1]/span')
+    hxs = Selector(text = html)
+    phonetics = hxs.xpath('//div[@id="phrsListTab"]/h2[1]/div[1]/span')
     for ph in phonetics:
-        ph = ph.select('./span/text()').extract()
-        if len(ph) > 0: print ph[0],
+        ph = ph.xpath('./span/text()').extract()
+        #if len(ph) > 0: print ph[0]  # UnicodeEncodeError
+        if len(ph) > 0: print ph[0].encode('utf8')
     print
-    lis = hxs.select('//div[@id="phrsListTab"]/div[@class="trans-container"]/ul/li')
+    xpath = '//div[@id="phrsListTab"]/div[@class="trans-container"]/ul/li'
+    lis = hxs.xpath(xpath)
     for li in lis:
         try:
-            print li.select('./text()').extract()[0]
+            print li.xpath('./text()').extract()[0]
         except:
             pass
-    examples = hxs.select('//div[@id="bilingual"]/ul/li')
+    examples = hxs.xpath('//div[@id="bilingual"]/ul/li')
     for li in examples:
-        example_en = li.select('./p[1]/span//text()').extract()
-        example_cn = li.select('./p[2]/span//text()').extract()
+        example_en = li.xpath('./p[1]/span//text()').extract()
+        example_cn = li.xpath('./p[2]/span//text()').extract()
 
         print ''.join(example_en)
         print ''.join(example_cn)
         print
-
-
-
-
-
-
