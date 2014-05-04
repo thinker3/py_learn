@@ -13,3 +13,5 @@ print locale.getpreferredencoding()
 s = u'命令处理程序'
 print s
 
+s = u"hə'ləʊ"  # hello
+print s  # UnicodeEncodeError
