@@ -140,8 +140,9 @@ def tags(*names):
             for name in names:
                 res = "<{tag}>{res}</{tag}>".format(res=res, tag=name)
             return res
-        return functools.wraps(f)(newf)
-        #return functools.update_wrapper(newf, f)
+        #return newf
+        #return functools.wraps(f)(newf)
+        return functools.update_wrapper(newf, f)
     return _tags
 
 
@@ -151,3 +152,14 @@ def sayhi(person, time):
 
 print sayhi('Tom', 'morning')
 print sayhi.__name__
+
+
+class SomeClass(object):
+
+    @tags('span', 'div', 'body')
+    def sayhi(self, person, time):
+        return 'Hi %s, good %s.' % (person, time)
+
+a = SomeClass()
+print a.sayhi('Tom', 'morning')
+print a.sayhi.__name__
