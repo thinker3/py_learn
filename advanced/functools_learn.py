@@ -90,6 +90,12 @@ print '*' * 20
 print functools.reduce(dict.__getitem__, 'he.she.you.they'.split('.'), deep)
 
 
+def dot(d, path):
+    print functools.reduce(dict.__getitem__, path.split('.'), d)
+
+dot(deep, 'he.she.you')
+
+
 class Dict(object):
 
     def __init__(self, d):
@@ -99,7 +105,7 @@ class Dict(object):
         return functools.reduce(dict.__getitem__, path.split('.'), self.d)
 
 deep = Dict(deep)
-print deep.dot('he.she.you')
+print deep.dot('he.she')
 
 
 def tags(*names):
