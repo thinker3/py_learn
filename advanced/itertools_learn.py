@@ -65,11 +65,18 @@ things = [
         ("animal", "duck"),
         ("vehicle", "boat"),
         ("animal", "bear"),
-        ("vehicle", "school bus"),
+        ("vehicle", "bus"),
     ]
 for key, group in itertools.groupby(things, lambda x: x[0]):
     print key, list(group)
 
+print '*' * 20
+import operator
+things.sort(key=operator.itemgetter(0, 1))
+for key, group in itertools.groupby(things, lambda x: x[0]):
+    print key, list(group)
+
+print '*' * 20
 y = [0, 0, 0, 1, 1, 1, 0, 0, 0, 0]
 for key, group in itertools.groupby(xrange(10), lambda x: y[x]):
     print key, list(group)
