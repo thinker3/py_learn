@@ -13,7 +13,7 @@ while True:
     phonetics = hxs.xpath('//div[@id="phrsListTab"]/h2[1]/div[1]/span')
     for ph in phonetics:
         ph = ph.xpath('./span/text()').extract()
-        #if len(ph) > 0: print ph[0]  # UnicodeEncodeError
+        #if len(ph) > 0: print ph[0]  # UnicodeEncodeError on windows
         if len(ph) > 0: print ph[0].encode('utf8')
     print
     xpath = '//div[@id="phrsListTab"]/div[@class="trans-container"]/ul/li'
@@ -28,6 +28,11 @@ while True:
         example_en = li.xpath('./p[1]/span//text()').extract()
         example_cn = li.xpath('./p[2]/span//text()').extract()
 
-        print ''.join(example_en)
-        print ''.join(example_cn)
-        print
+        # UnicodeEncodeError on mac
+        #print ''.join(example_en)
+        #print ''.join(example_cn)
+
+        print ''.join(example_en).encode('utf8')
+        print ''.join(example_cn).encode('utf8')
+    print
+    print
