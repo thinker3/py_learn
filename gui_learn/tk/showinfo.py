@@ -7,6 +7,7 @@ class App(object):
     def __init__(self):
         self.root = tk.Tk()
         self.root.title('Root')
+        self.root.geometry("500x500")
         self.frame = tk.Frame(self.root)
         #self.config_text()
         self.set_var()
