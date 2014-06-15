@@ -1,6 +1,7 @@
 import Tkinter as tk
 
-class App:
+
+class App(object):
     def __init__(self):
         self.root = tk.Tk()
         tk.Label(self.root, text="main window").pack()
@@ -8,7 +9,8 @@ class App:
         tk.Label(self.t, text="tool window").pack()
         self.root.bind("<Unmap>", self.OnUnmap)
         self.root.bind("<Map>", self.OnMap)
-        self.root.mainloop()
+
+    # not work on Ubuntu
 
     def OnMap(self, event):
         # show the tool window
@@ -19,4 +21,5 @@ class App:
         self.t.wm_withdraw()
 
 if __name__ == "__main__":
-    app=App()
+    app = App()
+    app.root.mainloop()

@@ -18,4 +18,3 @@ root = Tk()
 app = App(root)
 root.title('ROOT')
 root.mainloop()
-
