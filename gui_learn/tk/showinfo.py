@@ -33,6 +33,8 @@ class App(object):
 
     def var_change(self):
         self.var.set("world")
+        #self.root.update_idletasks()
+        self.frame.update()
         mb.showinfo("Title", "Hi", parent=None)
         self.var.set("hello")
 
