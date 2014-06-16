@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import sys
 import win32com.client as win32
 
 #excel = win32.gencache.EnsureDispatch('Excel.Application')
 #excel = win32.Dispatch('Excel.Application')
 excel = win32.DispatchEx('Excel.Application')  # rpac
-excel.Visible = 1
+excel.Visible = 0
 #wordBook = excel.Workbooks.open(templatePath)
 wordBook = excel.Workbooks.Add()
 sheet = wordBook.Sheets(1)
@@ -40,10 +41,23 @@ print values
 #sheet.Columns("B:B").ColumnWidth = 24
 #sheet.Columns("A:B").EntireColumn.AutoFit()
 sheet.Columns("A:B").AutoFit()
-#wordBook.Close(SaveChanges=0)
-#excel.ActiveWorkbook.SaveAs(destinationPath)
+try:
+    destinationPath = r"C:\Users\ken.chen\test.xlsx"
+    wordBook.SaveAs(destinationPath)
+    # must close or quit, or the file can not be deleted
+    #wordBook.Close(SaveChanges=0)
+    excel.Quit()
+
+    #destinationPath = "test.xlsx"  # C:\Users\ken.chen\Documents
+    #destinationPath = "C:/Users/ken.chen/test.xls"  # error
+    #destinationPath = r"C:\Users\ken.chen\test.xls"  # warning
+    #destinationPath = r"C:\Users\ken.chen\test.xlsx"
+    #wordBook.Close(True, destinationPath)
+except Exception as e:
+    print e
+    print e[1]
+    print e[2][2].encode(sys.getfilesystemencoding())
 
 """
-excel.Quit()
 del excel
 """
