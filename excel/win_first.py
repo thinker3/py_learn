@@ -27,6 +27,9 @@ cell = sheet.Cells(5, 3)
 cell.WrapText = 1
 cell.Value = "looooooooooooooooooooooooooooong"
 
+values = sheet.Range(sheet.Cells(1, 1), sheet.Cells(6, 4)).Value
+print values
+
 #sheet.Columns("A:A").ColumnWidth = 12
 #sheet.Columns("B:B").ColumnWidth = 24
 #sheet.Columns("A:B").EntireColumn.AutoFit()
