@@ -27,6 +27,12 @@ cell = sheet.Cells(5, 3)
 cell.WrapText = 1
 cell.Value = "looooooooooooooooooooooooooooong"
 
+sheet.Range(
+        sheet.Cells(1, 4),
+        sheet.Cells(5, 4)).Value = "looooooooooooooooooooooooooooong"
+#sheet.Columns(4).AutoFit()  # right
+sheet.Columns("D").AutoFit()
+
 values = sheet.Range(sheet.Cells(1, 1), sheet.Cells(6, 4)).Value
 print values
 
