@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import os
 import sys
 import win32com.client as win32
 
@@ -42,7 +43,12 @@ print values
 #sheet.Columns("A:B").EntireColumn.AutoFit()
 sheet.Columns("A:B").AutoFit()
 try:
-    destinationPath = r"C:\Users\ken.chen\test.xlsx"
+    #destinationPath = "C:\Users\ken.chen\test.xlsx"  # error
+    #destinationPath = r"C:\Users\ken.chen\test.xlsx"
+    destinationPath = r"C:\Users\ken.chen\notExists\test.xlsx"
+    dirname = os.path.dirname(destinationPath)
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
     wordBook.SaveAs(destinationPath)
     # must close or quit, or the file can not be deleted
     #wordBook.Close(SaveChanges=0)
