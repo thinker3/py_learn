@@ -7,4 +7,5 @@ import platform
 print platform.system()
 
 print os.name
-print os.uname()
+if sys.platform != 'win32':
+    print os.uname()
