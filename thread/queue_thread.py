@@ -31,12 +31,27 @@ class Worker(threading.Thread):
 # maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue.
 # Insertion will block once this size has been reached, until queue items are consumed.
 # If maxsize is less than or equal to zero, the queue size is infinite.
-queue = Queue.Queue()
+#queue = Queue.Queue()
+queue = Queue.Queue(40)
 for i in range(WORKERS):
     Worker(queue).start()
 
+deltas = []
 for i in range(50):
-    queue.put(i)
+    temp = [i]
+    before = time.time()
+    queue.put(temp)
+    now = time.time()
+    delta = now - before
+    temp.append(delta)
+    deltas.append(delta)
 
 for i in range(WORKERS):
     queue.put(None)
+
+while 1:
+    if threading.active_count() == 1:
+        print sum(deltas) / len(deltas)
+        break
+    else:
+        time.sleep(0.01)
