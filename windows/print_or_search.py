@@ -65,13 +65,24 @@ def print_selection():
     reset_clipboard(original_text)
     print
 
- 
+
+def get_selection():
+    original_text = get_original_text()
+    selected_text = get_selected_text()
+    reset_clipboard(original_text)
+    return selected_text
+
 hot = pyhk.pyhk()
-#hot.addHotkey(['Ctrl', 'Lwin'], print_selection)  # this is problematic
-hot.addHotkey(['Ctrl', 'Lwin', '1'], print_selection)  # c-Lwin or c-1 works
-# letters must be upper
-#hot.addHotkey(['Ctrl', 'Alt', 'Q'], exit)
-# pyhk is problematic
-#hot.addHotkey(['Ctrl', 'Alt', 'Z'], print_selection)
-#hot.addHotkey(['Ctrl', 'Alt', 'Z'], search)
-hot.start()
+
+if __name__ == '__main__':
+    # ctrl + shift + q to quit
+    #hot.addHotkey(['Ctrl', 'Lwin', '1'], search)
+    hot.addHotkey(['Ctrl', 'Lwin', '1'], print_selection)  # c-Lwin or c-1 works
+
+    # letters must be upper
+    # pyhk is problematic
+    #hot.addHotkey(['Lwin', 'Z'], print_selection)
+    #hot.addHotkey(['Ctrl', 'Lwin'], print_selection)
+    #hot.addHotkey(['Ctrl', 'Alt', 'Z'], print_selection)
+    #hot.addHotkey(['Ctrl', 'Alt', 'Z'], search)
+    hot.start()
