@@ -55,3 +55,9 @@ print used.Rows.Count, used.Columns.Count
 sheet.Rows(1).EntireRow.Insert()
 print used.Row, used.Column
 print used.Rows.Count, used.Columns.Count 
+
+delta = 2
+start_column = used.Column + used.Columns.Count
+sheet.Range(sheet.Columns(start_column), sheet.Columns(start_column + delta)).ColumnWidth = 2
+start_row = used.Row + used.Rows.Count
+sheet.Range(sheet.Rows(start_row), sheet.Rows(start_row + delta)).RowHeight = 50
