@@ -73,6 +73,9 @@ def main(excel):
     sheet.Rows(5).RowHeight = 30 
     sheet.Columns(5).HorizontalAlignment = constants.xlCenter
     #sheet.Columns(5).VerticalAlignment = constants.xlBottom
+    sheet.Columns(1).Font.Color = 24832
+    sheet.Cells(2, 2).Interior.Color = 13561798
+    sheet.Columns(3).Font.Bold = True
 
 
 if __name__ == '__main__':
