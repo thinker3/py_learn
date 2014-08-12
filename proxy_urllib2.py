@@ -1,8 +1,9 @@
-import urllib, urllib2, simplejson as json
+import urllib2
+
 
 def main(a, b):
     url = a + '://twitter.com'
-    proxy = urllib2.ProxyHandler({b: '127.0.0.1:8088'})
+    proxy = urllib2.ProxyHandler({b: '127.0.0.1:8087'})
     opener = urllib2.build_opener(proxy)
     urllib2.install_opener(opener)
     html = urllib2.urlopen(url).read()
@@ -10,4 +11,10 @@ def main(a, b):
     f.write(html)
     f.close()
 
-main('https', 'https') # both should be https
+
+# urllib2.URLError: <urlopen error [Errno 10060]
+#main('https', 'http')
+#main('http', 'https')
+#main('http', 'http')
+
+main('https', 'https')  # both should be https
