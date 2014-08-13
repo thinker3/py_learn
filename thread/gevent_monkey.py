@@ -1,13 +1,22 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import gevent.monkey
-gevent.monkey.patch_socket()
 
+from gevent import monkey
 import socket
-import gevent
+print socket.socket
+monkey.patch_socket()
+print socket.socket
+
+import select
+print select.select
+monkey.patch_select()
+print select.select
+
 import urllib2
+import gevent
 import simplejson as json
+
 
 def fetch(pid):
     protocol = 'http'
@@ -23,9 +32,11 @@ def fetch(pid):
     print('Process %s: %s' % (pid, time))
     return json_result['time']
 
+
 def synchronous():
     for i in range(1,10):
         fetch(i)
+
 
 def asynchronous():
     threads = []
