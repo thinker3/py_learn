@@ -3,6 +3,8 @@
 import sys
 import locale
 
+
+# mbcs ascii cp936
 print sys.getfilesystemencoding()
 print sys.getdefaultencoding()
 # code page of the console
