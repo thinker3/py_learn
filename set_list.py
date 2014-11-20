@@ -35,3 +35,28 @@ d = [a, b, c]
 
 print set.intersection(*d)
 print set.union(*d)
+
+
+def unique(seq):
+    temp = []
+    for x in seq:
+        #if not x in temp:
+        if x not in temp:
+            temp.append(x)
+    return temp
+
+t = [1, 2, 2, 3, 2, 5, 1, 3, 6, 5, 2, 7]
+print unique(t)
+
+
+def unique(seq):
+    temp = []
+    seen = set()
+    for x in seq:
+        if x not in seen:
+            temp.append(x)
+            seen.add(x)
+    return temp
+
+t = [1, 2, 2, 3, 2, 5, 1, 3, 6, 5, 2, 7]
+print unique(t)
