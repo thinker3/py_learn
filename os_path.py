@@ -7,7 +7,7 @@ print os.walk(os.getcwd())
 
 #dirname = os.path.dirname(__file__)
 dirname = os.path.dirname(os.path.abspath(__file__))
-print dirname 
+print dirname
 test = os.path.join(dirname, 'test/')
 print test
 if not os.path.exists(test):
