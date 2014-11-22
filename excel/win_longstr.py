@@ -43,13 +43,14 @@ def main(excel):
     wordBook = excel.Workbooks.Add()
     sheet = wordBook.Sheets(1)
 
+    # long string
     longstr = (
-            """"""
-            """WTO members agreed in principle last year to"""
-            """ """
-            """streamline and standardize global customs rules."""
-            """"""
-            )
+        """"""
+        """WTO members agreed in principle last year to"""
+        """ """
+        """streamline and standardize global customs rules."""
+        """"""
+    )
     print longstr
     sheet.Cells(1, 1).Value = longstr
     sheet.Cells(2, 2).Value = longstr
@@ -62,7 +63,7 @@ def main(excel):
     for i in range(1, 5):
         sheet.Columns(i).WrapText = 1
         width = sheet.Columns(i).ColumnWidth
-        if  width > 24:
+        if width > 24:
             sheet.Columns(i).ColumnWidth = 24
     print sheet.Columns(1).Width  # 622.5
     print sheet.Columns(1).ColumnWidth  # 103.13
@@ -70,7 +71,7 @@ def main(excel):
     #sheet.Columns(1).Width = 100
     sheet.Cells(5, 5).Value = 'centered'
     sheet.Columns(5).ColumnWidth = 24
-    sheet.Rows(5).RowHeight = 30 
+    sheet.Rows(5).RowHeight = 30
     sheet.Columns(5).HorizontalAlignment = constants.xlCenter
     #sheet.Columns(5).VerticalAlignment = constants.xlBottom
     sheet.Columns(1).Font.Color = 24832
