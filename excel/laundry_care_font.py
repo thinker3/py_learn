@@ -8,8 +8,8 @@ def main():
     excel = win32.DispatchEx('Excel.Application')
     excel.Visible = 0
     excel.Visible = 1
-    wordBook = excel.Workbooks.Add()
-    sheet = wordBook.Sheets(1)
+    workBook = excel.Workbooks.Add()
+    sheet = workBook.Sheets(1)
 
     gFont = "GLOBAL Care Icon"
     jFont = "JapaneseNext"

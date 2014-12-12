@@ -9,9 +9,9 @@ import win32com.client as win32
 #excel = win32.Dispatch('Excel.Application')
 excel = win32.DispatchEx('Excel.Application')  # rpac
 excel.Visible = 0
-#wordBook = excel.Workbooks.open(templatePath)
-wordBook = excel.Workbooks.Add()
-sheet = wordBook.Sheets(1)
+#workBook = excel.Workbooks.open(templatePath)
+workBook = excel.Workbooks.Add()
+sheet = workBook.Sheets(1)
 sheet.Cells(1, 1).Value = 'a' * 10
 sheet.Cells(1, 2).Value = 'b' * 20
 sheet.Cells(2, 2).Value = 'd' * 30
@@ -49,16 +49,16 @@ try:
     dirname = os.path.dirname(destinationPath)
     if not os.path.exists(dirname):
         os.makedirs(dirname)
-    wordBook.SaveAs(destinationPath)
+    workBook.SaveAs(destinationPath)
     # must close or quit, or the file can not be deleted
-    #wordBook.Close(SaveChanges=0)
+    #workBook.Close(SaveChanges=0)
     excel.Quit()
 
     #destinationPath = "test.xlsx"  # C:\Users\ken.chen\Documents
     #destinationPath = "C:/Users/ken.chen/test.xls"  # error
     #destinationPath = r"C:\Users\ken.chen\test.xls"  # warning
     #destinationPath = r"C:\Users\ken.chen\test.xlsx"
-    #wordBook.Close(True, destinationPath)
+    #workBook.Close(True, destinationPath)
 except Exception as e:
     print e
     print e[1]

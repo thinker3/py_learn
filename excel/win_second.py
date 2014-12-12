@@ -5,8 +5,8 @@ import win32com.client as win32
 
 excel = win32.DispatchEx('Excel.Application')
 excel.Visible = 1
-wordBook = excel.Workbooks.Add()
-sheet = wordBook.Sheets(1)
+workBook = excel.Workbooks.Add()
+sheet = workBook.Sheets(1)
 
 start_row = 2
 row = 5
@@ -19,7 +19,8 @@ summed = sheet.Range(
         sheet.Cells(start_row, 1),
         sheet.Cells(start_row + row - 1, 1)
     )
-#summed.Interior.ColorIndex = 6
+# color
+#summed.Interior.ColorIndex = 6  # yellow
 summed.Interior.Color = 65535
 
 # where 7 through 13 correspond to borders for (xlEdgeTop, xlEdgeBottom, xlEdgeRight, xlEdgeLeft, xlInsideHorizontal, xlInsideVertical)
@@ -31,10 +32,10 @@ for border_id in range(7, 13):
     summed.Borders(border_id).Weight=2
 
 points = {
-    'first': start_row, 
-    'second': 1, 
-    'third':start_row + row - 1, 
-    'fourth': 1, 
+    'first': start_row,
+    'second': 1,
+    'third':start_row + row - 1,
+    'fourth': 1,
 }
 formula = "=sum(r%(first)sc%(second)s:r%(third)sc%(fourth)s)" % points
 print formula  # =sum(r2c1:r6c1)
@@ -45,16 +46,16 @@ sheet.Cells(2, 4).Value = '2.4'
 used = sheet.UsedRange
 #print used
 print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count 
+print used.Rows.Count, used.Columns.Count
 
 # insert empty row, column
 sheet.Columns(1).EntireColumn.Insert()
 print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count 
+print used.Rows.Count, used.Columns.Count
 
 sheet.Rows(1).EntireRow.Insert()
 print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count 
+print used.Rows.Count, used.Columns.Count
 
 delta = 2
 start_column = used.Column + used.Columns.Count
