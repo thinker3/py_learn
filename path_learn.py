@@ -2,14 +2,16 @@
 # encoding: utf-8
 
 import os
-from path import Path as path
+# path.py
+# there is an alias called path, don't import that, no jedi hints
+from path import Path as pathpy
 
 
 def path_move():
-    testdir = path('~/testdir').expanduser()
+    testdir = pathpy('~/testdir').expanduser()
     print type(testdir)
 
-    assert isinstance(testdir, path)
+    assert isinstance(testdir, pathpy)
     testdir = testdir.normpath()
     print type(testdir)
 
@@ -26,30 +28,31 @@ def path_move():
 
     # TypeError: unbound method expanduser() must be called with Path instance
     # as first argument (got str instance instead)
-    #print path.expanduser('~/temp')
+    #print pathpy.expanduser('~/temp')
 
-    testfile = path('~/testfile').expanduser()
-    assert isinstance(testfile, path)
+    testfile = pathpy('~/testfile').expanduser()
+    assert isinstance(testfile, pathpy)
 
     if not testfile.exists():
         testfile.touch()
         testfile.move(testdir)
 
-    testfile = path('~/testfile2').expanduser()
+    testfile = pathpy('~/testfile2').expanduser()
     if not testfile.exists():
         testfile.touch()
-        path.move(testfile, testdir)
+        pathpy.move(testfile, testdir)
 
-    testfile = path('~/testfile3').expanduser()
+    testfile = pathpy('~/testfile3').expanduser()
     if not testfile.exists():
         testfile.touch()
-        path.copy(testfile, testdir)
+        r = pathpy.copy(testfile, testdir)
+        print 'New path is %s' % r  # None
         #testfile.rename('abcd')  # move to the working folder and renamed
 
         # TypeError: descriptor 'join' requires a 'unicode' object but received a 'list'
-        #new_name = path.join([testfile.dirname(), 'abcd'])
+        #new_name = pathpy.join([testfile.dirname(), 'abcd'])
 
-        new_name = path.join(testfile.dirname(), 'abcd')
+        new_name = pathpy.join(testfile.dirname(), 'abcd')
         print new_name  # a/Users/kenb/Users/kenc/Users/kend
 
         new_name = os.path.join(testfile.dirname(), 'abcd')
@@ -59,7 +62,7 @@ def path_move():
     testfile.remove_p()
 
     for f in testdir.files():
-        assert isinstance(f, path)
+        assert isinstance(f, pathpy)
         f.remove()
     testdir.rmdir()
 
