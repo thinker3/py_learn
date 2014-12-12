@@ -62,3 +62,36 @@ start_column = used.Column + used.Columns.Count
 sheet.Range(sheet.Columns(start_column), sheet.Columns(start_column + delta)).ColumnWidth = 2
 start_row = used.Row + used.Rows.Count
 sheet.Range(sheet.Rows(start_row), sheet.Rows(start_row + delta)).RowHeight = 50
+
+
+def get_column_number(letter):
+    # get column number by column letter
+    col = sheet.Columns(letter).Column
+    print col
+
+letter = 'c'
+get_column_number(letter)
+letter = 'ab'
+get_column_number(letter)
+
+
+def dollar():
+    # number or text(string)
+    #cell.NumberFormatLocal = "@"
+    cell = sheet.Cells(1, 1)
+    cell.Value = '8'
+    cell.NumberFormat = "@"
+    cell = sheet.Cells(1, 2)
+    cell.Value = 8
+    cell.NumberFormat = "@"
+    cell = sheet.Cells(1, 3)
+    # even if the value is of format text(string)
+    cell.Value = 'abc'
+    cell.NumberFormat = "@"
+
+    cell = sheet.Cells(1, 4)
+    cell.Value = '8'
+    cell = sheet.Cells(1, 5)
+    cell.Value = 8
+
+dollar()
