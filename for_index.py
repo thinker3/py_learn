@@ -1,4 +1,8 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
 import random
+
 li = [int(100*random.random()) for i in xrange(20)]
 li = list(set(li))
 li.sort()
