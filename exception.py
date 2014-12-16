@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+
+def for_exception_catch_outer():
+    try:
+        for i in range(10):
+            if i % 3 == 0:
+                raise Exception('Exception %s' % i)
+            else:
+                print i
+    except Exception as e:
+        print e
+
+
+def for_exception_catch_inner():
+    for i in range(10):
+        try:
+            if i % 3 == 0:
+                raise Exception('Exception %s' % i)
+            else:
+                print i
+        except Exception as e:
+            print e
+
+for_exception_catch_outer()
+print '*' * 30
+for_exception_catch_inner()
