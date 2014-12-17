@@ -26,3 +26,21 @@ def for_exception_catch_inner():
 for_exception_catch_outer()
 print '*' * 30
 for_exception_catch_inner()
+
+
+def how_many_exceptions_catched():
+    try:
+        for i in range(10):
+            try:
+                if i % 3 == 0:
+                    raise Exception('Exception %s' % i)
+                else:
+                    print i
+            except Exception as e:
+                print e
+                raise e
+    except Exception as e:
+        pass
+
+print '*' * 30
+how_many_exceptions_catched()
