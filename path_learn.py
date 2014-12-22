@@ -72,12 +72,16 @@ def path_dir_operations():
     assert isinstance(outer, pathpy)
     inner = pathpy('~/innertestdir').expanduser()
     copydir = pathpy('~/copytestdir').expanduser()
+    assert isinstance(copydir, pathpy)
     if not outer.exists():
         outer.makedirs()
     if not inner.exists():
         inner.makedirs()
+    '''
+    # not need to makedirs for copytree
     if not copydir.exists():
         copydir.makedirs()
+    '''
 
     testfile = os.path.join(inner, 'testfile')
     testfile = pathpy(testfile)
@@ -97,6 +101,7 @@ def path_dir_operations():
         #d.removedirs()
         d.rmdir()
     outer.rmdir()  # OSError: [Errno 66] Directory not empty
+    copydir.rmtree_p()
 
 #path_file_operations()
 path_dir_operations()
