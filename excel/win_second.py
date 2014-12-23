@@ -95,3 +95,9 @@ def dollar():
     cell.Value = 8
 
 dollar()
+
+
+def delete_row(row_number):
+    sheet.Rows(row_number).EntireRow.Delete()
+
+#delete_row(10)
