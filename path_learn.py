@@ -7,7 +7,7 @@ import os
 from path import Path as pathpy
 
 
-def path_move():
+def path_file_operations():
     testdir = pathpy('~/testdir').expanduser()
     print type(testdir)
 
@@ -52,7 +52,7 @@ def path_move():
         # TypeError: descriptor 'join' requires a 'unicode' object but received a 'list'
         #new_name = pathpy.join([testfile.dirname(), 'abcd'])
 
-        new_name = pathpy.join(testfile.dirname(), 'abcd')
+        new_name = pathpy.join(testfile.dirname(), 'abcd')  # problematic
         print new_name  # a/Users/kenb/Users/kenc/Users/kend
 
         new_name = os.path.join(testfile.dirname(), 'abcd')
@@ -66,4 +66,37 @@ def path_move():
         f.remove()
     testdir.rmdir()
 
-path_move()
+
+def path_dir_operations():
+    outer = pathpy('~/outertestdir').expanduser()
+    assert isinstance(outer, pathpy)
+    inner = pathpy('~/innertestdir').expanduser()
+    copydir = pathpy('~/copytestdir').expanduser()
+    if not outer.exists():
+        outer.makedirs()
+    if not inner.exists():
+        inner.makedirs()
+    if not copydir.exists():
+        copydir.makedirs()
+
+    testfile = os.path.join(inner, 'testfile')
+    testfile = pathpy(testfile)
+    testfile.touch()
+    inner.move(outer)
+    for d in outer.dirs():
+        assert isinstance(d, pathpy)
+        print d.dirname(), d.basename(), d
+        #d.copy(copydir)  # IOError: [Errno 21] Is a directory
+        dst = os.path.join(copydir, d.basename())
+        d.copytree(dst)  # The destination directory must not already exist
+        for f in d.files():
+            f.remove()
+        #d.remove()  # OSError: [Errno 1] Operation not permitted
+        # removedirs() tries to successively remove every parent directory
+        # mentioned in path until an error is raised
+        #d.removedirs()
+        d.rmdir()
+    outer.rmdir()  # OSError: [Errno 66] Directory not empty
+
+#path_file_operations()
+path_dir_operations()
