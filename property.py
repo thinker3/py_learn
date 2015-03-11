@@ -41,4 +41,24 @@ class CallProperty(object):
 obj = CallProperty()
 print obj.name
 print obj.full_name
+print '*' * 30
 
+
+def alias(key):
+    return property(
+        lambda self: getattr(self, key),
+        lambda self, value: setattr(self, key, value),
+        #lambda self: delattr(self, key),
+        )
+
+
+class Alias(object):
+    x = 0
+    y = alias('x')
+
+a = Alias()
+print a.x
+print a.y
+a.y = 1
+print a.x
+print a.y
