@@ -56,9 +56,25 @@ class Alias(object):
     x = 0
     y = alias('x')
 
+    m = 'hello'
+
+    @property
+    def n(self):
+        return self.m
+
+    @n.setter
+    def n(self, value):
+        self.m = value
+
 a = Alias()
 print a.x
 print a.y
 a.y = 1
 print a.x
 print a.y
+
+print a.m
+print a.n
+a.n = 'world'
+print a.m
+print a.n
