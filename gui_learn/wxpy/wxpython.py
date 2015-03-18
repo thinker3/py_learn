@@ -3,6 +3,7 @@
 
 import wx
 print 'wx version: %s' % wx.version()
+print wx.PlatformInfo
 
 from time import sleep
 
