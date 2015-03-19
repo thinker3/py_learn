@@ -1,4 +1,6 @@
-#coding=utf8
+#!/usr/bin/env python
+# encoding: utf-8
+
 
 class Person(object):
     country = 'cn'
@@ -10,19 +12,17 @@ class Person(object):
         return self.country
 
 p = Person()
-
 attr = getattr(p, 'show')
 if callable(attr):
     print attr()
 else:
     print attr
-
-
 attr = getattr(p, 'country')
 print attr
-
 print '-' * 30
-class A(object):
+
+
+class A(object):  # new style class
     def __init__(self):
         self.a = 1
 
@@ -47,10 +47,10 @@ try:
     print getattr(a, 'y')
 except AttributeError as e:
     print e.message
-
-
 print '-' * 30
-class A():
+
+
+class A():  # old style class
     def __init__(self):
         self.a = 1
 
@@ -75,6 +75,3 @@ try:
     print getattr(a, 'y')
 except AttributeError as e:
     print e.message
-
-
-
