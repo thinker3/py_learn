@@ -25,6 +25,8 @@ print type(c).__len__(c)  # Explicit lookup via type
 print '*' * 30
 print len(c)  # Implicit lookup
 print c.__class__.__dict__
+print type(c).__dict__
+print C.__dict__
 print '*' * 30
 print '*' * 30
 
@@ -49,3 +51,7 @@ print '*' * 30
 C.__len__ = lambda x: 15
 print c.__class__.__dict__
 print len(c)
+print '*' * 30
+print C is c.__class__
+print C is type(c)
+print c.__class__ is type(c)
