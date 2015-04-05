@@ -65,6 +65,7 @@ class C(A, B):
         B.__init__(self, c)
         self.c = c * 3
 
+print C.mro()  # method resolution order
 cc = C('c')
 print cc.a
 print cc.b
