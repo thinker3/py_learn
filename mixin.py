@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+
 class Mixin(object):
     def add(self, value):
         self.number += value
@@ -40,3 +44,28 @@ m.show_me()
 m.sub(1)
 m.show_me()
 print m.name
+
+print '*' * 30
+
+
+class A(object):
+    def __init__(self, a):
+        self.a = a
+
+
+class B(object):
+    def __init__(self, b):
+        self.b = b * 2
+
+
+class C(A, B):
+    def __init__(self, c):
+        #super(C, self).__init__(c)  # AttributeError: 'C' object has no attribute 'b'
+        A.__init__(self, c)
+        B.__init__(self, c)
+        self.c = c * 3
+
+cc = C('c')
+print cc.a
+print cc.b
+print cc.c
