@@ -70,3 +70,27 @@ cc = C('c')
 print cc.a
 print cc.b
 print cc.c
+
+
+class FirstMixin(object):
+    def say(self):
+        print 'FirstMixin'
+
+
+class SecondMixin(object):
+    def say(self):
+        print 'SecondMixin'
+
+
+class Mixin(FirstMixin, SecondMixin):  # class FirstMixin(SecondMixin): | class Mixin(FirstMixin):
+    pass
+
+m = Mixin()
+m.say()
+
+
+class Mixin(SecondMixin, FirstMixin):
+    pass
+
+m = Mixin()
+m.say()
