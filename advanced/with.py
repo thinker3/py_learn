@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import time
+from functools import wraps
+
 
 class AliasContextManager(object):
     # python context manager
@@ -30,3 +33,39 @@ with alias(sum) as fn:
     print fn([1, 2, 3])
 print fn
 print fn([1, 2, 3])
+
+
+class ContextDecorator(object):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+    def __enter__(self):
+        self.start_time = time.time()
+        return self
+
+    def __exit__(self, typ, val, traceback):
+        print "{}: {}".format(self.label, time.time() - self.start_time)
+
+    def __call__(self, f):
+        self.label = f.__name__
+        @wraps(f)
+        def wrapper(*args, **kw):
+            with self:
+                return f(*args, **kw)
+        return wrapper
+
+
+@ContextDecorator(label='foo')
+def loop():
+    for i in xrange(10 ** 7):
+        pass
+
+loop()
+
+
+def wait():
+    for i in xrange(10 ** 8):
+        pass
+
+with ContextDecorator(label='bar'):
+    wait()
