@@ -27,6 +27,33 @@ summed.Interior.Color = 65535
 # LineStyle of 1 = xlContinous
 # Weight of 2 = xlThin
 
+XlBorderWeight = {
+                  "xlHairline" : 1,
+                  "xlThin" : 2,
+                  "xlMedium" : 3,
+                  "xlThick" : 4
+                  }
+
+XlBordersIndex = {
+                  "xlDiagonalDown" : 5,
+                  "xlDiagonalUp" : 6,
+                  "xlEdgeBottom" : 9,
+                  "xlEdgeLeft" : 7,
+                  "xlEdgeRight" : 10,
+                  "xlEdgeTop" : 8,
+                  "xlInsideHorizontal" : 12,
+                  "xlInsideVertical" : 11,
+                  }
+
+
+def drawCellLine(sheet, sheet_range):
+    for line in ["xlEdgeBottom", "xlEdgeLeft", "xlEdgeRight", "xlEdgeTop"]:
+        sheet.Range(sheet_range).Borders(XlBordersIndex[line]).Weight = XlBorderWeight["xlMedium"]
+        sheet.Range(sheet_range).Borders(XlBordersIndex[line]).LineStyle = 1
+    for line in ["xlInsideHorizontal", "xlInsideVertical"]:
+        sheet.Range(sheet_range).Borders(XlBordersIndex[line]).Weight = XlBorderWeight["xlThin"]
+        sheet.Range(sheet_range).Borders(XlBordersIndex[line]).LineStyle = 1
+
 for border_id in range(7, 13):
     summed.Borders(border_id).LineStyle=1
     summed.Borders(border_id).Weight=2
@@ -101,3 +128,7 @@ def delete_row(row_number):
     sheet.Rows(row_number).EntireRow.Delete()
 
 #delete_row(10)
+
+#delete default sheets
+sheet = workBook.Sheets(3).Delete()
+sheet = workBook.Sheets(2).Delete()

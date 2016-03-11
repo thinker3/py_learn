@@ -1,8 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+# ## TypeError: must be type, not classobj
+# ## super() only operates on new-style classes
+
 
 class Base(object):
+    table = None
     here = 'here'
     member = 'Base'
 
@@ -12,6 +16,8 @@ class Base(object):
         # a class member and an object member
         self.length = len(self.there)  # key point
         print self.init
+        if self.table is None:
+            self.table = self.__class__.__name__.lower()
 
 
 class Derived(Base):

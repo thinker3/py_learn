@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# encoding: utf-8
+
+
 def make_adder_and_setter(x):
     x = x
     def setter(n):

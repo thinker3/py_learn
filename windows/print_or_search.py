@@ -6,12 +6,24 @@ import pyhk
 import win32gui
 import win32clipboard
 import SendKeys
-from youdao import query_web
- 
+import win32com.client
+
+
+def send():
+    shell = win32com.client.Dispatch("WScript.Shell")
+    shell.SendKeys("^c")
+    #print dir(shell)
+
+
 def exit():
     sys.exit()
 
+
 def get_selected_text():
+    send()
+    #SendKeys.SendKeys('abc')
+    #SendKeys.SendKeys('^c')
+    return ''
     handle = win32gui.GetForegroundWindow()
     title =  win32gui.GetWindowText(handle)
     if 'cmd.exe' in title or u'命令处理程序' in title.decode('gbk') or (
@@ -24,7 +36,9 @@ def get_selected_text():
     win32clipboard.CloseClipboard()
     return text
 
+
 def get_original_text():
+    return ''
     win32clipboard.OpenClipboard()
     try:
         original_text = win32clipboard.GetClipboardData()
@@ -51,10 +65,6 @@ def search():
     selected_text = get_selected_text()
     print 'selected text: %s' % selected_text
     reset_clipboard(original_text)
-    if selected_text:
-        query_web(selected_text)
-    else:
-        print 'wrong word?'
 
 
 def print_selection():

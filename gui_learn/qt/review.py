@@ -1,11 +1,12 @@
 import sys
 from PyQt4 import QtGui
 
+
 class Example(QtGui.QWidget):
     def __init__(self):
         super(Example, self).__init__()
         self.initUI()
-    
+
     def initUI(self):
         title = QtGui.QLabel('Title')
         author = QtGui.QLabel('Author')
@@ -21,14 +22,15 @@ class Example(QtGui.QWidget):
         grid.addWidget(authorEdit, 2, 1)
         grid.addWidget(review, 3, 0)
         grid.addWidget(reviewEdit, 3, 1, 5, 1)
-        self.setLayout(grid) 
+        self.setLayout(grid)
         self.setGeometry(300, 300, 350, 300)
-        self.setWindowTitle('Review')    
+        self.setWindowTitle('Review')
         self.show()
-    
+
+
 def main():
     app = QtGui.QApplication(sys.argv)
-    x = Example()
+    Example()
     sys.exit(app.exec_())
 
 

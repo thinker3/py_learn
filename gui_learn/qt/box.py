@@ -1,6 +1,7 @@
 import sys
 from PyQt4 import QtGui
 
+
 class Example(QtGui.QWidget):
     def __init__(self):
         super(Example, self).__init__()
@@ -19,14 +20,15 @@ class Example(QtGui.QWidget):
         vbox.addStretch(1)
         vbox.addLayout(hbox)
 
-        self.setLayout(vbox)    
+        self.setLayout(vbox)
         self.setGeometry(300, 300, 300, 150)
-        self.setWindowTitle('Buttons')    
+        self.setWindowTitle('Buttons')
         self.show()
+
 
 def main():
     app = QtGui.QApplication(sys.argv)
-    ex = Example()
+    Example()
     sys.exit(app.exec_())
 
 
