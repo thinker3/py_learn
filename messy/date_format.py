@@ -56,9 +56,21 @@ def to_timestamp(t=None):
     if not t:
         t = dt.datetime.now()
     delta = t - dt.datetime(1970, 1, 1)
-    print delta.total_seconds()
+    timestamp = delta.total_seconds()
+    print timestamp
+    return timestamp
+
+
+def to_datetime(timestamp=None):
+    if not timestamp:
+        timestamp = to_timestamp()
+    datetime = dt.datetime.utcfromtimestamp(timestamp)
+    print dt.datetime.fromtimestamp(timestamp), 'fromtimestamp'
+    print datetime, 'utcfromtimestamp'
+    return datetime
 
 #parse_format()
 #total_seconds()
 #how_many_days_past_in_a_year()
-to_timestamp()
+#to_timestamp()
+to_datetime()
