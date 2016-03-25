@@ -12,9 +12,26 @@ print a == None
 print a == 'Hello!'
 print '*' * 50
 
-# old, new style classes, assignment overloading, replace method at runtime
+
+class In(object):
+    def __init__(self, a=0, b=1):
+        self.a = a
+        self.b = b
+
+    def __eq__(self, other):
+        return self.a == other.a and self.b == other.b
+
+ex = [In(), In(1, 2), In(2, 3), In('', None)]
+print In() in ex
+print In(1, 2) in ex
+print In(2, 3) in ex
+print In("", None) in ex
+print In(None, "") in ex
+print In(1, 3) in ex
+
 
 class Base:
+    # old, new style classes, assignment overloading, replace method at runtime
     def __setattr__(self, attr, value):
         self.__dict__[attr] = 'base'
 
