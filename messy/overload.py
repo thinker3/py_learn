@@ -18,6 +18,9 @@ class In(object):
         self.a = a
         self.b = b
 
+    def __repr__(self):  # not __str__
+        return "(%s, %s)" % (self.a, self.b)
+
     def __eq__(self, other):
         return self.a == other.a and self.b == other.b
 
@@ -28,6 +31,9 @@ print In(2, 3) in ex
 print In("", None) in ex
 print In(None, "") in ex
 print In(1, 3) in ex
+instances = [In(), In(1, 2), In(2, 4), In('', None)]
+to_insert = filter(lambda x: x in ex, instances)
+print to_insert
 
 
 class Base:
