@@ -44,3 +44,14 @@ def how_many_exceptions_catched():
 
 print '*' * 30
 how_many_exceptions_catched()
+
+
+def throw():
+    try:
+        1 / 0
+    #except:
+    #    pass
+    finally:
+        pass
+
+throw()
