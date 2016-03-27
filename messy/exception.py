@@ -54,4 +54,13 @@ def throw():
     finally:
         pass
 
-throw()
+# throw()
+
+
+def only_raise():
+    try:
+        what
+    except:
+        raise
+
+only_raise()
