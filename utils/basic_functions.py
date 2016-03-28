@@ -15,6 +15,15 @@ except:
 lower_letters_digits = string.letters[:26] + string.digits
 
 
+def all(*cons):  # shortcircuiting
+    result = True
+    for con in cons:
+        result = result and con
+        if result is False:
+            return result
+    return True
+
+
 def get_html(url, callback=None, headers=None):
     _headers = {
         'User-Agent': 'Mozilla/5.0',
