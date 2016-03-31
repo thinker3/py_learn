@@ -5,8 +5,9 @@ from invoke import task
 
 
 @task(default=True)
-def test():
-    print('demo default task')
+def test(under_score='1'):
+    # invoke demo --under-score=0
+    print('test under_score', under_score)
 
 
 @task
