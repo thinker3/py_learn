@@ -11,8 +11,8 @@ lock = threading.Lock()
 
 class Worker(threading.Thread):
     def __init__(self, queue):
-        self.__queue = queue
         threading.Thread.__init__(self)
+        self.__queue = queue
 
     def run(self):
         while 1:
@@ -27,11 +27,12 @@ class Worker(threading.Thread):
             print self.name, "task", item, "finished"
             lock.release()
 
-# class Queue.Queue(maxsize=0)
-# maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue.
-# Insertion will block once this size has been reached, until queue items are consumed.
-# If maxsize is less than or equal to zero, the queue size is infinite.
-#queue = Queue.Queue()
+## class Queue.Queue(maxsize=0)
+## maxsize is an integer that sets the upperbound limit on the number of items that can be placed in the queue.
+## Insertion will block once this size has been reached, until queue items are consumed.
+## If maxsize is less than or equal to zero, the queue size is infinite.
+
+# queue = Queue.Queue()
 queue = Queue.Queue(40)
 for i in range(WORKERS):
     Worker(queue).start()
