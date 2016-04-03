@@ -9,21 +9,23 @@ import Queue
 import threading
 
 lock = threading.Lock()
+pause = 1
 worker_number = 3
 tasks = range(12)
 
 
 def do_work(item):
-    time.sleep(1)
-    lock.acquire()
+    time.sleep(pause)
     print(item)
-    lock.release()
 
 
 def worker(q):
     while Queue.running:
-        item = q.get()
-        do_work(item)
+        try:
+            item = q.get(timeout=0.1)
+            do_work(item)
+        except Queue.Empty as e:
+            print(type(e), str(e))
         if q.empty():
             Queue.running = False
 
@@ -48,14 +50,14 @@ class Printer(threading.Thread):
         self.queue = queue
 
     def run(self):
-        while self.running:
+        while Printer.running:
             if self.queue.empty():
-                self.running = False
+                Printer.running = False
+                break
+            ## Here is dangerous, right?
             task = self.queue.get()
-            lock.acquire()
-            time.sleep(1)
+            time.sleep(pause)
             print(task)
-            lock.release()
 
 
 def main_of_class():
@@ -68,5 +70,35 @@ def main_of_class():
     except KeyboardInterrupt:
         Printer.running = False
 
-# main_of_func()
-main_of_class()
+
+class Useless(threading.Thread):
+    running = True
+
+    def __init__(self, data):
+        threading.Thread.__init__(self)
+        self.data = data
+
+    def run(self):
+        while Useless.running:  # self.running, problematic
+            lock.acquire()
+            if len(self.data) == 0:
+                Useless.running = False  # self.running, problematic
+                task = None
+            else:
+                task = self.data.pop(0)
+            lock.release()
+            if task is not None:
+                time.sleep(pause)
+                print(task)
+
+
+def main_of_useless():
+    data = list(tasks)
+    [Useless(data).start() for i in range(worker_number)]
+    try:
+        while Useless.running:
+            time.sleep(1)
+    except KeyboardInterrupt:
+        Useless.running = False
+
+main_of_func()

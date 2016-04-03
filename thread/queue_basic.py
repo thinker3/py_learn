@@ -56,6 +56,19 @@ priority_queue.put(Person('Jack'))
 priority_queue.put(Person('Florance'))
 priority_queue.put(Person('Tom'))
 priority_queue.put(Person('Susan'))
+
 print '*' * 30
 while not priority_queue.empty():
     print priority_queue.get()
+
+print '*' * 30
+queue = Queue.Queue()
+try:
+    queue.get(block=False)
+except Queue.Empty as e:
+    print('block=False: "%s"' % e)
+    print(type(e), repr(e), str(e))
+try:
+    queue.get(timeout=1)
+except Queue.Empty as e:
+    print('timeout=1: "%s"' % e)
