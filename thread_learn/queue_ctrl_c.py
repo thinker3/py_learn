@@ -8,10 +8,12 @@ import time
 import Queue
 import threading
 
+from invoke import task
+
 lock = threading.Lock()
-pause = 1
-worker_number = 3
-tasks = range(12)
+pause = 0.1
+worker_number = 10
+tasks = range(120)
 
 
 def do_work(item):
@@ -30,6 +32,7 @@ def worker(q):
             Queue.running = False
 
 
+@task
 def main_of_func():
     Queue.running = True
     q = Queue.Queue()
@@ -48,20 +51,24 @@ class Printer(threading.Thread):
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
+        # self.daemon = True
 
     def run(self):
         while Printer.running:
             if self.queue.empty():
+                time.sleep(1)
                 Printer.running = False
                 break
-            ## Here is dangerous, right?
-            task = self.queue.get()
-            time.sleep(pause)
-            print(task)
+            try:
+                item = self.queue.get(block=False)
+                print(item)
+            except Queue.Empty as e:
+                print(type(e), str(e))
 
 
+@task
 def main_of_class():
-    q = Queue.Queue()
+    q = Queue.Queue(len(tasks) + 1)
     [q.put(item) for item in tasks]
     [Printer(q).start() for i in range(worker_number)]
     try:
@@ -83,15 +90,16 @@ class Useless(threading.Thread):
             lock.acquire()
             if len(self.data) == 0:
                 Useless.running = False  # self.running, problematic
-                task = None
+                item = None
             else:
-                task = self.data.pop(0)
+                item = self.data.pop(0)
             lock.release()
-            if task is not None:
+            if item is not None:
                 time.sleep(pause)
-                print(task)
+                print(item)
 
 
+@task
 def main_of_useless():
     data = list(tasks)
     [Useless(data).start() for i in range(worker_number)]
@@ -101,4 +109,5 @@ def main_of_useless():
     except KeyboardInterrupt:
         Useless.running = False
 
-main_of_func()
+if __name__ == '__main__':
+    pass
