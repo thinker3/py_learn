@@ -1,24 +1,22 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-## join and task_done, does not work
-## does not need daemon threads
-
 import time
 import Queue
 import threading
 
+import requests
 from invoke import task
 
 lock = threading.Lock()
-pause = 0.1
-worker_number = 10
-tasks = range(120)
+worker_number = 60
+tasks = range(1200)
+url = 'http://www.baidu.com/'
 
 
 def do_work(item):
-    time.sleep(pause)
-    print(item)
+    text = requests.get(url).text
+    print(item, len(text))
 
 
 def worker(q):
@@ -51,17 +49,17 @@ class Printer(threading.Thread):
     def __init__(self, queue):
         threading.Thread.__init__(self)
         self.queue = queue
-        # self.daemon = True
 
     def run(self):
         while Printer.running:
             if self.queue.empty():
-                time.sleep(1)
+                # time.sleep(1)
                 Printer.running = False
                 break
             try:
                 item = self.queue.get(block=False)
-                print(item)
+                text = requests.get(url).text
+                print(item, len(text))
             except Queue.Empty as e:
                 print(type(e), str(e))
 
@@ -95,8 +93,8 @@ class Useless(threading.Thread):
                 item = self.data.pop(0)
             lock.release()
             if item is not None:
-                time.sleep(pause)
-                print(item)
+                text = requests.get(url).text
+                print(item, len(text))
 
 
 @task
@@ -110,4 +108,4 @@ def main_of_useless():
         Useless.running = False
 
 if __name__ == '__main__':
-    pass
+    main_of_class()
