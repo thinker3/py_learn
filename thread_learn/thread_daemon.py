@@ -45,6 +45,16 @@ def main_no_wait():
     print('Over')
 
 
+def main_dead_worker_join():
+    Model = IndependentWorker
+    Model = DaemonWorker
+    worker = Model()
+    worker.start()
+    time.sleep(5)
+    print('worker.is_alive()', worker.is_alive())
+    worker.join()
+
 if __name__ == '__main__':
     # main_wait()
-    main_no_wait()
+    # main_no_wait()
+    main_dead_worker_join()
