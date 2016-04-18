@@ -61,12 +61,12 @@ print list(itertools.islice(xrange(10), 2, 8, 2)) # start, stop, step
 
 print '*' * 20
 things = [
-        ("vehicle", "car"),
-        ("animal", "duck"),
-        ("vehicle", "boat"),
-        ("animal", "bear"),
-        ("vehicle", "bus"),
-    ]
+    ("vehicle", "car"),
+    ("animal", "duck"),
+    ("vehicle", "boat"),
+    ("animal", "bear"),
+    ("vehicle", "bus"),
+]
 for key, group in itertools.groupby(things, lambda x: x[0]):
     print key, list(group)
 
@@ -84,3 +84,20 @@ for key, group in itertools.groupby(xrange(10), lambda x: y[x]):
 print '*' * 20
 for key, igroup in itertools.groupby(xrange(12), lambda x: x / 5):
     print key, list(igroup)
+
+print '*' * 20
+things = [
+    (-1, -2.1),
+    (-1, -3.5),
+    (0, 0),
+    (1, 2.2),
+    (1, 1.2),
+    (1, 0.8),
+]
+temp = {-1: [], 1: []}
+for key, group in itertools.groupby(things, lambda x: x[0]):
+    group = list(group)
+    print key, group
+    if key in temp:
+        temp[key].append((sum(1 for i in group), sum(v for k, v in group)))
+print temp
