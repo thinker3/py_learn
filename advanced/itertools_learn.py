@@ -101,3 +101,14 @@ for key, group in itertools.groupby(things, lambda x: x[0]):
     if key in temp:
         temp[key].append((sum(1 for i in group), sum(v for k, v in group)))
 print temp
+
+print '*' * 20
+things = [
+    ['a', '1', '2', '3'],
+    ['a', '2', '3', '4'],
+    ['b', '3', '4', '5'],
+    ['b', '4', '5', '6'],
+]
+for key, group in itertools.groupby(things, lambda x: x[0]):
+    group = map(lambda x: x[1:], group)
+    print key, group
