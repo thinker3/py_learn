@@ -25,3 +25,22 @@ print l
 import operator
 l.sort(key=operator.itemgetter(0, 1))
 print l
+
+
+class Person(object):
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+people = [
+    Person('Jim', 5),
+    Person('Tom', 3),
+    Person('Bob', 9),
+]
+
+from operator import attrgetter
+
+people.sort(key=attrgetter('age'), reverse=True)
+for person in people:
+    print(person.name, person.age)
