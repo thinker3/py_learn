@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-
+import cytoolz as toolz
+from operator import itemgetter
 from utils.decorators import (
     segregate,
     isolate,
@@ -109,3 +110,12 @@ unique_test(unique, t)
 
 fs = frozenset([1, 2, 3])
 # fs.add(4)
+
+
+duplicate_dicts = [
+    {'id': 1, 'name': 'Jim'},
+    {'id': 2, 'name': 'Tom'},
+    {'id': 1, 'name': 'Jim'},
+    {'id': 3, 'name': 'Jack'},
+]
+print list(toolz.unique(duplicate_dicts, key=itemgetter('id')))
