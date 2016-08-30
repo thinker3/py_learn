@@ -18,7 +18,7 @@ def iteritems():
 
 
 def iterkv():
-    for key, serie in df.iterkv():  # iteritems  == iterkv
+    for key, serie in df.iterkv():  # iteritems == iterkv
         import ipdb; ipdb.set_trace()
 
 
