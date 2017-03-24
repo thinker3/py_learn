@@ -3,7 +3,7 @@
 
 # http://strftime.org/
 
-import time
+from time import sleep
 import datetime as dt
 
 
@@ -31,7 +31,7 @@ def parse_format():
 
 def total_seconds():
     before = dt.datetime.now()
-    time.sleep(1)
+    sleep(1)
     now = dt.datetime.now()
     delta = now - before
     seconds = delta.total_seconds()

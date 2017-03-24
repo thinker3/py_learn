@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import csv
+# import csv
 import codecs
-# import unicodecsv as csv
+# The csv module doesn’t directly support reading and writing Unicode
+import unicodecsv as csv
 
 with open('test.csv', "wb") as f:
     f.writer(codecs.BOM_UTF8)
