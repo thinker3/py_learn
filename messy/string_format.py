@@ -10,12 +10,10 @@ def test():
     name = 'Jim'
     print 'hello %s' % name
 
-    # named parameters string formatting
+    # named parameters string
     print 'hello %(name)s' % {'name': name}
     print 'hello %(name)s' % dict(name=name)
 
-    dic=dict(a='abc', b='bcd', c='cde')
-    print dic
 
 test()
 
@@ -45,5 +43,6 @@ def format():
     print '{:o}'.format(12)
     print '{:x}'.format(12)
     print '{:,}'.format(1234567890)
+
 
 format()

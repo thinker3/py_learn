@@ -26,6 +26,7 @@ class AliasContextManager(object):
         del self.fn
         #self.fn = None
 
+
 alias = AliasContextManager
 
 with alias(sum) as fn:
@@ -48,6 +49,7 @@ class ContextDecorator(object):
 
     def __call__(self, f):
         self.label = f.__name__
+
         @wraps(f)
         def wrapper(*args, **kw):
             with self:
@@ -60,12 +62,14 @@ def loop():
     for i in xrange(10 ** 7):
         pass
 
+
 loop()
 
 
 def wait():
     for i in xrange(10 ** 8):
         pass
+
 
 with ContextDecorator(label='bar'):
     wait()
