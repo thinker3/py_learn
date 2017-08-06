@@ -4,6 +4,7 @@
 
 def decorate(func):
     print 'decorate is called'
+
     def _func(*args, **kwargs):
         print '_func is called'
         return func(*args, **kwargs)

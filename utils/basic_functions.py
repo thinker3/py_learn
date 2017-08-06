@@ -1,8 +1,10 @@
 # coding=utf8
+
 import os
 import time
 import codecs
 import string
+import urllib
 import urllib2
 import socket
 from xlwt import Workbook
@@ -172,6 +174,9 @@ def make_xls_file(sheetname='1', filename=None, columns=[], objs=[]):
 def make_xls_response(sheetname='1', filename=None, columns=[], objs=[]):
     book, filename = make_workbook(sheetname, filename, columns, objs)
     response = HttpResponse(mimetype='application/vnd.ms-excel')
+    # "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    response = HttpResponse(content_type='application/vnd.ms-excel')
+    filename = urllib.quote(unicode(filename).encode('utf8'))
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     book.save(response)
     return response

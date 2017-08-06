@@ -2,6 +2,7 @@
 *.pdf
 *~
 *.swp
+*.apk
 
 # C extensions
 *.so

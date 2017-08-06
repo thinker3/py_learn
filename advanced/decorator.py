@@ -1,29 +1,40 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 def makebold(fn):
     def wrapped():
         return "<b>" + fn() + "</b>"
     return wrapped
+
 
 def makeitalic(fn):
     def wrapped():
         return "<i>" + fn() + "</i>"
     return wrapped
 
+
 @makebold
 @makeitalic
 def hello():
     return "hello world"
 
+
 print hello()
+
 
 @makeitalic
 @makebold
 def hello():
     return "hello world"
 
+
 print hello()
+
 
 def hello():
     return "hello world"
+
 
 hello = makeitalic(makebold(hello))
 print hello()
@@ -44,10 +55,14 @@ class Tag(object):
 def sayhi():
     return 'hi'
 
+
 print sayhi()
+
 
 def sayhi():
     return 'hi'
+
+
 tag_i = Tag('i')
 tag_b = Tag('b')
 sayhi = tag_i(tag_b(sayhi))
@@ -55,19 +70,27 @@ print sayhi()
 
 
 def table(name):
+
     def _table(cls):
         cls.__table__ = name
         return cls
     return _table
 
+
 @table('u')
-class User(object): pass
+class User(object):
+    pass
+
 
 print User
 abc = User()
 print abc.__table__
 
-class User(object): pass
+
+class User(object):
+    pass
+
+
 User = table('v')(User)
 abc = User()
 print abc.__table__
@@ -85,6 +108,7 @@ def tag(name):
 @tag('i')
 def sayhi():
     return 'hi'
+
 
 print sayhi()
 
@@ -106,11 +130,13 @@ def tag(name):
 def sayhi(person, time):
     return 'hi %s, good %s.' % (person, time)
 
+
 print sayhi('tom', 'night')
 
 
 def sayhi(person, time):
     return 'hi %s, good %s.' % (person, time)
+
 
 print tag('b')(tag('i')(sayhi))('tom', 'night')
 
@@ -134,5 +160,6 @@ def tags(*names):
 @tags('span', 'div', 'body')
 def sayhi(person, time):
     return 'Hi %s, good %s.' % (person, time)
+
 
 print sayhi('Tom', 'morning')

@@ -1,9 +1,16 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import time
+
+# import time
 import itertools
-import functools
+# import functools
+'''
+# __import__('ipdb').set_trace()
+    from decorator import decorator
+    ImportError: cannot import name decorator
+    python namespace conflict
+'''
 
 """
 # python2.6 does not support step
@@ -55,9 +62,9 @@ print list(itertools.izip_longest('ABCDE', '123'))
 print list(itertools.izip_longest('ABCDE', '123', fillvalue='/'))
 
 print '*' * 20
-print list(itertools.islice(xrange(10), 2)) # stop
-print list(itertools.islice(xrange(10), 2, 8)) # start, stop
-print list(itertools.islice(xrange(10), 2, 8, 2)) # start, stop, step
+print list(itertools.islice(xrange(10), 2))  # stop
+print list(itertools.islice(xrange(10), 2, 8))  # start, stop
+print list(itertools.islice(xrange(10), 2, 8, 2))  # start, stop, step
 
 print '*' * 20
 things = [

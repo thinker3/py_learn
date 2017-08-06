@@ -2,6 +2,7 @@
 
 import os
 import json
+import urllib
 import requests
 
 home = os.path.expanduser('~')
@@ -14,7 +15,11 @@ def separate(num=80):
 def test_get():
     separate()
     url = 'http://www.baidu.com'
-    r = requests.get(url)
+    params = dict(
+        x=1,
+        y=[2, 3],
+    )
+    r = requests.get(url, params=params)  # doseq is True
     assert isinstance(r, requests.Response)
     #print dir(r)
     print r.url
@@ -78,7 +83,21 @@ def post_with_session():
     client.post(url, data=data)
 
 
-#test_get()
-#test_post()
-#test_post_json()
-post_with_session()
+def construct_query_string():
+    params = dict(
+        x=1,
+        y=[2, 3],
+    )
+    query_string = urllib.urlencode(params, doseq=0)  # default is 0
+    print query_string
+    query_string = urllib.urlencode(params, doseq=True)
+    url = 'http://www.baidu.com'
+    url = '%s?%s' % (url, query_string)
+    print url
+
+
+# test_get()
+# test_post()
+# test_post_json()
+# post_with_session()
+# construct_query_string()

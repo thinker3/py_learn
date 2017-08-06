@@ -38,12 +38,12 @@ def multiple_levels_zipped():
     files = [
         ['class_static_method.py', 'matrix.py'],
         ['get_obj_by_method.py'],
-        ]
+    ]
     first = 'abc'
     second = [
         'hello',
         'world',
-        ]
+    ]
 
     dst = zipfile.ZipFile(output, 'w')
     for i, second_dir in enumerate(second):
@@ -69,4 +69,5 @@ if __name__ == '__main__':
     #one_file_zipped()
     #more_files_zipped()
     #multiple_levels_zipped()
-    zero_file_zipped()
+    #zero_file_zipped()
+    pass
