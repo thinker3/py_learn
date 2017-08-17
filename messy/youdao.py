@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#coding: utf8
+# -*- coding: utf-8 -*-
 
 import sys
 import urllib2 as u
@@ -9,15 +9,17 @@ from scrapy.selector import Selector
 encoding = sys.getfilesystemencoding() or "utf8"
 while True:
     query = raw_input('q to quit, input the word: ')
-    if query.lower() == 'q': break
+    if query.lower() == 'q':
+        break
     url = "http://dict.youdao.com/search?tab=chn&keyfrom=dict.top&q=" + query
     html = u.urlopen(url).read()
-    hxs = Selector(text = html)
+    hxs = Selector(text=html)
     phonetics = hxs.xpath('//div[@id="phrsListTab"]/h2[1]/div[1]/span')
     for ph in phonetics:
         ph = ph.xpath('./span/text()').extract()
         #if len(ph) > 0: print ph[0]  # UnicodeEncodeError on windows
-        if len(ph) > 0: print ph[0].encode(encoding)
+        if len(ph) > 0:
+            print ph[0].encode(encoding)
     print
     xpath = '//div[@id="phrsListTab"]/div[@class="trans-container"]/ul/li'
     lis = hxs.xpath(xpath)

@@ -1,13 +1,17 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from scrapy.selector import XmlXPathSelector
 
-xml = \
-"""
-<root>
-    <foos>
-        <foo>the quick <bar>brown </bar>fox</foo>
-    </foos>
-</root>
-"""
+xml = (
+    """
+    <root>
+        <foos>
+            <foo>the quick <bar>brown </bar>fox</foo>
+        </foos>
+    </root>
+    """
+)
 
 
 xxs = XmlXPathSelector(text=xml)
@@ -17,8 +21,8 @@ for one in foos:
     text = ''.join(text)
     print text
 
-xml = \
-"""
+xml = (
+    """
     <content type="text/xml">
       <s:dict>
         <s:key name="group_id">MAC</s:key>
@@ -34,17 +38,9 @@ xml = \
         <s:key name="window_period">30</s:key>
       </s:dict>
     </content>
-"""
+    """
+)
 
 xxs = XmlXPathSelector(text=xml)
 quota = xxs.select('//*[@name="quota"]/text()').extract()[0]
 print quota
-
-
-
-
-
-
-
-
-

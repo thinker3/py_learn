@@ -3,6 +3,7 @@
 *~
 *.swp
 *.apk
+*.txt
 
 # C extensions
 *.so

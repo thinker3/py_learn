@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+from datetime import (
+    datetime,
+)
+
 
 def decorate(func):
     print 'decorate is called'
@@ -39,3 +43,13 @@ def isolate(*args, **kwargs):
     sep = kwargs.get('sep') or '*'
     length = kwargs.get('length') or 30
     return separate(sep, length)
+
+
+def show_time_interval(func):
+    def _func(*args, **kwargs):
+        before = datetime.now()
+        ans = func(*args, **kwargs)
+        delta = (datetime.now() - before)
+        print delta.total_seconds()
+        return ans
+    return _func
