@@ -14,6 +14,10 @@ class DictObject(object):
     def __str__(self):
         return str(self.__dict__)
 
+    @property
+    def _dict(self):
+        return self.__dict__
+
 
 def dict2query(params):
     query = []
@@ -38,8 +42,40 @@ def get_url(base_url, params=None):
     return url
 
 
-if __name__ == '__main__':
+class Dict(dict):
+
+    def __setattr__(self, name, value):
+        self[name] = value
+
+    def __getattr__(self, name):
+        return self[name]
+
+
+def test_DictObject():
     do = DictObject(a=1, b=2)
     print do
     do.update(c=3)
     print do
+    dao = DictObject(**do._dict)
+    print dao
+
+
+def test_Dict():
+    do = Dict(a=1, b=2)
+    print do
+    temp = {'a': 1, 'b': 2}
+    do = Dict(temp)
+    print do
+    do = Dict(**do)
+    print do
+    do = Dict()
+    do.a = 1
+    print do.a
+    do.update(b=2)
+    print do.b
+
+
+if __name__ == '__main__':
+    # test_DictObject()
+    # test_Dict()
+    pass

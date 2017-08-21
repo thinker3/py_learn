@@ -1,15 +1,17 @@
 #!/usr/bin/env python
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 
 
 class Person(object):
     country = 'cn'
+
     def __getattr__(self, name):
         return object.__getattribute__(self, name)
 
     def show(self):
         print 'hello'
         return self.country
+
 
 p = Person()
 attr = getattr(p, 'show')
@@ -36,6 +38,7 @@ class A(object):  # new style class
     def __getattribute__(self, name):
         print 'calling __getattribute__ ...'
         return object.__getattribute__(self, name)
+
 
 a = A()
 print a.__dict__
@@ -64,6 +67,7 @@ class A():  # old style class
     def __getattribute__(self, name):
         print 'calling __getattribute__ ...'
         return object.__getattribute__(self, name)
+
 
 a = A()
 print a.__dict__
