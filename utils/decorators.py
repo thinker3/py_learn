@@ -36,6 +36,22 @@ def separate(sep='*', length=30):
     return _wrapper
 
 
+def smart_separate(*arg, **kwargs):
+    def separate(sep='-', length=50):
+        def wrapper(func):
+            def _func(*args, **kwargs):
+                r = func(*args, **kwargs)
+                print sep * length
+                return r
+            return _func
+        return wrapper
+
+    if args:
+        first = args[0]
+        if type(first) == 'function':
+            return wrapper(first)
+
+
 def isolate(*args, **kwargs):
     # @isolate, with or without ()
     if len(args) == 1 and callable(args[0]):

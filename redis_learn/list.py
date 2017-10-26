@@ -16,4 +16,5 @@ def fix_length_list():
     li = db.lrange('li', 0, -1)
     print li
 
+
 fix_length_list()

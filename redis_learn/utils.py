@@ -11,4 +11,4 @@ def get_redis(db=1):
 
 if __name__ == '__main__':
     db = get_redis()
-    import ipdb; ipdb.set_trace()
+    __import__('ipdb').set_trace()
