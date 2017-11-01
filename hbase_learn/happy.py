@@ -3,7 +3,9 @@
 
 import happybase
 
-host = '172.18.0.5'
+import config
+
+host = config.host
 port = 9090  # default
 connection = happybase.Connection(host=host)
 tables = connection.tables()
