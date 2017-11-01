@@ -27,6 +27,10 @@ row_key = '1'  # can not be int
 table.put(row_key, info)
 row = table.row(row_key)
 print row
+print table.counter_get('1', 'info:counter')
+print table.row(row_key)
+print table.counter_inc('1', 'info:counter', 2)
+print table.row(row_key)
 
 infos = [
     {
@@ -52,3 +56,10 @@ with table.batch() as bat:
     bat.delete('2')
 rows = list(table.scan())
 print len(rows)
+
+
+def delete_table(connection, table_name):
+    connection.delete_table(table_name, disable=True)
+
+
+# delete_table(connection, table_name)
