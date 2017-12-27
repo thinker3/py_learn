@@ -41,5 +41,3 @@ nosetests.xml
 
 local_*.*
 !local_*.tpl.*
-
-xxx/
