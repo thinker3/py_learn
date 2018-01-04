@@ -4,7 +4,7 @@
 import os
 # path.py
 # there is an alias called path, don't import that, no jedi hints
-from path import Path as pathpy
+from path import Path as pathpy  # noqa
 
 
 def path_file_operations():
@@ -103,5 +103,6 @@ def path_dir_operations():
     outer.rmdir()  # OSError: [Errno 66] Directory not empty
     copydir.rmtree_p()
 
-#path_file_operations()
+
+# path_file_operations()
 path_dir_operations()
