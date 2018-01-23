@@ -1,23 +1,26 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import random
 
 print 'random float:'
 print random.uniform(1.2, 3.6)
+
 print '*' * 30
+for i in xrange(10):
+    print random.randint(0, 3)  # integers in [0, 3]
+print '*' * 30
+for i in xrange(10):
+    print random.randrange(0, 1), random.randint(0, 1)
 
-n=0
-while n<10:
-    r = random.randint(0,10) # integers in [0, 10]
-    print r,
-    n += 1
-
-print
+print '*' * 30
 numbers = range(0, 20)
-some_numbers= random.sample(numbers, 5)
 print numbers
+some_numbers = random.sample(numbers, 5)
 print some_numbers
+print random.choice(some_numbers)
 
-print random.choice(numbers)
-
+print '*' * 30
 random.seed(0)
 print random.random()
 random.seed(0)
