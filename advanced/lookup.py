@@ -18,6 +18,7 @@ class C(object):
         print "Class getattribute invoked"
         return object.__getattribute__(*args)
 
+
 c = C()
 print c.__len__()  # Explicit lookup via instance
 print '*' * 30
@@ -34,6 +35,7 @@ print '*' * 30
 class C(object):
     def __init__(self):
         self.c = 'C'
+
 
 c = C()
 print c.__class__.__dict__

@@ -8,12 +8,14 @@ import operator
 def add(a, b):
     print a + b
 
+
 add_1 = functools.partial(add, 1)
 add_1(5)
 
 
 def say_hello(name, default="Good morning"):
     print "Hello %s, %s!" % (name, default)
+
 
 say_hello('Ken')
 welcome = functools.partial(say_hello, default='Welcome')
@@ -24,6 +26,7 @@ welcome_jerry()
 
 def run_callback(callback):
     callback()
+
 
 run_callback(welcome_jerry)
 #run_callback(welcome)  # TypeError
@@ -51,6 +54,7 @@ def multiply(n):
     print functools.reduce(lambda x, y: x * y, [], 1)
     print functools.reduce(operator.mul, xrange(1, n + 1))
 
+
 add(100)
 print '*' * 20
 multiply(4)
@@ -73,6 +77,7 @@ def lgcd(*args):
 def llcm(*args):
     return reduce(lcm, args)
 
+
 print '*' * 20
 print lgcd(100, 80, 36)
 print llcm(100, 80, 36)
@@ -93,6 +98,7 @@ print functools.reduce(dict.__getitem__, 'he.she.you.they'.split('.'), deep)
 def dot(d, path):
     print functools.reduce(dict.__getitem__, path.split('.'), d)
 
+
 dot(deep, 'he.she.you')
 
 
@@ -103,6 +109,7 @@ class Dict(object):
 
     def dot(self, path):
         return functools.reduce(dict.__getitem__, path.split('.'), self.d)
+
 
 deep = Dict(deep)
 print deep.dot('he.she')
@@ -128,6 +135,7 @@ def tags(*names):
 @tags('span', 'div', 'body')
 def sayhi(person, time):
     return 'Hi %s, good %s.' % (person, time)
+
 
 print '*' * 20
 print sayhi('Tom', 'morning')
@@ -156,6 +164,7 @@ def tags(*names):
 def sayhi(person, time):
     return 'Hi %s, good %s.' % (person, time)
 
+
 print sayhi('Tom', 'morning')
 print sayhi.__name__
 
@@ -165,6 +174,7 @@ class SomeClass(object):
     @tags('span', 'div', 'body')
     def sayhi(self, person, time):
         return 'Hi %s, good %s.' % (person, time)
+
 
 a = SomeClass()
 print a.sayhi('Tom', 'morning')
