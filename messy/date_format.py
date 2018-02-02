@@ -69,8 +69,11 @@ def to_datetime(timestamp=None):
     print datetime, 'utcfromtimestamp'
     return datetime
 
-#parse_format()
-#total_seconds()
-#how_many_days_past_in_a_year()
-#to_timestamp()
-to_datetime()
+
+if __name__ == '__main__':
+    # parse_format()
+    # total_seconds()
+    # how_many_days_past_in_a_year()
+    # to_timestamp()
+    to_datetime()
+    pass

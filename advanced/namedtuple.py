@@ -35,5 +35,3 @@ print Point4D(*p[:], t=4)
 d = p._asdict()
 d.update(t=4)
 print Point4D(**d)
-
-

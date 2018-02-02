@@ -5,18 +5,34 @@ import urllib
 
 
 class DictObject(object):
+    _invalid_keys = (
+        'update',
+        '_data',
+        '_safety_check',
+        '__dict__',
+    )
+
     def __init__(self, **kwargs):
+        self._safety_check(kwargs)
         self.__dict__.update(kwargs)
 
     def update(self, **kwargs):
+        self._safety_check(kwargs)
         self.__dict__.update(kwargs)
+
+    @property
+    def _data(self):
+        return self.__dict__
+
+    def _safety_check(self, kwargs):
+        for key in self._invalid_keys:
+            assert key not in kwargs
+
+    def __getattr__(self, key):
+        return self.__dict__.get(key)
 
     def __str__(self):
         return str(self.__dict__)
-
-    @property
-    def _dict(self):
-        return self.__dict__
 
 
 def dict2query(params):
@@ -51,16 +67,16 @@ class Dict(dict):
         return self[name]
 
 
-def test_DictObject():
+def test_DictObject():  # noqa
     do = DictObject(a=1, b=2)
     print do
     do.update(c=3)
     print do
-    dao = DictObject(**do._dict)
+    dao = DictObject(**do._data)
     print dao
 
 
-def test_Dict():
+def test_Dict():  # noqa
     do = Dict(a=1, b=2)
     print do
     temp = {'a': 1, 'b': 2}
