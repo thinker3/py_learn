@@ -16,3 +16,23 @@ class Foo(object):
 print Foo.number
 # AttributeError: 'Foo' object has no attribute 'number'
 # print Foo().number
+
+
+class classproperty(object):  # noqa
+    def __init__(self, getter):
+        self.getter = getter
+
+    def __get__(self, instance, owner):
+        return self.getter(owner)
+
+
+class Foo(object):
+    x = 1
+
+    @classproperty
+    def number(cls):  # noqa
+        return cls.x
+
+
+print Foo().number
+print Foo.number
