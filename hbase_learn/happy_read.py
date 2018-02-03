@@ -25,6 +25,18 @@ def test_scan(table):
         print row_key, row
 
 
+def test_filter(table, value):
+    filter = "SingleColumnValueFilter('profile', 'name', =, 'binary:{value}')".format(value=value)
+    rows = table.scan(filter=filter)
+    rows = [one for one in rows]
+    print len(rows)
+    for row_key, row in rows:
+        print row_key, row
+    if rows:
+        row_key, row = rows[0]
+        assert isinstance(row, dict)
+
+
 def test_counter(table, row_key):
     print table.counter_get('1', 'profile:counter')
     print table.row(row_key)
@@ -51,4 +63,6 @@ if __name__ == '__main__':
     test_row(table, '1')
     test_row(table, '2')
     test_row(table, '3')
+    test_filter(table, 'Jack')
+    test_filter(table, 'None')
     pass
