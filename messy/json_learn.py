@@ -5,7 +5,7 @@ import ast
 import pprint
 try:
     import simplejson as json
-except:
+except ImportError:
     import json
 
 json_str = '["foo", "bar"]'
@@ -39,3 +39,10 @@ print obj, type(obj)
 json_str = '[True, False, None]'
 obj = ast.literal_eval(json_str)
 print obj, type(obj)
+
+unicode_info = {
+    'name': u'李好',
+    'style': u'צקלה',
+}
+print json.dumps(unicode_info)
+print json.dumps(unicode_info, ensure_ascii=False)

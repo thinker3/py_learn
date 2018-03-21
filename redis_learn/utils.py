@@ -6,7 +6,7 @@ from redis_learn import config
 
 
 def get_redis(db=1):
-    return redis.Redis(host=config.host, port=config.port, db=db)
+    return redis.Redis(host=config.host, port=config.port, db=db, password='root')
 
 
 if __name__ == '__main__':
