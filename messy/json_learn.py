@@ -46,3 +46,9 @@ unicode_info = {
 }
 print json.dumps(unicode_info)
 print json.dumps(unicode_info, ensure_ascii=False)
+dumpped_unicode = '{"style": "צקלה", "name": "李好"}'
+data = json.loads(dumpped_unicode)
+print data['name'], data['style']
+dumpped_unicode = '{"style": "\u05e6\u05e7\u05dc\u05d4", "name": "\u674e\u597d"}'
+data = json.loads(dumpped_unicode)
+print data['name'], data['style']
