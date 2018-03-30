@@ -1,16 +1,11 @@
 import os
 
-# run in this floder and another folder respectively
+# run in this folder and another folder respectively
 print __file__, type(__file__)  # magic.py <type 'str'>
 filepath = os.path.abspath(__file__)
 print filepath
 print os.path.dirname(filepath)
 print os.path.dirname(__file__)
-
-print '-' * 100
-print __name__, type(__name__)  # __main__ <type 'str'>
-
-
 print '-' * 100
 
 
@@ -19,11 +14,11 @@ class Foo(object):
     def __new__(cls):
         print 1
 
-    def __init__(cls):
-        print 2  # not be printed
+    def __init__(cls):  # noqa
+        print 2  # not printed
+
 
 f = Foo()
-
 print '-' * 100
 
 
@@ -39,9 +34,9 @@ class Foo(object):
     def __call__(self):
         print 3
 
+
 f = Foo()
 f()  # __call__ called here
-
 print '-' * 100
 
 
@@ -67,10 +62,10 @@ class Foo(object):
         print self.name  # JimJim
         print self.__class__.name  # Jim
 
+
 f = Foo('Jim')
 print f.__dict__
 print Foo.__dict__
-
 print '-' * 100
 
 
@@ -87,14 +82,14 @@ class Foo(object):
         self.name = name * 2
         print self.name
 
-Foo('Jim')
 
+Foo('Jim')
 print '-' * 100
 
 
 class Meta(type):
 
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls, *args, **kwargs):  # noqa
         print cls  # <class '__main__.Foo'>
         print args  # ('a',)
         print kwargs  # {}
@@ -120,6 +115,7 @@ class Foo(object):
     def show(self):
         print 'hello'
 
+
 f = Foo('a')
 f.show()
 
@@ -127,13 +123,12 @@ print '-' * 100
 Foo.__new__(Foo)
 # Foo.__new__()
 # Foo.__init__(Foo)
-
 print '-' * 100
 
 
 class Meta(type):
 
-    def __call__(cls):
+    def __call__(cls):  # noqa
         obj = cls.__new__(cls)
         obj.__init__()
         return obj
@@ -152,6 +147,7 @@ class Foo(object):
     @classmethod
     def show(cls):
         print cls
+
 
 f = Foo()
 f.show()  # <class '__main__.Foo'>
