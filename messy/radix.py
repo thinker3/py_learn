@@ -14,13 +14,14 @@ def convert_binary_string_to_decimal_int(binary_string):
 
 def invert(i):
     d = {
-            '0': '1',
-            '1': '0',
-            }
+        '0': '1',
+        '1': '0',
+    }
     s = map(lambda v: d[v], bin(i)[2:])
     s = '0b' + ''.join(s)
     i = convert_binary_string_to_decimal_int(s)
     return s, i
+
 
 mode_with_quick_edit = 231
 mode_without_quick_edit = 167
