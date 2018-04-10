@@ -50,3 +50,19 @@ for k, v in a.items():
     del a[k]
     a[v] = k
 print a
+
+# update reversed
+defaults = dict(
+    ip='127.0.0.1',
+    port=4002,
+)
+params = dict(
+    port=5002,
+    debug=True,
+)
+params = dict(defaults, **params)
+assert params == dict(
+    ip='127.0.0.1',
+    port=5002,
+    debug=True,
+)
