@@ -1,6 +1,7 @@
 *.py[cod~]
 *.pdf
 *~
+*_
 *.swp
 *.apk
 *.txt

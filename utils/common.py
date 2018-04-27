@@ -1,7 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import json
+import string
 import urllib
+import shortuuid
+from datetime import (
+    datetime,
+)
+
+from utils import defines
 
 
 class DictObject(object):
@@ -89,6 +97,45 @@ def test_Dict():  # noqa
     print do.a
     do.update(b=2)
     print do.b
+
+
+def format_time(t, fmt=defines.COMMON_TIME_FMT):
+    return t.strftime(fmt)
+
+
+def format_date(d, fmt=defines.COMMON_DATE_FMT):
+    return d.strftime(fmt)
+
+
+def format_datetime(dt, fmt=defines.COMMON_DATETIME_FMT):
+    return dt.strftime(fmt)
+
+
+def parse_datetime(dt_str, fmt=defines.COMMON_DATETIME_FMT):
+    return datetime.strptime(dt_str, fmt)
+
+
+def get_now():
+    return datetime.now()
+
+
+def get_now_str(fmt=defines.COMMON_DATETIME_FMT):
+    return format_datetime(get_now(), fmt)
+
+
+def get_uuid(length=10, letters_only=False):
+    alphabet = None
+    if letters_only:
+        alphabet = list(string.letters)
+    return shortuuid.ShortUUID(alphabet).random(length=length)
+
+
+def convert_to_string(value):
+    if isinstance(value, unicode):
+        return value.encode('utf-8')
+    if isinstance(value, (list, tuple, dict)):
+        return json.dumps(value, ensure_ascii=False)
+    return str(value)
 
 
 if __name__ == '__main__':

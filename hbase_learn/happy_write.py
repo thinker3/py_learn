@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import utils
+from hbase_learn import hbase_utils
 
 
 def create_table(connection):
@@ -69,10 +69,10 @@ def test_delete_row(table):
 
 
 if __name__ == '__main__':
-    connection = utils.get_connection()
+    connection = hbase_utils.get_connection()
     table = create_table(connection)
     test_put_one(table)
     test_put_batch(table)
     # test_delete_row(table)
-    # utils.delete_table(connection, table.name)
+    # hbase_utils.delete_table(connection, table.name)
     pass

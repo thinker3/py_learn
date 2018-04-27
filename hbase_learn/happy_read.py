@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import utils
+from hbase_learn import hbase_utils
 
 
 def seperate(n=120):
@@ -13,7 +13,7 @@ def test_row(table, row_key):
     assert isinstance(row, dict)
     for k, v in row.iteritems():
         print k, v
-    row = utils.row_to_dicts(row)
+    row = hbase_utils.row_to_dicts(row)
     for k, v in row.iteritems():
         print k, v
     seperate(80)
@@ -45,12 +45,12 @@ def test_counter(table, row_key):
 
 
 if __name__ == '__main__':
-    connection = utils.get_connection()
+    connection = hbase_utils.get_connection()
     tables = connection.tables()
     assert isinstance(tables, list)
     print tables
     table_name = 'patient'
-    table = utils.get_table(connection, table_name)
+    table = hbase_utils.get_table(connection, table_name)
     assert table.name == table_name
     # print table.regions()  # TTransportException: TTransportException(message='TSocket read 0 bytes', type=4)
     families = table.families()
