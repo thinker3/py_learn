@@ -8,3 +8,6 @@ print a
 
 b = binascii.a2b_hex(a)
 print b
+
+s = '\x01\xab\xcd'
+print map(binascii.hexlify, s)
