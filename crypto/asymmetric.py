@@ -4,7 +4,7 @@
 import rsa
 from base64 import b64encode
 
-secret = 'hello'
+secret = 'hello' * 1000
 pubkey, privkey = rsa.newkeys(512)
 print pubkey
 print pubkey.save_pkcs1()
@@ -30,7 +30,7 @@ print privkey
 print privkey.save_pkcs1()
 
 print
-crypto = rsa.encrypt(secret, pubkey)
+crypto = rsa.encrypt(secret, pubkey)  # OverflowError, if secret is too long
 print 'encrypted msg:', repr(crypto)
 msg = rsa.decrypt(crypto, privkey)
 print msg

@@ -44,7 +44,7 @@ unicode_info = {
     'name': u'李好',
     'style': u'צקלה',
 }
-print json.dumps(unicode_info)
+print json.dumps(unicode_info)  # default: ensure_ascii=True
 print json.dumps(unicode_info, ensure_ascii=False)
 dumpped_unicode = '{"style": "צקלה", "name": "李好"}'
 data = json.loads(dumpped_unicode)

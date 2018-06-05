@@ -2,6 +2,7 @@
 # encoding: utf-8
 
 import Queue
+from collections import deque
 
 first_in_first_out = Queue.Queue()
 first_in_last_out = Queue.LifoQueue()
@@ -72,3 +73,17 @@ try:
     queue.get(timeout=1)
 except Queue.Empty as e:
     print('timeout=1: "%s"' % e)
+
+
+def limited_queue_test():
+    raw_data = range(10)
+    dq = deque([], 3)
+    for i in raw_data:
+        dq.append(i)
+    data = []
+    while dq:
+        data.append(dq.popleft())
+    assert data == raw_data[-3:]
+
+
+limited_queue_test()
