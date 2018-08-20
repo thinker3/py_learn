@@ -95,3 +95,5 @@ if __name__ == '__main__':
     test_B_special()
     test_H(1, '\x00\x01')
     test_I(1, '\x00\x00\x00\x01')
+    assert struct.pack('>1s', '') == '\x00'
+    assert struct.pack('>1s', '0') == '\x30' == chr(48)
