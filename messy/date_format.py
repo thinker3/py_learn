@@ -3,8 +3,14 @@
 
 # http://strftime.org/
 
-from time import sleep
+import time
 import datetime as dt
+
+
+def get_timestamp():
+    timestamp = str(time.time()).replace('.', '')
+    print timestamp
+    return timestamp
 
 
 def parse_format():
@@ -31,7 +37,7 @@ def parse_format():
 
 def total_seconds():
     before = dt.datetime.now()
-    sleep(1)
+    time.sleep(1)
     now = dt.datetime.now()
     delta = now - before
     seconds = delta.total_seconds()
@@ -71,9 +77,10 @@ def to_datetime(timestamp=None):
 
 
 if __name__ == '__main__':
+    # get_timestamp()
     # parse_format()
     # total_seconds()
     # how_many_days_past_in_a_year()
     # to_timestamp()
-    to_datetime()
+    # to_datetime()
     pass
