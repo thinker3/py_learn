@@ -1,24 +1,44 @@
-from sys import argv
 
 def print_primes(n):
-    if n<3:
-        return
+    assert n >= 2 and isinstance(n, int)
     temp = [2]
-    for i in xrange(3, n, 2):
-        print i
-        m = i/2
+    for i in xrange(3, n + 1, 2):
+        m = i / 2
         for j in temp:
             if j > m:
                 temp.append(i)
                 break
-            if i%j != 0:
+            if i % j != 0:
                 continue
             else:
                 break
-    print ','.join(map(str, temp))
-    
-f = open(argv[1], 'r')
-for one in f:
-    if one.strip():
-        print_primes(int(one))
-f.close()
+    for p in temp:
+        print p,
+
+
+class PrimePosition(object):
+    def __init__(self, prime, pos):
+        self.prime = prime
+        self.pos = pos
+
+    def __str__(self):
+        return '(%s, %s)' % (self.prime, self.pos)
+
+
+def new(n):
+    assert n >= 2 and isinstance(n, int)
+    pp_list = []
+    for i in xrange(2, n + 1):
+        j = 0
+        for pp in pp_list:
+            if pp.pos == i:
+                j += 1
+                pp.pos += pp.prime
+        if j == 0:
+            pp_list.append(PrimePosition(i, 2 * i))
+    for one in pp_list:
+        print one.prime,
+
+print_primes(39)
+print
+new(39)
