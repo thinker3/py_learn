@@ -6,8 +6,7 @@ from datetime import datetime
 
 
 class Person(object):
-    def __getattr__(self, name):
-        return object.__getattribute__(self, name)
+    pass
 
 
 obj = Person()

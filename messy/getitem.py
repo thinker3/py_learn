@@ -1,37 +1,19 @@
-d = {'a': 'alpha', 'b': 'beta'}
-print d.__getitem__('a')
-print d['b']
-try:
-    print object.__getitem__(d, 'a')
-except:
-    pass
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+data = {'a': 'alpha', 'b': 'beta'}
+assert data.__getitem__('a') == data['a'] == 'alpha'
 
 try:
-    print getattr(d, 'a')
-except:
-    pass
+    object.__getitem__(data, 'b')
+except Exception as e:
+    print e
 
-try:
-    print object.__getattribute__(d, 'a')
-except:
-    pass
+array = ['alpha', 'beta', 'gamma']
+assert array.__getitem__(0) == array[0] == 'alpha'
+assert array.__getitem__(-1) == array[-1] == 'gamma'
+assert array[1:] == array.__getitem__(slice(1, None))
 
-
-print '-' * 30
-l = ['alpha', 'beta', 'gamma']
-print l.__getitem__(0)
-print l.__getitem__(-1)
-print l[1]
-print l[1:]
-print l.__getitem__(slice(1,None))
-print l.__getitem__(slice(1,))
-print l.__getitem__(slice(None,1))
-print l.__getitem__(slice(None,None))
-print l.__getitem__(slice(None,None,2))
-
-
-print '-' * 30
-t = ('alpha', 'beta')
-print t.__getitem__(0)
-print t.__getitem__(-1)
-print t[1]
+seq = ('alpha', 'beta')
+assert seq.__getitem__(0) == seq[0] == 'alpha'
+assert seq.__getitem__(-1) == seq[-1] == 'beta'

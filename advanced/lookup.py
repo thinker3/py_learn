@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+from pprint import pprint
+
 
 class Meta(type):
     def __getattribute__(*args):
@@ -8,7 +10,7 @@ class Meta(type):
         return type.__getattribute__(*args)
 
 
-class C(object):
+class Class(object):
     __metaclass__ = Meta
 
     def __len__(self):
@@ -19,41 +21,29 @@ class C(object):
         return object.__getattribute__(*args)
 
 
-c = C()
-print c.__len__()  # Explicit lookup via instance
-print '*' * 30
-print type(c).__len__(c)  # Explicit lookup via type
-print '*' * 30
-print len(c)  # Implicit lookup
-print c.__class__.__dict__
-print type(c).__dict__
-print C.__dict__
-print '*' * 30
-print '*' * 30
+obj = Class()
+obj.__len__()  # Explicit lookup via instance
+Class.__len__(obj)  # Explicit lookup via type
+len(obj)  # Implicit lookup, __getattribute__ not invoked
+print
 
 
-class C(object):
+class Class(object):
     def __init__(self):
-        self.c = 'C'
+        self.name = 'Class'
 
 
-c = C()
-print c.__class__.__dict__
-print c.__class__.__dict__['__dict__']
-print c.__dict__
-print '*' * 30
-c.__len__ = lambda: 5
-print c.__class__.__dict__
-print c.__dict__
-print '*' * 30
-print c.__len__()
-print '*' * 30
-#print len(c)  # TypeError: object of type 'C' has no len()
-#C.__len__ = lambda: 15  # TypeError: <lambda>() takes no arguments (1 given)
-C.__len__ = lambda x: 15
-print c.__class__.__dict__
-print len(c)
-print '*' * 30
-print C is c.__class__
-print C is type(c)
-print c.__class__ is type(c)
+obj = Class()
+assert Class is obj.__class__ is type(obj)
+print obj.__dict__
+pprint(dict(Class.__dict__), indent=4)
+dic = Class.__dict__['__dict__']
+print type(dic)
+assert dic.__get__(obj) == obj.__dict__
+
+obj.__len__ = lambda: 5
+assert obj.__len__() == 5
+#len(obj)  # TypeError: object of type 'Class' has no len()
+#Class.__len__ = lambda: 15  # TypeError: <lambda>() takes no arguments (1 given)
+Class.__len__ = lambda x: 15
+assert len(obj) == 15

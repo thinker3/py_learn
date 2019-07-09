@@ -5,8 +5,7 @@ from xlwt import Workbook
 
 
 class Person(object):
-    def __getattr__(self, name):
-        return object.__getattribute__(self, name)
+    pass
 
 
 obj = Person()
@@ -52,7 +51,7 @@ def make_xls(sheetname='sheet_1', filename='filename.xls', columns=[], objs=[]):
             if isinstance(obj, dict):
                 sheet.write(i, index_of(attr, columns), obj[attr])
             else:
-                sheet.write(i, index_of(attr, columns), obj.__getattribute__(attr))
+                sheet.write(i, index_of(attr, columns), getattr(obj, attr))
     book.save(filename)
 
 
