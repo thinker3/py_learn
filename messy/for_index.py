@@ -3,15 +3,15 @@
 
 import random
 
-li = [int(100*random.random()) for i in xrange(20)]
+li = [int(100*random.random()) for i in range(20)]
 li = list(set(li))
 li.sort()
-print li
+print(li)
 
 
 for i, one in enumerate(li):
     if one<=38 and 38<li[i+1]:
-        print one, li[i+1]
+        print(one, li[i+1])
         break
 
 
@@ -32,17 +32,17 @@ def for_for(key=''):
                 temp.append(j)
         two_dim.append(temp)
     for one in two_dim:
-        print one
+        print(one)
 
-print
+print()
 for_for('continue')
-print
+print()
 for_for('break')
-print
+print()
 for_for()
 
 
-print
+print()
 two_dim = []
 for i in range(5):
     temp = []
@@ -54,4 +54,4 @@ for i in range(5):
             temp.append(j)
     two_dim.append(temp)
 for one in two_dim:
-    print one
+    print(one)

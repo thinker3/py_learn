@@ -26,7 +26,7 @@ def get_selected_text():
     return ''
     handle = win32gui.GetForegroundWindow()
     title =  win32gui.GetWindowText(handle)
-    if 'cmd.exe' in title or u'命令处理程序' in title.decode('gbk') or (
+    if 'cmd.exe' in title or '命令处理程序' in title.decode('gbk') or (
             title.startswith('python') and title.strip().endswith('.py')):
         return None
     else:
@@ -61,19 +61,19 @@ def reset_clipboard(original_text):
 
 def search():
     original_text = get_original_text()
-    print 'original_text: %s' % original_text
+    print('original_text: %s' % original_text)
     selected_text = get_selected_text()
-    print 'selected text: %s' % selected_text
+    print('selected text: %s' % selected_text)
     reset_clipboard(original_text)
 
 
 def print_selection():
     original_text = get_original_text()
-    print 'original_text: %s' % original_text
+    print('original_text: %s' % original_text)
     selected_text = get_selected_text()
-    print 'selected text: %s' % selected_text
+    print('selected text: %s' % selected_text)
     reset_clipboard(original_text)
-    print
+    print()
 
 
 def get_selection():

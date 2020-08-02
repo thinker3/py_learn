@@ -19,7 +19,7 @@ running = True
 while running:
     try:
         r = random.randint(1, 7)
-        print 'hello %s' % r
+        print('hello %s' % r)
         if r == 4:
             1/0
         time.sleep(1)

@@ -55,17 +55,17 @@ def is_square(a, b, c, d):
 f = open(argv[1], 'r')
 for one in f.readlines():
     if one.strip():
-        points = map(eval, one.split(', '))
-        print is_square(*points)
+        points = list(map(eval, one.split(', ')))
+        print(is_square(*points))
 f.close()
-print
+print()
 
 
 import sys 
 cases = open(sys.argv[1], 'r')
 for case in cases:
     if case.strip():
-        a, b, c, d = map(eval, case.split(', '))
+        a, b, c, d = list(map(eval, case.split(', ')))
         ab = b[0]-a[0], b[1]-a[1]
         dc = c[0]-d[0], c[1]-d[1]
         ac = c[0]-a[0], c[1]-a[1]
@@ -80,37 +80,37 @@ for case in cases:
             if ab[0]*bc[0] + ab[1]*bc[1] == 0:
                 if ac[0]*bd[0] + ac[1]*bd[1] == 0:
                     if ab == zero:
-                        print 'false'
+                        print('false')
                     else:
-                        print 'true'
+                        print('true')
                     continue
         if ab == cd:
             if ab[0]*ac[0] + ab[1]*ac[1] == 0:
                 if ad[0]*bc[0] + ad[1]*bc[1] == 0:
                     if ab == zero:
-                        print 'false'
+                        print('false')
                     else:
-                        print 'true'
+                        print('true')
                     continue
         if ad == cb:
             if ad[0]*ac[0] + ad[1]*ac[1] == 0:
                 if ab[0]*dc[0] + ab[1]*dc[1] == 0:
                     if ad == zero:
-                        print 'false'
+                        print('false')
                     else:
-                        print 'true'
+                        print('true')
                     continue
-        print 'false'
+        print('false')
 
 cases.close()
-print
+print()
 
 
 import sys, re 
 cases = open(sys.argv[1], 'r')
 for case in cases:
     if case != '\n':
-        nums = map(int, re.findall(r'\d+', case))
+        nums = list(map(int, re.findall(r'\d+', case)))
         points= []
         for i in range(4):
             points.append((nums[i*2], nums[i*2+1]))
@@ -127,19 +127,19 @@ for case in cases:
         if ab == dc:
             if ab[0]*bc[0] + ab[1]*bc[1] == 0:
                 if ac[0]*bd[0] + ac[1]*bd[1] == 0:
-                    print 'true'
+                    print('true')
                     continue
         if ab == cd:
             if ab[0]*ac[0] + ab[1]*ac[1] == 0:
                 if ad[0]*bc[0] + ad[1]*bc[1] == 0:
-                    print 'true'
+                    print('true')
                     continue
         if ad == cb:
             if ad[0]*ac[0] + ad[1]*ac[1] == 0:
                 if ab[0]*dc[0] + ab[1]*dc[1] == 0:
-                    print 'true'
+                    print('true')
                     continue
-        print 'false'
+        print('false')
 
 cases.close()
 

@@ -12,7 +12,7 @@ for one in f:
         i, s = one.split(':')
         index.append(int(i))
         floats = re.findall(r"[-+]?\d*\.\d+|[-+]?\d+\.?", s)
-        a, b, c, d = map(float, floats)
+        a, b, c, d = list(map(float, floats))
         arclines.append(([a, b], [c, d]))
 f.close()
 
@@ -22,7 +22,7 @@ def get_direction(x):
     return cross(*x)
 
 def two_three(point):
-    a, b = map(radians, point)
+    a, b = list(map(radians, point))
     p = (cos(a)*cos(b), cos(a)*sin(b), sin(a))
     #p = unit((cos(b), sin(b), sin(a)))
     return p
@@ -33,8 +33,8 @@ def cross(a, b):
             a[0]*b[1] - a[1]*b[0]]
 
 def unit(p):
-    s = sqrt(sum(map(lambda x: x**2, p)))
-    return map(lambda x: x/s, p)
+    s = sqrt(sum([x**2 for x in p]))
+    return [x/s for x in p]
 
 def get_angle(a, b):
     ab = sum(i*j for i, j in zip(a, b))
@@ -43,7 +43,7 @@ def get_angle(a, b):
 def is_overlap(m, n):
     p1 = cross(directions[m], directions[n])
     p1 = unit(p1)
-    p2 = map(lambda x: -x, p1)
+    p2 = [-x for x in p1]
     m12 = get_angle(arclines[m][0], arclines[m][1])
     n12 = get_angle(arclines[n][0], arclines[n][1])
 
@@ -65,13 +65,13 @@ def is_overlap(m, n):
     else:
         return True
 
-arclines = map(lambda x: map(two_three, x), arclines)
-directions = map(get_direction, arclines)
+arclines = [list(map(two_three, x)) for x in arclines]
+directions = list(map(get_direction, arclines))
 
 
 points = []
 numbers = []
-for i, j in itertools.combinations(range(bridges_number), 2):
+for i, j in itertools.combinations(list(range(bridges_number)), 2):
     if is_overlap(i,j):
         points.append((i, j))
         numbers += [i, j]
@@ -87,13 +87,13 @@ def get_more(numbers):
 removed = []
 while points:
     n = get_more(numbers)
-    numbers = filter(lambda x: x!=n, numbers)
-    points = filter(lambda p: n not in p, points)
+    numbers = [x for x in numbers if x!=n]
+    points = [p for p in points if n not in p]
     removed.append(n)
 
-left = filter(lambda x: x not in removed, range(bridges_number))
+left = [x for x in range(bridges_number) if x not in removed]
 for i in left:
-    print index[i]
+    print(index[i])
 
 
 

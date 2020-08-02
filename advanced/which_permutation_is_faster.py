@@ -9,9 +9,9 @@ def my_inductive_permutations_generator(n):
     if n <= 1:
         yield ans[0]
     temp = []
-    for i in xrange(1, n):
+    for i in range(1, n):
         for one in ans:
-            for j in xrange(i,-1,-1):
+            for j in range(i,-1,-1):
                 two = one[:]
                 two.insert(j, i)
                 if i == n-1:
@@ -22,16 +22,16 @@ def my_inductive_permutations_generator(n):
         temp = []
 
 def my_permutations_generator_faster(n):
-    l = range(n)
+    l = list(range(n))
     yield l
     if n<=1:
         return
     while 1:
-        for i in xrange(n-1, 0, -1):
+        for i in range(n-1, 0, -1):
             l[i], l[i-1] = l[i-1], l[i]
             yield l
         index = 0 
-        for i in xrange(1, n):
+        for i in range(1, n):
             if not index and l[i] != n-i-1:
                 index = i
                 continue
@@ -46,11 +46,11 @@ def my_permutations_generator_faster(n):
             return
 
 def python_permutations(n):
-    indices = range(n)
-    cycles = range(n, 0, -1)
+    indices = list(range(n))
+    cycles = list(range(n, 0, -1))
     yield indices
     while n:
-        for i in reversed(range(n)):
+        for i in reversed(list(range(n))):
             cycles[i] -= 1
             if cycles[i] == 0:
                 indices[i:] = indices[i+1:] + indices[i:i+1]
@@ -64,7 +64,7 @@ def python_permutations(n):
             return
 
 def permute_in_place(n):
-    a = range(n)
+    a = list(range(n))
     yield a
     if n <= 1:
         return
@@ -95,13 +95,13 @@ def get_time_delta(f):
 
 def main():
     times = []
-    times.append(get_time_delta(itertools.permutations(range(num))))
+    times.append(get_time_delta(itertools.permutations(list(range(num)))))
     times.append(get_time_delta(my_permutations_generator_faster(num)))
     times.append(get_time_delta(my_inductive_permutations_generator(num)))
     times.append(get_time_delta(permute_in_place(num)))
     times.append(get_time_delta(python_permutations(num)))
     for one in times:
-        print one
+        print(one)
 
 main()
 

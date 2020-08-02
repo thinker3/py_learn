@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import Queue
+import queue
 from collections import deque
 
-first_in_first_out = Queue.Queue()
-first_in_last_out = Queue.LifoQueue()
-priority_queue = Queue.PriorityQueue()
+first_in_first_out = queue.Queue()
+first_in_last_out = queue.LifoQueue()
+priority_queue = queue.PriorityQueue()
 
 for i in range(5):
     first_in_first_out.put(i)
@@ -20,15 +20,15 @@ priority_queue.put(7)
 priority_queue.put(-3)
 
 while not first_in_first_out.empty():
-    print first_in_first_out.get()
+    print(first_in_first_out.get())
 
-print '*' * 30
+print('*' * 30)
 while not first_in_last_out.empty():
-    print first_in_last_out.get()
+    print(first_in_last_out.get())
 
-print '*' * 30
+print('*' * 30)
 while not priority_queue.empty():
-    print priority_queue.get()
+    print(priority_queue.get())
 
 
 class Person(object):
@@ -46,9 +46,9 @@ priority_queue.put(Person('Jack'))
 priority_queue.put(Person('Florance'))
 priority_queue.put(Person('Tom'))
 priority_queue.put(Person('Susan'))
-print '*' * 30
+print('*' * 30)
 while not priority_queue.empty():
-    print priority_queue.get()
+    print(priority_queue.get())
 
 #Person.__cmp__ = cmp  # not works
 #del Person.__cmp__  # strange result
@@ -58,25 +58,25 @@ priority_queue.put(Person('Florance'))
 priority_queue.put(Person('Tom'))
 priority_queue.put(Person('Susan'))
 
-print '*' * 30
+print('*' * 30)
 while not priority_queue.empty():
-    print priority_queue.get()
+    print(priority_queue.get())
 
-print '*' * 30
-queue = Queue.Queue()
+print('*' * 30)
+queue = queue.Queue()
 try:
     queue.get(block=False)
-except Queue.Empty as e:
-    print('block=False: "%s"' % e)
-    print(type(e), repr(e), str(e))
+except queue.Empty as e:
+    print(('block=False: "%s"' % e))
+    print((type(e), repr(e), str(e)))
 try:
     queue.get(timeout=1)
-except Queue.Empty as e:
-    print('timeout=1: "%s"' % e)
+except queue.Empty as e:
+    print(('timeout=1: "%s"' % e))
 
 
 def limited_queue_test():
-    raw_data = range(10)
+    raw_data = list(range(10))
     dq = deque([], 3)
     for i in raw_data:
         dq.append(i)

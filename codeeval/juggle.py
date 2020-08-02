@@ -50,10 +50,10 @@ f = open(argv[1], 'r')
 for one in f:
     if one.strip():
         if not circuits_over:
-            circuit = map(int, re.findall(r'\d+', one))[1:]
+            circuit = list(map(int, re.findall(r'\d+', one)))[1:]
             circuits.append(circuit)
         else:
-            juggler = map(int, re.findall(r'\d+', one))
+            juggler = list(map(int, re.findall(r'\d+', one)))
             j = Juggler(juggler)
             assign(j)
     else:
@@ -61,5 +61,5 @@ for one in f:
 f.close()
 
 c = groups[wanted]
-s = sum(map(lambda j: j.index, c))
-print s
+s = sum([j.index for j in c])
+print(s)

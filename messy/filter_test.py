@@ -1,7 +1,7 @@
 li = [0, 1, 'a', '', ' ', None]
-lit = filter(None, li)
-print li
-print lit
+lit = [_f for _f in li if _f]
+print(li)
+print(lit)
 
 
 def my_filter(item):
@@ -10,11 +10,11 @@ def my_filter(item):
     else:
         return False
 
-print
+print()
 li = [0, 1, 'a', '', ' ', None]
-lit = filter(my_filter, li)
-print li
-print lit
+lit = list(filter(my_filter, li))
+print(li)
+print(lit)
 
 
 class Nonsense(object):
@@ -33,4 +33,4 @@ li = [
     Nonsense({}),
     Nonsense('href'),
 ]
-print filter(lambda x: x.sense, li)
+print([x for x in li if x.sense])

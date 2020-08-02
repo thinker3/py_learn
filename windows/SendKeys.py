@@ -142,7 +142,7 @@ def _handle_char(c,keys,shift):
         keys.append((MODIFIERS['+'],False))
 
 def _release_modifiers(keys,modifiers):
-    for c in modifiers.keys():
+    for c in list(modifiers.keys()):
         if modifiers[c]:
             keys.append((MODIFIERS[c], False))
             modifiers[c] = False
@@ -172,13 +172,13 @@ def str2keys(key_string,
     keys = []
     # for keeping track of whether shift, ctrl, & alt are pressed
     modifiers = {}
-    for k in MODIFIERS.keys():
+    for k in list(MODIFIERS.keys()):
         modifiers[k] = False
 
     while chars:
         c = chars.pop()
 
-        if c in MODIFIERS.keys():
+        if c in list(MODIFIERS.keys()):
             keys.append((MODIFIERS[c],True))
             modifiers[c] = True
 
@@ -197,8 +197,8 @@ def str2keys(key_string,
                     _handle_char(CODES['TAB'], keys, False)
                 else:
                     # if we need shift for this char and it's not already pressed
-                    shift = (c.isupper() or c in SHIFT.keys()) and not modifiers['+']
-                    if c in SHIFT.keys():
+                    shift = (c.isupper() or c in list(SHIFT.keys())) and not modifiers['+']
+                    if c in list(SHIFT.keys()):
                         _handle_char(SHIFT[c], keys, shift)
                     else:
                         _handle_char(c.lower(), keys, shift)
@@ -231,7 +231,7 @@ def str2keys(key_string,
                 if arg == 0: 
                     arg = 1
                 for i in range(int(arg)):
-                    if code in CODES.keys():
+                    if code in list(CODES.keys()):
                         _append_code(keys, CODES[code])
                     else:
                         # must be an escaped modifier or a 
@@ -245,7 +245,7 @@ def str2keys(key_string,
                         c = code
                         if not shift:
                             # handle keys in SHIFT (!, @, etc...)
-                            if c in SHIFT.keys():
+                            if c in list(SHIFT.keys()):
                                 c = SHIFT[c]
                                 shift = True
                         _handle_char(c.lower(), keys, shift)
@@ -276,8 +276,8 @@ def str2keys(key_string,
                 _append_code(keys, CODES['TAB'])
             else:
                 # if we need shift for this char and it's not already pressed
-                shift = (c.isupper() or c in SHIFT.keys()) and not modifiers['+']
-                if c in SHIFT.keys():
+                shift = (c.isupper() or c in list(SHIFT.keys())) and not modifiers['+']
+                if c in list(SHIFT.keys()):
                     _handle_char(SHIFT[c], keys, shift)
                 else:
                     _handle_char(c.lower(), keys, shift)
@@ -366,14 +366,14 @@ def usage():
     """
     Writes help message to `stderr` and exits.
     """
-    print >> sys.stderr, """\
+    print("""\
 %(name)s [-h] [-d seconds] [-p seconds] [-f filename] or [string of keys]
 
     -dN    or --delay=N   : N is seconds before starting
     -pN    or --pause=N   : N is seconds between each key
     -fNAME or --file=NAME : NAME is filename containing keys to send
     -h     or --help      : show help message
-""" % {'name': 'SendKeys.py'}
+""" % {'name': 'SendKeys.py'}, file=sys.stderr)
     sys.exit(1)
 
 
@@ -382,7 +382,7 @@ def error(msg):
     Writes `msg` to `stderr`, displays usage
     information, and exits.
     """
-    print >> sys.stderr, '\nERROR: %s\n' % msg
+    print('\nERROR: %s\n' % msg, file=sys.stderr)
     usage()
 
 
@@ -411,13 +411,13 @@ def main(args=None):
             try:
                 pause = float(a)
                 assert pause >= 0
-            except (ValueError,AssertionError),e:
+            except (ValueError,AssertionError) as e:
                 error('`pause` must be >= 0.0')
         elif o in ('-d','--delay'):
             try:
                 delay = float(a)
                 assert delay >= 0
-            except (ValueError,AssertionError),e:
+            except (ValueError,AssertionError) as e:
                 error('`delay` must be >= 0.0')
 
     time.sleep(delay)

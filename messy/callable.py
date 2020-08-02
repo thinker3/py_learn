@@ -3,10 +3,10 @@ class Callable(object):
         self.a = a
 
     def __call__(self):
-        print self.a
+        print(self.a)
 
 c = Callable(1)
-print c.a
+print(c.a)
 c()
 
 

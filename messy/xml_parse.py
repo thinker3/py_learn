@@ -19,7 +19,7 @@ foos = xxs.select('//foos')
 for one in foos:
     text = one.select('./foo//text()').extract()
     text = ''.join(text)
-    print text
+    print(text)
 
 xml = (
     """
@@ -43,4 +43,4 @@ xml = (
 
 xxs = XmlXPathSelector(text=xml)
 quota = xxs.select('//*[@name="quota"]/text()').extract()[0]
-print quota
+print(quota)

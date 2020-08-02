@@ -10,7 +10,7 @@ from win32com.client import makepy
 def get_constants_using_EnsureModule():
     makepy_path = os.path.abspath(makepy.__file__)
     cmd = '''python %s''' % makepy_path
-    print cmd
+    print(cmd)
     from win32com.client import gencache
     gencache.EnsureModule('{00020813-0000-0000-C000-000000000046}', 0, 1, 6)
     excel = win32.DispatchEx('Excel.Application')
@@ -21,7 +21,7 @@ def get_constants_using_makepy():
     makepy_path = os.path.abspath(makepy.__file__)
     lib = "Microsoft Excel 12.0 Object Library"
     cmd = '''python %s "%s"''' % (makepy_path, lib)
-    print cmd
+    print(cmd)
     os.popen(cmd)
     """
     If Excel is already open, using dispatch will create a new tab in the Excel instance.
@@ -51,22 +51,22 @@ def main(excel):
         """streamline and standardize global customs rules."""
         """"""
     )
-    print longstr
+    print(longstr)
     sheet.Cells(1, 1).Value = longstr
     sheet.Cells(2, 2).Value = longstr
     sheet.Cells(3, 3).Value = longstr
     sheet.Cells(4, 4).Value = 'short string'
     for i in range(1, 5):
         sheet.Columns(i).AutoFit()
-    print sheet.Columns(1).Width  # 622.5
-    print sheet.Columns(1).ColumnWidth  # 103.13
+    print(sheet.Columns(1).Width)  # 622.5
+    print(sheet.Columns(1).ColumnWidth)  # 103.13
     for i in range(1, 5):
         sheet.Columns(i).WrapText = 1
         width = sheet.Columns(i).ColumnWidth
         if width > 24:
             sheet.Columns(i).ColumnWidth = 24
-    print sheet.Columns(1).Width  # 622.5
-    print sheet.Columns(1).ColumnWidth  # 103.13
+    print(sheet.Columns(1).Width)  # 622.5
+    print(sheet.Columns(1).ColumnWidth)  # 103.13
     # AttributeError: Property '<unknown>.Width' can not be set.
     #sheet.Columns(1).Width = 100
     sheet.Cells(5, 5).Value = 'centered'

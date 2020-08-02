@@ -3,11 +3,11 @@
 
 
 def is_sub_dict(less, more):
-    return less.viewitems() <= more.viewitems()
+    return less.items() <= more.items()
 
 
 def dict_has_subset(more, less):
-    for k, v in less.iteritems():
+    for k, v in less.items():
         if k not in more:
             return False
         if more[k] != v:

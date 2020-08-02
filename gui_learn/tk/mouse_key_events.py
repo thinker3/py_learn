@@ -2,25 +2,25 @@
 # encoding: utf-8
 
 
-import Tkinter as tk
+import tkinter as tk
 
 
 def key(event):
-    print "pressed", event.keycode, event.keysym
-    print event.x, event.y  # point in the frame
-    print event.x_root, event.y_root  # point in the screen
-    print event.state, event.time
-    print event.type, event.widget
+    print("pressed", event.keycode, event.keysym)
+    print(event.x, event.y)  # point in the frame
+    print(event.x_root, event.y_root)  # point in the screen
+    print(event.state, event.time)
+    print(event.type, event.widget)
 
 
 def left_click(event):
     frame.focus_set()
-    print "left clicked at", event.x, event.y
+    print("left clicked at", event.x, event.y)
 
 
 def right_click(event):
     frame.focus_set()
-    print "right clicked at", event.x, event.y
+    print("right clicked at", event.x, event.y)
 
 root = tk.Tk()
 width = height = 400

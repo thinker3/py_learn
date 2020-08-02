@@ -60,5 +60,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print is_word_in_matrix(one)
+        print(is_word_in_matrix(one))
 f.close()

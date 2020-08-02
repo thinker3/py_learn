@@ -15,8 +15,8 @@ cur = conn.cursor()
 #sql = "insert into words(id,name,phonetic,meaning,example) values(2,'world','wd','','hello world')"
 #sql = "insert into words(name,phonetic,meaning,example) values('world','wd','世界','hello world')"
 #sql = "update words set meaning='世界'"
-meaning = u'哈哈3'
-example = u'哈哈4'
+meaning = '哈哈3'
+example = '哈哈4'
 meaning = meaning.encode('utf8')
 example = example.encode('utf8')
 sql = "update words set meaning=%s, example=%s where id=%d"
@@ -28,5 +28,5 @@ except:
 conn.commit()
 cur.close()
 conn.close()
-print r
+print(r)
 

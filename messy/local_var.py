@@ -1,16 +1,16 @@
 if 1:
     a = 'hello'
-print a
+print(a)
 
-for i in xrange(10):
+for i in range(10):
     b = i*3
-print b, i
+print(b, i)
 
 t = 0
-for i in xrange(10):
+for i in range(10):
     t = t + i
-print t
-print '*' * 50
+print(t)
+print('*' * 50)
 
 
 class A(object):
@@ -22,19 +22,19 @@ class B(object):
     def func(self):
         a = A(0)
         b = 1
-        print locals()
-        for k, v in locals().items():
+        print(locals())
+        for k, v in list(locals().items()):
             if isinstance(v, A):
-                print v.num
+                print(v.num)
 
         def inner():
             a = A(10)
             b = 20
-            print locals()
-            for k, v in locals().items():
+            print(locals())
+            for k, v in list(locals().items()):
                 if isinstance(v, A):
-                    print v.num
-                    print locals()
+                    print(v.num)
+                    print(locals())
         inner()
 
 b = B()

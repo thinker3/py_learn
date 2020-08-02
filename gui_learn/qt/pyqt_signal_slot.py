@@ -10,7 +10,7 @@ class A(QObject):
         self.emit(SIGNAL("go"))    
  
     def bfunc(self):
-        print "Hello World!"
+        print("Hello World!")
  
 if __name__=="__main__":
     app=QCoreApplication(sys.argv)

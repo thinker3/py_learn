@@ -5,19 +5,19 @@ d = {
     b: 'edf',
 }
 
-for k, v in d.items():
-    print k, v
+for k, v in list(d.items()):
+    print(k, v)
 
 
-print
+print()
 d = {True: 'abc', False: '123'}
-for k, v in d.items():
-    print k, v
-print d[True]
-print d[False]
+for k, v in list(d.items()):
+    print(k, v)
+print(d[True])
+print(d[False])
 
-li = [(k, v) for k, v in d.items()]
-print li  # [(False, '123'), (True, 'abc')]
+li = [(k, v) for k, v in list(d.items())]
+print(li)  # [(False, '123'), (True, 'abc')]
 
-print d.items()  # [(False, '123'), (True, 'abc')]
-print d.iteritems()  # <dictionary-itemiterator object at 0x7f9456456f18>
+print(list(d.items()))  # [(False, '123'), (True, 'abc')]
+print(iter(d.items()))  # <dictionary-itemiterator object at 0x7f9456456f18>

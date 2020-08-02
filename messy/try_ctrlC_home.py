@@ -18,17 +18,17 @@ def save(num):
 
 try:
     while 1:
-        print 'hello %d' % num
+        print('hello %d' % num)
         sleep(0.1)
         num += 1
         a = 1/(num - 120)
 except KeyboardInterrupt:
     pass # or raise it to higher handler
 except:
-    print 'ctrl c'
+    print('ctrl c')
     save(num)
     os._exit(0) # This line here will prevent finally and atexit from executing
 finally:
-    print 'finally'
+    print('finally')
 
 atexit.register(save, num)

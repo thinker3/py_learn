@@ -6,7 +6,7 @@ from permutation import Permutation
 
 
 def test_permutations():
-    t = itertools.permutations(range(1, 5))
+    t = itertools.permutations(list(range(1, 5)))
     s = 0
     even = []
     odd = []
@@ -28,21 +28,21 @@ def test_permutations():
 
 def test_combinations():
     s = 0
-    for one in itertools.combinations(range(4), 3):
+    for one in itertools.combinations(list(range(4)), 3):
         print(one)
         s += 1
     print(s)
 
 
 def test_zip():
-    print('*' * 20)
+    print(('*' * 20))
     more = ['a', 'b', 'c', 'd', 'e']
     less = [1, 2, 3]
     s = 0
     for one in itertools.combinations(more, len(less)):
         for two in itertools.permutations(one):
             for a, b in zip(two, less):
-                print(a, b)
+                print((a, b))
             print()
             s += 1
     print(s)
@@ -67,11 +67,11 @@ def my_permutations(n):
 
 
 def test_my_permutations():
-    print('*' * 20)
+    print(('*' * 20))
     ans = my_permutations(3)
     for one in ans:
         print(one)
-    print(len(ans))
+    print((len(ans)))
 
 
 test_permutations()

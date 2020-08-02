@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import ConfigParser
+import configparser
 
-config = ConfigParser.SafeConfigParser()
+config = configparser.SafeConfigParser()
 filename = 'test.conf'
 config.read(filename)
 debug = config.getboolean('default', 'debug')
-print debug, type(debug)
+print(debug, type(debug))
 debug = not debug
 # ## TypeError: option values must be strings
 # config.set('default', 'debug', debug)

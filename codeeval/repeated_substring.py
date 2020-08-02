@@ -19,5 +19,5 @@ def max_repeated_substring(one):
 f = open(argv[1], 'r')
 for one in f:
     if one != '\n':
-        print max_repeated_substring(one)
+        print(max_repeated_substring(one))
 f.close()

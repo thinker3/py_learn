@@ -6,12 +6,12 @@ from base64 import b64encode
 
 secret = 'hello' * 1000
 pubkey, privkey = rsa.newkeys(512)
-print pubkey
-print pubkey.save_pkcs1()
-print repr(pubkey.save_pkcs1('DER'))
-print b64encode(pubkey.save_pkcs1('DER'))
-print privkey
-print privkey.save_pkcs1()
+print(pubkey)
+print(pubkey.save_pkcs1())
+print(repr(pubkey.save_pkcs1('DER')))
+print(b64encode(pubkey.save_pkcs1('DER')))
+print(privkey)
+print(privkey.save_pkcs1())
 
 pubkey = rsa.PublicKey(
     7415502624357151701843602000555318455948573542840931625729150638611638251360782052774127447815979830851875097447216767147242437831115031378524678172264921,
@@ -24,19 +24,19 @@ privkey = rsa.PrivateKey(
     4446231151572194572272541834440666920306217930405766286220328832524851462544515341,
     1667817612616703003339597571420391729959720600059564280837759069331120381,
 )
-print pubkey
-print pubkey.save_pkcs1()
-print privkey
-print privkey.save_pkcs1()
+print(pubkey)
+print(pubkey.save_pkcs1())
+print(privkey)
+print(privkey.save_pkcs1())
 
-print
+print()
 crypto = rsa.encrypt(secret, pubkey)  # OverflowError, if secret is too long
-print 'encrypted msg:', repr(crypto)
+print('encrypted msg:', repr(crypto))
 msg = rsa.decrypt(crypto, privkey)
-print msg
+print(msg)
 
 token = 'Doo4Laijooveibodee5aV6co8eeL3eeb'
 signature = rsa.sign(token, privkey, 'SHA-256')
-print 'signature:', repr(signature)
+print('signature:', repr(signature))
 is_valid = rsa.verify(token, signature, pubkey)
-print is_valid
+print(is_valid)

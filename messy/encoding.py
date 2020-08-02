@@ -6,7 +6,7 @@ import locale
 
 
 def p(f):
-    print '%s.%s(): %s' % (f.__module__, f.__name__, f())
+    print('%s.%s(): %s' % (f.__module__, f.__name__, f()))
 
 p(sys.getdefaultencoding)
 p(sys.getfilesystemencoding)

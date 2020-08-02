@@ -2,7 +2,7 @@
 def print_primes(n):
     assert n >= 2 and isinstance(n, int)
     temp = [2]
-    for i in xrange(3, n + 1, 2):
+    for i in range(3, n + 1, 2):
         m = i / 2
         for j in temp:
             if j > m:
@@ -13,7 +13,7 @@ def print_primes(n):
             else:
                 break
     for p in temp:
-        print p,
+        print(p, end=' ')
 
 
 class PrimePosition(object):
@@ -28,7 +28,7 @@ class PrimePosition(object):
 def new(n):
     assert n >= 2 and isinstance(n, int)
     pp_list = []
-    for i in xrange(2, n + 1):
+    for i in range(2, n + 1):
         j = 0
         for pp in pp_list:
             if pp.pos == i:
@@ -37,8 +37,8 @@ def new(n):
         if j == 0:
             pp_list.append(PrimePosition(i, 2 * i))
     for one in pp_list:
-        print one.prime,
+        print(one.prime, end=' ')
 
 print_primes(39)
-print
+print()
 new(39)

@@ -1,4 +1,4 @@
-from Tkinter import Tk
+from tkinter import Tk
 
 class GUI():
     def __init__(self):

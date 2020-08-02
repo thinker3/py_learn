@@ -15,7 +15,7 @@ class Base(object):
         self.init_here = 'init_here'
         # a class member and an object member
         self.length = len(self.there)  # key point
-        print self.init
+        print(self.init)
         if self.table is None:
             self.table = self.__class__.__name__.lower()
 
@@ -36,40 +36,40 @@ class Derived(Base):
     '''
 
 d = Derived()
-print '*' * 30
-print d.length
-print d.here
-print d.there
-print d.member
-print d.init
-print d.init_here
+print('*' * 30)
+print(d.length)
+print(d.here)
+print(d.there)
+print(d.member)
+print(d.init)
+print(d.init_here)
 #print d.init_there
 
-print '*' * 30
+print('*' * 30)
 d.there = 'changed'
 d.words.append('hello')
 e = Derived()
-print d.there
-print e.there
+print(d.there)
+print(e.there)
 
-print '*' * 30
+print('*' * 30)
 d.there = 'hidden'
 e.there = 'showing'
-print d.there
-print e.there
+print(d.there)
+print(e.there)
 
 # class variable or instance variable? may be the same if it is immutable
 # but if it is mutable...
 
-print '*' * 30
+print('*' * 30)
 e.words.append('world')
-print d.words
-print e.words
+print(d.words)
+print(e.words)
 f = Derived()
 f.words.append('!')
-print d.words
-print e.words
-print f.words
-print d.there
-print e.there
-print f.there
+print(d.words)
+print(e.words)
+print(f.words)
+print(d.there)
+print(e.there)
+print(f.there)

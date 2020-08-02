@@ -13,7 +13,7 @@ print(df)
 
 
 def iteritems():
-    for key, serie in df.iteritems():
+    for key, serie in df.items():
         import ipdb; ipdb.set_trace()
 
 
@@ -34,16 +34,16 @@ def itertuples():
 
 
 def zipping():
-    rows = zip(df['c1'], df['c2'])
-    rows = zip(df.c1, df.c2)
+    rows = list(zip(df['c1'], df['c2']))
+    rows = list(zip(df.c1, df.c2))
     columns = df.columns.tolist()
-    rows = zip(*[getattr(df, title) for title in df.columns])
+    rows = list(zip(*[getattr(df, title) for title in df.columns]))
     import ipdb; ipdb.set_trace()
 
 
 def apply():
-    print(df.sum(0))
-    print(df.sum(1))
+    print((df.sum(0)))
+    print((df.sum(1)))
     def inner(x):
         return sum(x)
     ret = df.apply(inner, axis=0)  # x is a column

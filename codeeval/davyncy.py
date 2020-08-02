@@ -2,14 +2,14 @@ import itertools
 from sys import argv
 
 def get_overlap_number_sub(a, b):
-    len_a, len_b = map(len, (a, b))
+    len_a, len_b = list(map(len, (a, b)))
     b0 = b[0]
     try:
         j = a.index(b0)
         le_a = len_a-j
         if le_a == 1:
             return 1
-        for i in xrange(1, min(le_a, len_b)):
+        for i in range(1, min(le_a, len_b)):
             if a[i+j] != b[i]:
                 return get_overlap_number_sub(a[j+1:], b)
         else:
@@ -36,7 +36,7 @@ def concat(one):
         n = len(fragments)
         the_max = 0
         index = None
-        for i, j in itertools.combinations(range(n), 2):
+        for i, j in itertools.combinations(list(range(n)), 2):
             m = get_overlap_number(fragments[i], fragments[j])
             if m > the_max:
                 the_max = m
@@ -47,7 +47,7 @@ def concat(one):
             fragments.pop(j)
             fragments.pop(i)
             fragments.append(merged)
-    print fragments[0]
+    print(fragments[0])
 
 f = open(argv[1], 'r')
 for one in f:

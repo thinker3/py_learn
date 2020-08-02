@@ -15,16 +15,16 @@ def is_even(palindromes, r):
 
 def how_many_interesting_subranges(one):
     one = one[:-1]
-    left, right = map(int, one.split(' '))
-    left_to_right = range(left, right+1)
+    left, right = list(map(int, one.split(' ')))
+    left_to_right = list(range(left, right+1))
     n = right+1-left
     palindromes = []
     for i in left_to_right:
         if is_palindrome(i):
             palindromes.append(i)
     total = 0
-    for i in xrange(n):
-        for j in xrange(i+1, n+1):
+    for i in range(n):
+        for j in range(i+1, n+1):
             r = left_to_right[i:j]
             if is_even(palindromes, r):
                 total += 1
@@ -33,5 +33,5 @@ def how_many_interesting_subranges(one):
 f = open(argv[1], 'r')
 for one in f:
     if one != '\n':
-        print how_many_interesting_subranges(one)
+        print(how_many_interesting_subranges(one))
 f.close()

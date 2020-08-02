@@ -26,9 +26,9 @@ one.update(three)
 one.update(
     this='this'
 )
-print one
+print(one)
 
-print dict.fromkeys(['a', 'b', 'c'], 1)
+print(dict.fromkeys(['a', 'b', 'c'], 1))
 
 data = [
     ('a', 1),
@@ -40,16 +40,16 @@ data = [
 total = {}
 for k, v in data:
     total.setdefault(k, []).append(v)
-print total
-total = {k: sum(v) for k, v in total.items()}
-print total
+print(total)
+total = {k: sum(v) for k, v in list(total.items())}
+print(total)
 
 a = {k: str(k) for k in range(4)}
-print a
-for k, v in a.items():
+print(a)
+for k, v in list(a.items()):
     del a[k]
     a[v] = k
-print a
+print(a)
 
 # update reversed
 defaults = dict(

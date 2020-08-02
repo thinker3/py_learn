@@ -14,7 +14,7 @@ for i in range(len(base) - 1):
     else:
         d[base[i] * 9 / 5] = letters[i - 1] + letters[i + 1]
 d[base[i + 1]] = letters[i + 1]
-base_r = d.keys()
+base_r = list(d.keys())
 base_r.sort(reverse=True)
 
 '''
@@ -38,5 +38,5 @@ for one in f:
     one = one.strip()
     if one:
         one = int(one)
-        print to_roman(one)
+        print(to_roman(one))
 f.close()

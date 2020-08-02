@@ -16,7 +16,7 @@ data = '''1  0   937 306 97  3
 
 data = data.split('\n')[0:-1]
 data = [p.split(one) for one in data]
-data = [map(int, one) for one in data]
+data = [list(map(int, one)) for one in data]
 
 
 def list_diff(a, b):
@@ -34,6 +34,6 @@ for i, _ in enumerate(data):
 
 for i, one in enumerate(result):
     one[0] = i+1
-    print one
+    print(one)
     sleep(0.001)
 

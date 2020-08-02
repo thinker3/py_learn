@@ -24,7 +24,7 @@ carbon.TISSelectInputSource.argtypes = [ctypes.c_void_p]
 carbon.TISCopyInputSourceForLanguage.argtypes = [ctypes.c_void_p]
 carbon.TISCopyInputSourceForLanguage.restype = ctypes.c_void_p
 
-en = CoreFoundation.CFSTR(u'en').__c_void_p__()
+en = CoreFoundation.CFSTR('en').__c_void_p__()
 en = carbon.TISCopyInputSourceForLanguage(en)
-print en
+print(en)
 #carbon.TISSelectInputSource(en)

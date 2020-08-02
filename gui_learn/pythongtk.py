@@ -2,7 +2,7 @@ import gtk
 import egg.trayicon     # egg == python-gnome2-extras
 
 def callback(widget, ev):
-        print "Button %i pressed!" % ev.button
+        print("Button %i pressed!" % ev.button)
 
 
 tray = egg.trayicon.TrayIcon("TrayIcon")

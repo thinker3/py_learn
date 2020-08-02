@@ -3,4 +3,4 @@ try:
     a = 30/0
 except:
     if a:
-        print a
+        print(a)

@@ -22,7 +22,7 @@ class MyHighlighter(QtGui.QTextEdit):
         # Setup the regex engine
         pattern = "word"
         pattern = re.compile(pattern, re.IGNORECASE)
-        print pattern
+        print(pattern)
         regex = QtCore.QRegExp(pattern.sub)
         # Process the displayed document
         pos = 0

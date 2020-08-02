@@ -5,7 +5,7 @@ import os
 
 
 def divide(sep='*', length=30):
-    print sep * length
+    print(sep * length)
 
 
 def abs_path(root, filename):

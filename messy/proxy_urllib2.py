@@ -1,12 +1,12 @@
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 
 
 def main(a, b):
     url = a + '://twitter.com'
-    proxy = urllib2.ProxyHandler({b: '127.0.0.1:8087'})
-    opener = urllib2.build_opener(proxy)
-    urllib2.install_opener(opener)
-    html = urllib2.urlopen(url).read()
+    proxy = urllib.request.ProxyHandler({b: '127.0.0.1:8087'})
+    opener = urllib.request.build_opener(proxy)
+    urllib.request.install_opener(opener)
+    html = urllib.request.urlopen(url).read()
     f= open('twitter.html', 'w')
     f.write(html)
     f.close()

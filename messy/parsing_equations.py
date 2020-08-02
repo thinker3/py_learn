@@ -33,13 +33,13 @@ for one in equ:
     effs.append(tuple(temp))
 
 for one in effs:
-    print one
+    print(one)
 
 import numpy as np
 A = np.array(effs)
 x = np.linalg.lstsq(A,B)
-print vars
-print x[0]
+print(vars)
+print(x[0])
 
 
 

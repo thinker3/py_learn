@@ -18,5 +18,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print ','.join(order(one))
+        print(','.join(order(one)))
 f.close()

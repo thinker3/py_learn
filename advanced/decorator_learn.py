@@ -20,7 +20,7 @@ def hello():
     return "hello world"
 
 
-print hello()
+print(hello())
 
 
 @makeitalic
@@ -29,7 +29,7 @@ def hello():
     return "hello world"
 
 
-print hello()
+print(hello())
 
 
 def hello():
@@ -37,7 +37,7 @@ def hello():
 
 
 hello = makeitalic(makebold(hello))
-print hello()
+print(hello())
 
 
 class Tag(object):
@@ -56,7 +56,7 @@ def sayhi():
     return 'hi'
 
 
-print sayhi()
+print(sayhi())
 
 
 def sayhi():
@@ -66,7 +66,7 @@ def sayhi():
 tag_i = Tag('i')
 tag_b = Tag('b')
 sayhi = tag_i(tag_b(sayhi))
-print sayhi()
+print(sayhi())
 
 
 def table(name):
@@ -82,9 +82,9 @@ class User(object):
     pass
 
 
-print User
+print(User)
 abc = User()
-print abc.__table__
+print(abc.__table__)
 
 
 class User(object):
@@ -93,7 +93,7 @@ class User(object):
 
 User = table('v')(User)
 abc = User()
-print abc.__table__
+print(abc.__table__)
 
 
 def tag(name):
@@ -110,7 +110,7 @@ def sayhi():
     return 'hi'
 
 
-print sayhi()
+print(sayhi())
 
 
 def tag(name):
@@ -131,14 +131,14 @@ def sayhi(person, time):
     return 'hi %s, good %s.' % (person, time)
 
 
-print sayhi('tom', 'night')
+print(sayhi('tom', 'night'))
 
 
 def sayhi(person, time):
     return 'hi %s, good %s.' % (person, time)
 
 
-print tag('b')(tag('i')(sayhi))('tom', 'night')
+print(tag('b')(tag('i')(sayhi))('tom', 'night'))
 
 
 def tags(*names):
@@ -162,4 +162,4 @@ def sayhi(person, time):
     return 'Hi %s, good %s.' % (person, time)
 
 
-print sayhi('Tom', 'morning')
+print(sayhi('Tom', 'morning'))

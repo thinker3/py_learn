@@ -8,9 +8,9 @@ def for_exception_catch_outer():
             if i % 3 == 0:
                 raise Exception('Exception %s' % i)
             else:
-                print i
+                print(i)
     except Exception as e:
-        print e
+        print(e)
 
 
 def for_exception_catch_inner():
@@ -19,12 +19,12 @@ def for_exception_catch_inner():
             if i % 3 == 0:
                 raise Exception('Exception %s' % i)
             else:
-                print i
+                print(i)
         except Exception as e:
-            print e
+            print(e)
 
 for_exception_catch_outer()
-print '*' * 30
+print('*' * 30)
 for_exception_catch_inner()
 
 
@@ -35,14 +35,14 @@ def how_many_exceptions_catched():
                 if i % 3 == 0:
                     raise Exception('Exception %s' % i)
                 else:
-                    print i
+                    print(i)
             except Exception as e:
-                print e
+                print(e)
                 raise e
     except Exception as e:
         pass
 
-print '*' * 30
+print('*' * 30)
 how_many_exceptions_catched()
 
 

@@ -15,7 +15,7 @@ class Number(object):
         self.number = number
 
     def show_me(self):
-        print self.number
+        print(self.number)
 
 
 class SuperNumber(Mixin, Number): # SuperNumber => Mixin => Number
@@ -35,7 +35,7 @@ s.add(10)
 s.show_me()
 s.sub(1)
 s.show_me()
-print s.name
+print(s.name)
 
 m = MightyNumber(0)
 m.show_me()
@@ -43,9 +43,9 @@ m.add(10)
 m.show_me()
 m.sub(1)
 m.show_me()
-print m.name
+print(m.name)
 
-print '*' * 30
+print('*' * 30)
 
 
 class A(object):
@@ -65,21 +65,21 @@ class C(A, B):
         B.__init__(self, c)
         self.c = c * 3
 
-print C.mro()  # method resolution order
+print(C.mro())  # method resolution order
 cc = C('c')
-print cc.a
-print cc.b
-print cc.c
+print(cc.a)
+print(cc.b)
+print(cc.c)
 
 
 class FirstMixin(object):
     def say(self):
-        print 'FirstMixin'
+        print('FirstMixin')
 
 
 class SecondMixin(object):
     def say(self):
-        print 'SecondMixin'
+        print('SecondMixin')
 
 
 class Mixin(FirstMixin, SecondMixin):  # class FirstMixin(SecondMixin): | class Mixin(FirstMixin):

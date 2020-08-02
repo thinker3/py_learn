@@ -8,7 +8,7 @@ from Crypto.Cipher import AES
 
 
 def unicode_to_utf8(s):
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         s = s.encode("utf-8")
     return s
 
@@ -46,13 +46,13 @@ def test_AESCipher(data):  # noqa
     key = 'mahxeecha4ipai2B'
     crypto = AESCipher(key)
     encrypted = crypto.encrypt(data)
-    print repr(encrypted)
+    print(repr(encrypted))
     decrypted = crypto.decrypt(encrypted)
-    print decrypted
+    print(decrypted)
 
 
 if __name__ == '__main__':
     data = 'hello'
     test_AESCipher(data)
-    data = u'你好'
+    data = '你好'
     test_AESCipher(data)

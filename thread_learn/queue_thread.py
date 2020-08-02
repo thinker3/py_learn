@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 import threading
-import Queue
+import queue
 import time, random
 
 WORKERS = 5
@@ -19,12 +19,12 @@ class Worker(threading.Thread):
             item = self.__queue.get()
             if item is None:
                 lock.acquire()
-                print self.name, 'quits'
+                print(self.name, 'quits')
                 lock.release()
                 break
             time.sleep(random.randint(10, 100) / 1000.0)  # integers in [10, 100]
             lock.acquire()
-            print self.name, "task", item, "finished"
+            print(self.name, "task", item, "finished")
             lock.release()
 
 ## class Queue.Queue(maxsize=0)
@@ -33,7 +33,7 @@ class Worker(threading.Thread):
 ## If maxsize is less than or equal to zero, the queue size is infinite.
 
 # queue = Queue.Queue()
-queue = Queue.Queue(40)
+queue = queue.Queue(40)
 for i in range(WORKERS):
     Worker(queue).start()
 
@@ -52,7 +52,7 @@ for i in range(WORKERS):
 
 while 1:
     if threading.active_count() == 1:
-        print sum(deltas) / len(deltas)
+        print(sum(deltas) / len(deltas))
         break
     else:
         time.sleep(0.01)

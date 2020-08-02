@@ -1,5 +1,5 @@
 #coding=utf8
-from Tkinter import *
+from tkinter import *
 
 
 def App(object):

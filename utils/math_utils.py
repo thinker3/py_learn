@@ -16,5 +16,5 @@ def round_down_float(f, n=2):  # truncate and fill zeros if needed
 
 
 if __name__ == '__main__':
-    print round_down_float(3.1)
-    print round_down_float(3.14159, 4)
+    print(round_down_float(3.1))
+    print(round_down_float(3.14159, 4))

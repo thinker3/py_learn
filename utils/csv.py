@@ -9,12 +9,12 @@ class UnicodeGBKReader(UnicodeReader):
 
     def _unicode(self, value, encoding_errors):
         try:
-            return unicode(value, 'gbk', encoding_errors)
+            return str(value, 'gbk', encoding_errors)
         except UnicodeDecodeError:
-            return unicode(value, 'utf-8', encoding_errors)
+            return str(value, 'utf-8', encoding_errors)
 
-    def next(self):
-        row = self.reader.next()
+    def __next__(self):
+        row = next(self.reader)
         encoding_errors = self.encoding_errors
         if self._parse_numerics:
             return [(value if isinstance(value, float) else

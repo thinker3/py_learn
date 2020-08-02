@@ -13,7 +13,7 @@ class Dosomething(threading.Thread):
             if answer == 'q':
                 break
             if answer:
-                print answer
+                print(answer)
                 answer = ''
             sleep(0.1)
 
@@ -25,7 +25,7 @@ def main():
     t = Dosomething()
     t.start()
     while answer != 'q':
-        answer = raw_input('>')
+        answer = input('>')
         sleep(0.2)
 
 

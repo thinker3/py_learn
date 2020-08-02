@@ -6,5 +6,5 @@ class Test(object):
     name = 'python'
 
 t = Test()
-print hasattr(t, 'name')  # not has_attr
-print getattr(t, 'name', 'null')  # not get_attr
+print(hasattr(t, 'name'))  # not has_attr
+print(getattr(t, 'name', 'null'))  # not get_attr

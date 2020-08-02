@@ -4,7 +4,7 @@ import itertools
 
 
 def find_no(m, options):
-    for i in xrange(m, 1, -1):
+    for i in range(m, 1, -1):
         for one in itertools.combinations(options, i):
             temp = []
             for j in one:
@@ -24,7 +24,7 @@ def is_it_possible(one):
     n, options = one.split(';')
     #n = int(n)
     options = options.split('],')
-    options = map(lambda x: re.findall(r'\d+', x)[1:], options)
+    options = [re.findall(r'\d+', x)[1:] for x in options]
     m = len(options)
 
     yes = find_yes(m, options)
@@ -47,5 +47,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print is_it_possible(one)
+        print(is_it_possible(one))
 f.close()

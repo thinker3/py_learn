@@ -13,5 +13,5 @@ person.name = 'Tom'
 person.address = Address()
 person.address.zip = '40015'
 
-print person.name
-print person.address.zip
+print(person.name)
+print(person.address.zip)

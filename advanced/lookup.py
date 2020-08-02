@@ -6,18 +6,16 @@ from pprint import pprint
 
 class Meta(type):
     def __getattribute__(*args):
-        print "Metaclass getattribute invoked"
+        print("Metaclass getattribute invoked")
         return type.__getattribute__(*args)
 
 
-class Class(object):
-    __metaclass__ = Meta
-
+class Class(object, metaclass=Meta):
     def __len__(self):
         return 10
 
     def __getattribute__(*args):
-        print "Class getattribute invoked"
+        print("Class getattribute invoked")
         return object.__getattribute__(*args)
 
 
@@ -25,7 +23,7 @@ obj = Class()
 obj.__len__()  # Explicit lookup via instance
 Class.__len__(obj)  # Explicit lookup via type
 len(obj)  # Implicit lookup, __getattribute__ not invoked
-print
+print()
 
 
 class Class(object):
@@ -35,10 +33,10 @@ class Class(object):
 
 obj = Class()
 assert Class is obj.__class__ is type(obj)
-print obj.__dict__
+print(obj.__dict__)
 pprint(dict(Class.__dict__), indent=4)
 dic = Class.__dict__['__dict__']
-print type(dic)
+print(type(dic))
 assert dic.__get__(obj) == obj.__dict__
 
 obj.__len__ = lambda: 5

@@ -5,4 +5,4 @@ def solve(eq,var='x'):
     return -c.real/c.imag
 ## end of http://code.activestate.com/recipes/578481/ }}}
 
-print solve("2*x = 6")
+print(solve("2*x = 6"))

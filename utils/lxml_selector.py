@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import requests
 from lxml import etree
 from lxml.html import tostring
@@ -21,7 +21,7 @@ class Selector(object):
             self.tree = etree.HTML(self.html)
 
     def get_html_by_urllib2(self):
-        self.html = urllib2.urlopen(self.url).read()
+        self.html = urllib.request.urlopen(self.url).read()
 
     def get_html_by_requests(self):
         self.html = requests.get(self.url).text

@@ -55,8 +55,8 @@ class GUI(QtGui.QWidget, threading.Thread, QObject):
             self.setWindowState(self.windowState() & ~QtCore.Qt.WindowMinimized | QtCore.Qt.WindowActive)
             self.activateWindow()
             self.setWindowFlags(Qt.WindowStaysOnTopHint)
-            print repr(self.windowState())
-            print 'here'
+            print(repr(self.windowState()))
+            print('here')
 
     def run(self):
         while self.running:
@@ -86,7 +86,7 @@ class GUI(QtGui.QWidget, threading.Thread, QObject):
             try:
                 item_dict = query_web(word)
             except:
-                print 'web failure'
+                print('web failure')
             if item_dict:
                 self.save(item_dict)
         if self.item:
@@ -105,7 +105,7 @@ class GUI(QtGui.QWidget, threading.Thread, QObject):
                             self.previous = var
                             self.search(var)
                         else:
-                            print 'same word ?'
+                            print('same word ?')
 
 
 def main():

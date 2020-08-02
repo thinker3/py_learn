@@ -11,6 +11,6 @@ class A(object):
 
 a = A()
 a.append(1)
-print a.numbers
+print(a.numbers)
 b = A()
-print b.numbers
+print(b.numbers)

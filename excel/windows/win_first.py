@@ -17,9 +17,9 @@ sheet.Cells(1, 2).Value = 'b' * 20
 sheet.Cells(2, 2).Value = 'd' * 30
 
 values = sheet.Range(sheet.Cells(1, 1), sheet.Cells(1, 2)).Value
-print values
+print(values)
 values = sheet.Range(sheet.Cells(1, 1), sheet.Cells(2, 2)).Value
-print values
+print(values)
 
 sheet.Range("A5:B5").Value = [['Hello', 'World']]
 range = sheet.Range(sheet.Cells(1, 3), sheet.Cells(4, 3))
@@ -36,7 +36,7 @@ sheet.Range(
 sheet.Columns("D").AutoFit()
 
 values = sheet.Range(sheet.Cells(1, 1), sheet.Cells(6, 4)).Value
-print values
+print(values)
 
 #sheet.Columns("A:A").ColumnWidth = 12
 #sheet.Columns("B:B").ColumnWidth = 24
@@ -60,9 +60,9 @@ try:
     #destinationPath = r"C:\Users\ken.chen\test.xlsx"
     #workBook.Close(True, destinationPath)
 except Exception as e:
-    print e
-    print e[1]
-    print e[2][2].encode(sys.getfilesystemencoding())
+    print(e)
+    print(e[1])
+    print(e[2][2].encode(sys.getfilesystemencoding()))
 
 """
 del excel

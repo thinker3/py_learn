@@ -13,12 +13,12 @@ for one in f:
     if one:
         if one.startswith('#'):
             continue
-        tankers = map(int, re.findall(r'\d+', one))
+        tankers = list(map(int, re.findall(r'\d+', one)))
         amount = tankers.pop(-1)
         ans = []
         last = tankers.pop(-1)
-        max_of_each = map(lambda x: amount / x + 2, tankers)
-        vectors = map(xrange, max_of_each)
+        max_of_each = [amount / x + 2 for x in tankers]
+        vectors = list(map(xrange, max_of_each))
         min_diff = tankers[0] - 1
         for vector in itertools.product(*vectors):
             remainder = (amount - dot(tankers, vector)) % last
@@ -31,9 +31,9 @@ for one in f:
                 full_vector[-1] += 1
                 diff = dot(tankers + [last], full_vector) - amount
                 min_diff = diff if diff < min_diff else min_diff
-        ans = map(str, ans)
+        ans = list(map(str, ans))
         if ans:
-            print ''.join(ans)
+            print(''.join(ans))
         else:
-            print min_diff
+            print(min_diff)
 f.close()

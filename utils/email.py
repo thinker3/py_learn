@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from __future__ import absolute_import
+
 
 import smtplib
 from email.mime.text import MIMEText
@@ -14,7 +14,7 @@ from utils import get_abs_path
 def send(user, password, receiver, host='smtp.qq.com', port=25):
     sender = '%s@qq.com' % user
     content = MIMEMultipart('related')
-    content['Subject'] = u'send embedded image'
+    content['Subject'] = 'send embedded image'
     content['From'] = sender
     content['To'] = receiver
 

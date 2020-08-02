@@ -20,10 +20,10 @@ def create_instance_test():
 
 def query_test():
     t1 = Teacher.get(name='t1')
-    print t1
-    print t1.students.count()
+    print(t1)
+    print(t1.students.count())
     for one in t1.students:
-        print one.name
+        print(one.name)
 
 
 if __name__ == '__main__':

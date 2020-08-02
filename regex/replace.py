@@ -6,4 +6,4 @@ import re
 
 s = "([({}))[[]{}]{}"
 s = re.sub('\(\)|\[\]|{}', '', s)
-print s
+print(s)

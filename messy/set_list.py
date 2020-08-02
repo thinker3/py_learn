@@ -15,14 +15,14 @@ def test():
     # l = [[1],[1],[2]]  # TypeError: unhashable type: 'list'
     l = [(1,), (1,), (2,)]
     s = set(l)
-    print s
+    print(s)
 
     l = [1, 2, 3]
     t = tuple(l)
-    print t
+    print(t)
 
     t = tuple()
-    print t
+    print(t)
     # t.append(1) #no attr append, since tuples are immutable
 
 test()
@@ -31,10 +31,10 @@ test()
 @segregate
 def init_set_test():
     s = set()
-    print s
+    print(s)
     # s = {}  # dict, actually
     s = {None}
-    print s
+    print(s)
 
 init_set_test()
 
@@ -43,7 +43,7 @@ init_set_test()
 def set_add_test():
     s = {0, 1, 2, }
     s.add('a')
-    print s
+    print(s)
 
 set_add_test()
 
@@ -54,24 +54,24 @@ def set_operations_test():
     # set union intersection difference | & -
     a = set([1, 2, 3, 4])
     b = set([1, 4, 7])
-    print a, b
-    print a | b
-    print a & b
-    print a - b
+    print(a, b)
+    print(a | b)
+    print(a & b)
+    print(a - b)
 
     a = set([1, 2, 3, 4])
     b = set([1, 4, 7])
     c = set([2, 4])
     d = [a, b, c]
-    print set.intersection(*d)
-    print set.union(*d)
+    print(set.intersection(*d))
+    print(set.union(*d))
 
     a = set(range(10))
     b = set([2, 4, 6, 12])
-    print a.difference(b)
-    print a
-    print a.difference_update(b)
-    print a
+    print(a.difference(b))
+    print(a)
+    print(a.difference_update(b))
+    print(a)
 
 set_operations_test()
 
@@ -81,7 +81,7 @@ set_operations_test()
 # @isolate(sep='#')
 @isolate(length=50)
 def unique_test(func, seq):
-    print func(seq)
+    print(func(seq))
 
 
 def unique(seq):
@@ -118,4 +118,4 @@ duplicate_dicts = [
     {'id': 1, 'name': 'Jim'},
     {'id': 3, 'name': 'Jack'},
 ]
-print list(toolz.unique(duplicate_dicts, key=itemgetter('id')))
+print(list(toolz.unique(duplicate_dicts, key=itemgetter('id'))))

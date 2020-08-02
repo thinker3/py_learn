@@ -41,9 +41,9 @@ def test_B(integer, hex_data):  # noqa
 
 def test_nB(n):  # noqa
     fmt = '>%dB' % n
-    data = tuple(xrange(n))
+    data = tuple(range(n))
     packed = struct.pack(fmt, *data)
-    print '%s, %r, %r' % (fmt, data, packed)
+    print('%s, %r, %r' % (fmt, data, packed))
     unpacked = struct.unpack(fmt, packed)
     assert unpacked == data
     size = struct.calcsize(fmt)
@@ -84,6 +84,12 @@ def test_I(integer, hex_data):  # noqa
     assert size == 4
 
 
+def test_nI(integers, hex_data):
+    n = len(integers)
+    assert struct.pack('>%dI' % n, *integers) == hex_data
+    assert struct.unpack('>%dI' % n, hex_data) == integers
+
+
 if __name__ == '__main__':
     test_little_endian()
     test_big_endian()
@@ -95,5 +101,8 @@ if __name__ == '__main__':
     test_B_special()
     test_H(1, '\x00\x01')
     test_I(1, '\x00\x00\x00\x01')
+    test_I(2 ** 32 - 2, '\xff\xff\xff\xfe')
+    test_nI((255, 65535), b'\x00\x00\x00\xff\x00\x00\xff\xff')
+    test_nI((255, 65535), b'\x00\x00\x00\xff' + b'\x00\x00\xff\xff')
     assert struct.pack('>1s', '') == '\x00'
     assert struct.pack('>1s', '0') == '\x30' == chr(48)

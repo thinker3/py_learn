@@ -5,5 +5,5 @@ patterns = tuple(patterns)
 host1 = 'code.google.com'
 host2 = 'www.baidu.com'
 
-print host1.endswith(patterns)
-print host2.endswith(patterns)
+print(host1.endswith(patterns))
+print(host2.endswith(patterns))

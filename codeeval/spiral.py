@@ -18,16 +18,16 @@ def spiral_printing(n, m, one):
     dx = n - 1
     dy = 0
     while 1:
-        for i in xrange(ay, by):
+        for i in range(ay, by):
             index = point_2_index(ax, i)
             yield one[index]
-        for i in xrange(bx, cx):
+        for i in range(bx, cx):
             index = point_2_index(i, cy)
             yield one[index]
-        for i in xrange(cy, dy, -1):
+        for i in range(cy, dy, -1):
             index = point_2_index(dx, i)
             yield one[index]
-        for i in xrange(dx, ax, -1):
+        for i in range(dx, ax, -1):
             index = point_2_index(i, ax)
             yield one[index]
         ax += 1
@@ -41,12 +41,12 @@ def spiral_printing(n, m, one):
         if ay > by or ax > dx:
             break
         if ay == by:
-            for i in xrange(bx, cx + 1):
+            for i in range(bx, cx + 1):
                 index = point_2_index(i, cy)
                 yield one[index]
             break
         elif ax == dx:
-            for i in xrange(ay, by + 1):
+            for i in range(ay, by + 1):
                 index = point_2_index(ax, i)
                 yield one[index]
             break
@@ -59,5 +59,5 @@ for one in f:
         n = int(n)
         m = int(m)
         one = one.split(' ')
-        print ' '.join(spiral_printing(n, m, one))
+        print(' '.join(spiral_printing(n, m, one)))
 f.close()

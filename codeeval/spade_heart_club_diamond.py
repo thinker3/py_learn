@@ -13,11 +13,11 @@ class Hand(object):
     def __init__(self, cards, name):
         self.name = name
         self.is_flush = False
-        suits = map(lambda x: x[1], cards)
+        suits = [x[1] for x in cards]
         if len(set(suits)) == 1:
             self.is_flush = True
-        values = map(lambda x: x[0], cards)
-        values = map(lambda x: VALUES[CARDS.index(x)], values)
+        values = [x[0] for x in cards]
+        values = [VALUES[CARDS.index(x)] for x in values]
         self.values = sorted(values, key=lambda x: - VALUES.index(x))
         self.value = ''.join(self.values)
         self.compared_results()
@@ -54,8 +54,7 @@ class Hand(object):
             self.number = int(self.deltas, 2)
             return self.number == 15
         except:
-            self.number = int(''.join(map(
-                lambda x: '1' if x > '0' else '0', self.deltas)), 2)
+            self.number = int(''.join(['1' if x > '0' else '0' for x in self.deltas]), 2)
 
     def has_3_the_same_value(self):
         flag = self.number in (3, 9, 12)
@@ -136,7 +135,7 @@ for one in f:
         two_hands = get_cards(one)
         winner = get_winner(two_hands)
         if winner:
-            print winner.name
+            print(winner.name)
         else:
-            print 'none'
+            print('none')
 f.close()

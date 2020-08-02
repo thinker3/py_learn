@@ -7,10 +7,10 @@ from datetime import (
 
 
 def decorate(func):
-    print 'decorate is called'
+    print('decorate is called')
 
     def _func(*args, **kwargs):
-        print '_func is called'
+        print('_func is called')
         return func(*args, **kwargs)
     _func._original = func
     return _func
@@ -19,9 +19,9 @@ def decorate(func):
 def segregate(func):
     # @segregate, without ()
     def _func(*args, **kwargs):
-        print func.__name__
+        print(func.__name__)
         func(*args, **kwargs)
-        print '*' * 30
+        print('*' * 30)
     return _func
 
 
@@ -29,9 +29,9 @@ def separate(sep='*', length=30):
     # @separate, with ()
     def _wrapper(func):
         def _func(*args, **kwargs):
-            print func.__name__
+            print(func.__name__)
             func(*args, **kwargs)
-            print sep * length
+            print(sep * length)
         return _func
     return _wrapper
 
@@ -41,7 +41,7 @@ def smart_separate(*arg, **kwargs):
         def wrapper(func):
             def _func(*args, **kwargs):
                 r = func(*args, **kwargs)
-                print sep * length
+                print(sep * length)
                 return r
             return _func
         return wrapper
@@ -66,6 +66,6 @@ def show_time_interval(func):
         before = datetime.now()
         ans = func(*args, **kwargs)
         delta = (datetime.now() - before)
-        print delta.total_seconds()
+        print(delta.total_seconds())
         return ans
     return _func

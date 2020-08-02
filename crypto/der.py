@@ -12,14 +12,14 @@ keyPub = RSA.importKey(keyDER)
 cipher = Cipher_PKCS1_v1_5.new(keyPub)
 cipher_text = cipher.encrypt(msg.encode())  # ValueError: Plaintext is too long
 emsg = b64encode(cipher_text)
-print emsg
+print(emsg)
 
 # ValueError: RSA modulus length must be a multiple of 256 and >= 1024
 key = RSA.generate(1024)
 binPrivKey = key.exportKey('DER')
 binPubKey = key.publickey().exportKey('DER')
-print repr(binPubKey)
-print b64encode(binPubKey)
+print(repr(binPubKey))
+print(b64encode(binPubKey))
 privKeyObj = RSA.importKey(binPrivKey)
 pubKeyObj = RSA.importKey(binPubKey)
 msg = "attack at dawn"

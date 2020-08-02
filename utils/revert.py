@@ -11,6 +11,6 @@ new = [one for one in files if one.startswith('?')]
 
 modified = [re.split(r'\s+', one)[-1] for one in modified]
 for one in modified:
-    print one
+    print(one)
     os.system('svn revert %s' % one)
 

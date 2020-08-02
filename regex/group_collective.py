@@ -7,9 +7,9 @@ ss = "Feb 2011"
 sss = "Febr 2011"
 
 m = re.match(p, ss)
-print m
-print m.group()
-print m.groups()
+print(m)
+print(m.group())
+print(m.groups())
 
 
 s_list = [
@@ -23,4 +23,4 @@ s_list = [
     ]
 for one in s_list:
     m = re.search(r'([^{]*)({)(.*)(})([^}]*)', one)
-    print m.groups()
+    print(m.groups())

@@ -22,7 +22,7 @@ f = open(argv[1], 'r')
 for one in f:
     if one.strip():
         try:
-            print get_the_next(one.strip())
+            print(get_the_next(one.strip()))
         except:
-            print 0 # ???
+            print(0) # ???
 f.close()

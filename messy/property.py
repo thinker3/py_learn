@@ -9,10 +9,10 @@ class String2Int(object):
         self.str_num = str(value)
 
     def show_int(self):
-        print self.num, type(self.num)
+        print(self.num, type(self.num))
 
     def show_str(self):
-        print self.str_num, type(self.str_num)
+        print(self.str_num, type(self.str_num))
 
     num = property(get_num, set_num)
 
@@ -23,7 +23,7 @@ n.show_str()
 n.num = 321
 n.show_int()
 n.show_str()
-print '*' * 30
+print('*' * 30)
 
 class CallProperty(object):
     '''
@@ -39,9 +39,9 @@ class CallProperty(object):
         return self.name + ' Kennedy'
 
 obj = CallProperty()
-print obj.name
-print obj.full_name
-print '*' * 30
+print(obj.name)
+print(obj.full_name)
+print('*' * 30)
 
 
 def alias(key):
@@ -67,14 +67,14 @@ class Alias(object):
         self.m = value
 
 a = Alias()
-print a.x
-print a.y
+print(a.x)
+print(a.y)
 a.y = 1
-print a.x
-print a.y
+print(a.x)
+print(a.y)
 
-print a.m
-print a.n
+print(a.m)
+print(a.n)
 a.n = 'world'
-print a.m
-print a.n
+print(a.m)
+print(a.n)

@@ -3,15 +3,15 @@
 
 for i in range(10):
     if i == 20:
-        print i
+        print(i)
         break
 else:
-    print 'else'
+    print('else')
 
 
 for i in range(10):
     if i == 2:
-        print 'break'
+        print('break')
         break
 else:
-    print 'else'
+    print('else')

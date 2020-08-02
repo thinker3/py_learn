@@ -33,14 +33,14 @@ def create_one():
 
 
 def create_many(table, count=10000):
-    for i in xrange(count):
-        print i
+    for i in range(count):
+        print(i)
         data = create_one()
         row_key = '{key}__{create_time}'.format(**data)
         temp = {}
-        for k, v in data.iteritems():
+        for k, v in data.items():
             temp['A:%s' % k] = common.convert_to_string(v)
-        print temp
+        print(temp)
         table.put(row_key, temp)
 
 

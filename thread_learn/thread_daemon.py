@@ -15,7 +15,7 @@ class Worker(threading.Thread):
 
     def run(self):
         text = requests.get(url).text
-        print(self, len(text))
+        print((self, len(text)))
 
 
 class IndependentWorker(Worker):
@@ -51,10 +51,10 @@ def main_dead_worker_join():
     worker = Model()
     worker.start()
     time.sleep(5)
-    print('worker.is_alive()', worker.is_alive())
+    print(('worker.is_alive()', worker.is_alive()))
     worker.join()
 
 if __name__ == '__main__':
     # main_wait()
-    # main_no_wait()
-    main_dead_worker_join()
+    main_no_wait()
+    # main_dead_worker_join()

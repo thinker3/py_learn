@@ -3,5 +3,5 @@
 
 import errno
 
-for k, v in errno.errorcode.iteritems():
-    print k, v
+for k, v in errno.errorcode.items():
+    print(k, v)

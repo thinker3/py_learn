@@ -51,15 +51,15 @@ def multiple_levels_zipped():
             fullname = os.path.join(dirname, basename)
             arcname = os.path.join(first, second_dir, basename)
             dst.write(fullname, arcname, zipfile.ZIP_DEFLATED)
-    print dst.filelist
+    print(dst.filelist)
     dst.close()
 
 
 def zero_file_zipped():
     dst = zipfile.ZipFile(output, 'w')
-    print dst.filelist
+    print(dst.filelist)
     has_content = bool(dst.filelist)
-    print has_content
+    print(has_content)
     dst.close()
     if not has_content:
         os.remove(output)

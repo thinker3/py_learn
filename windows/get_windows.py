@@ -16,10 +16,10 @@ def bringToFront(windowText):
 
         topWindows = []
         win32gui.EnumWindows(windowEnumerationHandler, topWindows)
-        print len(topWindows)
+        print(len(topWindows))
         for i in topWindows:
             if windowText in i[1]:
-                print i
+                print(i)
                 win32gui.ShowWindow(i[0], 5)
                 win32gui.SetForegroundWindow(i[0])
         handle = win32gui.GetForegroundWindow()
@@ -32,7 +32,7 @@ bringToFront('wxpython')
 
 import SendKeys
 SendKeys.SendKeys('^a')
-print 'here'
+print('here')
 
 '''
 topWindows = []

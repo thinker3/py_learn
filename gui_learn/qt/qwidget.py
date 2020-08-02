@@ -32,7 +32,7 @@ class GUI(QtGui.QWidget):
                 self.setWindowState(Qt.WindowActive)
 
     def sayHello(self):
-        print 'Hello'
+        print('Hello')
 
 
 if __name__ == '__main__':

@@ -1,12 +1,12 @@
 def outer(a):
     def inner():
-        print a, b
+        print(a, b)
         #a = 0 # UnboundLocalError: local variable 'a' referenced before assignment
     b = 2
     inner()
 
 outer(1)
-print '-' * 20
+print('-' * 20)
 
 
 def outer(a):
@@ -17,10 +17,10 @@ def outer(a):
         b = 'b'
     b = 2
     inner()
-    print a, b
+    print(a, b)
 
 outer(1)
-print a, b
+print(a, b)
 
 
 

@@ -6,18 +6,18 @@ import simplecrypt
 
 text = 'hello world'
 coded = base64.b64encode(text)
-print type(coded)  # <type 'str'>
-print coded
+print(type(coded))  # <type 'str'>
+print(coded)
 text = coded.decode('base64')
-print text
+print(text)
 text = base64.b64decode(coded)
-print text
+print(text)
 
 crypted = simplecrypt.encrypt('test', text)
-print crypted
+print(crypted)
 coded = base64.b64encode(crypted)
-print coded
+print(coded)
 crypted = coded.decode('base64')
-print crypted
+print(crypted)
 text = simplecrypt.decrypt('test', crypted)
-print text
+print(text)

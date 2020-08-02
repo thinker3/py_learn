@@ -8,7 +8,7 @@ import pythoncom
 def main():
     #pythoncom.CoInitialize()
     excel = win32.DispatchEx('Excel.Application')
-    print excel.Version
+    print(excel.Version)
     excel.Visible = 1
     excel.DisplayAlerts = False
     workBook = excel.Workbooks.Add()

@@ -17,17 +17,17 @@ from utils.lxml_selector import Selector
 class Job(mongo.Document):
     position_id = mongo.StringField()
     url = mongo.URLField(
-        verbose_name=u'职位详情链接',
+        verbose_name='职位详情链接',
     )
     description = mongo.StringField(
-        verbose_name=u'职位描述',
+        verbose_name='职位描述',
     )
     create_time = mongo.DateTimeField(
-        verbose_name=u'创建时间',
+        verbose_name='创建时间',
         default=datetime.datetime.now(),
     )
     create_time = mongo.DateTimeField(
-        verbose_name=u'更新时间',
+        verbose_name='更新时间',
         default=datetime.datetime.now(),
     )
 
@@ -60,7 +60,7 @@ class Lagou(object):
         get_params = dict(
             city=city,
             px='new',
-            gx=u'全职',
+            gx='全职',
             isSchoolJob=0,
             needAddtionalResult='false',
         )
@@ -74,11 +74,11 @@ class Lagou(object):
         )
 
         def get_referer():
-            base_url = u'https://www.lagou.com/jobs/list_%s' % search_kw
+            base_url = 'https://www.lagou.com/jobs/list_%s' % search_kw
             params = dict(
                 city=city,
                 px='new',
-                gx=u'全职',
+                gx='全职',
             )
             referer = common.get_url(base_url, params)
             return referer
@@ -105,9 +105,9 @@ class Lagou(object):
                 total_count = json.content['positionResult']['totalCount']
                 page_size = json.content['pageSize']
                 self.total_page = int(math.ceil(float(total_count) / page_size))
-                print self.total_page
+                print(self.total_page)
         except Exception as e:
-            print e
+            print(e)
             result = []
         for job in result:
             position_id = str(job['positionId'])
@@ -153,7 +153,7 @@ class Lagou(object):
             description__icontains=self.jd_kw,
             description__not__icontains='jquery',
         ):
-            print job.url
+            print(job.url)
 
     def run(self):
         self.get_job_detail_urls()
@@ -168,8 +168,8 @@ class Lagou(object):
 
 
 def test_lagou():
-    city = u'重庆'
-    search_kw = u'前端'
+    city = '重庆'
+    search_kw = '前端'
     jd_kw = 'react'
     lagou = Lagou(city, search_kw, jd_kw)
     # lagou.run()

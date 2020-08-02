@@ -5,12 +5,12 @@ class A(object):
 
 
 a = A()
-print a == 0
-print a == ''
-print a == True
-print a == None
-print a == 'Hello!'
-print '*' * 50
+print(a == 0)
+print(a == '')
+print(a == True)
+print(a == None)
+print(a == 'Hello!')
+print('*' * 50)
 
 
 class In(object):
@@ -25,15 +25,15 @@ class In(object):
         return self.a == other.a and self.b == other.b
 
 ex = [In(), In(1, 2), In(2, 3), In('', None)]
-print In() in ex
-print In(1, 2) in ex
-print In(2, 3) in ex
-print In("", None) in ex
-print In(None, "") in ex
-print In(1, 3) in ex
+print(In() in ex)
+print(In(1, 2) in ex)
+print(In(2, 3) in ex)
+print(In("", None) in ex)
+print(In(None, "") in ex)
+print(In(1, 3) in ex)
 instances = [In(), In(1, 2), In(2, 4), In('', None)]
-to_insert = filter(lambda x: x in ex, instances)
-print to_insert
+to_insert = [x for x in instances if x in ex]
+print(to_insert)
 
 
 class Base:
@@ -50,21 +50,21 @@ _setattr_ = Base.__setattr__
 
 
 def my_setattr_(self, attr, value):
-    print 'called'
+    print('called')
     _setattr_(self, attr, value)
     self.__dict__[attr*2] = value
 
 e = Extend()
 b = Base()
 e.foo = 'foo'
-print e.__dict__
+print(e.__dict__)
 Base.__setattr__ = my_setattr_
 #Extend.__setattr__ = my_setattr_
 e.foo = 'foo'
-print e.__dict__
+print(e.__dict__)
 b.bar = 'bar'
-print b.__dict__
-print '*' * 50
+print(b.__dict__)
+print('*' * 50)
 
 
 class Base(object):
@@ -80,17 +80,17 @@ _setattr_ = Base.__setattr__
 
 
 def my_setattr_(self, attr, value):
-    print 'called'
+    print('called')
     _setattr_(self, attr, value)
     object.__setattr__(self, attr*2, value)
 
 e = Extend()
 b = Base()
 e.foo = 'foo'
-print e.__dict__
+print(e.__dict__)
 Base.__setattr__ = my_setattr_
 #Extend.__setattr__ = my_setattr_
 e.foo = 'foo'
-print e.__dict__
+print(e.__dict__)
 b.bar = 'bar'
-print b.__dict__
+print(b.__dict__)

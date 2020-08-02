@@ -30,10 +30,10 @@ class AliasContextManager(object):
 alias = AliasContextManager
 
 with alias(sum) as fn:
-    print fn
-    print fn([1, 2, 3])
-print fn
-print fn([1, 2, 3])
+    print(fn)
+    print(fn([1, 2, 3]))
+print(fn)
+print(fn([1, 2, 3]))
 
 
 class ContextDecorator(object):
@@ -45,7 +45,7 @@ class ContextDecorator(object):
         return self
 
     def __exit__(self, typ, val, traceback):
-        print "{}: {}".format(self.label, time.time() - self.start_time)
+        print("{}: {}".format(self.label, time.time() - self.start_time))
 
     def __call__(self, f):
         self.label = f.__name__
@@ -59,7 +59,7 @@ class ContextDecorator(object):
 
 @ContextDecorator(label='foo')
 def loop():
-    for i in xrange(10 ** 7):
+    for i in range(10 ** 7):
         pass
 
 
@@ -67,7 +67,7 @@ loop()
 
 
 def wait():
-    for i in xrange(10 ** 8):
+    for i in range(10 ** 8):
         pass
 
 

@@ -65,24 +65,24 @@ points = {
     'fourth': 1,
 }
 formula = "=sum(r%(first)sc%(second)s:r%(third)sc%(fourth)s)" % points
-print formula  # =sum(r2c1:r6c1)
+print(formula)  # =sum(r2c1:r6c1)
 sheet.Cells(start_row + row, 1).FormulaR1C1 = formula
 
 sheet.Cells(2, 4).Value = '2.4'
 
 used = sheet.UsedRange
 #print used
-print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count
+print(used.Row, used.Column)
+print(used.Rows.Count, used.Columns.Count)
 
 # insert empty row, column
 sheet.Columns(1).EntireColumn.Insert()
-print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count
+print(used.Row, used.Column)
+print(used.Rows.Count, used.Columns.Count)
 
 sheet.Rows(1).EntireRow.Insert()
-print used.Row, used.Column
-print used.Rows.Count, used.Columns.Count
+print(used.Row, used.Column)
+print(used.Rows.Count, used.Columns.Count)
 
 delta = 2
 start_column = used.Column + used.Columns.Count
@@ -94,7 +94,7 @@ sheet.Range(sheet.Rows(start_row), sheet.Rows(start_row + delta)).RowHeight = 50
 def get_column_number(letter):
     # get column number by column letter
     col = sheet.Columns(letter).Column
-    print col
+    print(col)
 
 letter = 'c'
 get_column_number(letter)

@@ -21,7 +21,7 @@ class Dosomething(threading.Thread):
     def done(self, one):
         customers, products = one.split(';')
         customers = customers.split(',')
-        products = map(get_letters, products.split(','))
+        products = list(map(get_letters, products.split(',')))
         for customer in customers:
             row = []
             letters = get_letters(customer)
@@ -35,13 +35,13 @@ class Dosomething(threading.Thread):
         less = row_num
         if row_num > col_num:
             less = col_num 
-            for one in itertools.combinations(range(row_num), less):
-                for two in itertools.permutations(range(col_num)):
+            for one in itertools.combinations(list(range(row_num)), less):
+                for two in itertools.permutations(list(range(col_num))):
                     total = self.get_total(one, two, less)
                     max_ss = total if max_ss < total else max_ss
         else:
-            for one in itertools.combinations(range(col_num), less):
-                for two in itertools.permutations(range(row_num)):
+            for one in itertools.combinations(list(range(col_num)), less):
+                for two in itertools.permutations(list(range(row_num))):
                     total = self.get_total(two, one, less)
                     max_ss = total if max_ss < total else max_ss
         return max_ss
@@ -102,7 +102,7 @@ f.close()
 while threading.active_count() >= 2:
     sleep(0.001)
 for one in ans:
-    print '%.2f' % one
+    print('%.2f' % one)
 
 
 

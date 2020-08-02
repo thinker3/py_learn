@@ -1,6 +1,6 @@
 #coding=utf8
-import Tkinter as tk
-import tkMessageBox as mb
+import tkinter as tk
+import tkinter.messagebox as mb
 
 
 class App(object):

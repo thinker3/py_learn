@@ -8,7 +8,7 @@ from scrapy.selector import Selector
 # on windows: mbcs, on mac: utf-8
 encoding = sys.getfilesystemencoding() or "utf8"
 while True:
-    query = raw_input('q to quit, input the word: ')
+    query = input('q to quit, input the word: ')
     if query.lower() == 'q':
         break
     url = "http://dict.youdao.com/search?tab=chn&keyfrom=dict.top&q=" + query
@@ -19,13 +19,13 @@ while True:
         ph = ph.xpath('./span/text()').extract()
         #if len(ph) > 0: print ph[0]  # UnicodeEncodeError on windows
         if len(ph) > 0:
-            print ph[0].encode(encoding)
-    print
+            print(ph[0].encode(encoding))
+    print()
     xpath = '//div[@id="phrsListTab"]/div[@class="trans-container"]/ul/li'
     lis = hxs.xpath(xpath)
     for li in lis:
         try:
-            print li.xpath('./text()').extract()[0]
+            print(li.xpath('./text()').extract()[0])
         except:
             pass
     examples = hxs.xpath('//div[@id="bilingual"]/ul/li')
@@ -37,7 +37,7 @@ while True:
         #print ''.join(example_en)
         #print ''.join(example_cn)
 
-        print ''.join(example_en).encode(encoding)
-        print ''.join(example_cn).encode(encoding)
-    print
-    print
+        print(''.join(example_en).encode(encoding))
+        print(''.join(example_cn).encode(encoding))
+    print()
+    print()

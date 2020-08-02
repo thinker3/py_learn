@@ -72,5 +72,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print to_number(one.split())
+        print(to_number(one.split()))
 f.close()

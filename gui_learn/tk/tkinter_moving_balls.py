@@ -2,18 +2,18 @@
 # encoding: utf-8
 
 import threading
-import Queue
+import queue
 import random
 import math
 import time
-import Tkinter
+import tkinter
 
 random.seed(0)
 
 class App:
     def __init__(self, queue, width=400, height=300):
         self.width, self.height = width, height
-        self.canvas = Tkinter.Canvas(width=width, height=height, bg='black')
+        self.canvas = tkinter.Canvas(width=width, height=height, bg='black')
         self.canvas.pack(fill='none', expand=False)
         self._oid = []
         self.canvas.after(10, self.move)
@@ -24,7 +24,7 @@ class App:
     def check_queue(self):
         try:
             x, y, rad, outline = self.queue.get(block=False)
-        except Queue.Empty:
+        except queue.Empty:
             pass
         else:
             self.create_moving_ball(x, y, rad, outline)
@@ -58,16 +58,16 @@ class App:
 def queue_create(queue, running):
     while running:
         if random.random() < 1e-6:
-            print "Create a new moving ball please"
+            print("Create a new moving ball please")
             x, y = random.randint(100, 150), random.randint(100, 150)
             color = random.choice(['green', 'white', 'yellow', 'blue'])
             queue.put((x, y, random.randint(10, 30), color))
         time.sleep(0) # Effectively yield this thread.
 
-root = Tkinter.Tk()
+root = tkinter.Tk()
 running = [True]
 
-queue = Queue.Queue()
+queue = queue.Queue()
 
 app = App(queue)
 app.create_moving_ball()

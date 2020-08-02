@@ -40,17 +40,17 @@ while this:
     this = that
 
 total = ((total - middle - axis) * 2 + middle + axis) * 4 + 1 
-print total
+print(total)
 
 
 
 total = 0
-for i in xrange(1, 299):
-    for j in xrange(299):
+for i in range(1, 299):
+    for j in range(299):
         if i + j > 298:
             continue
         s = digits_sum(i) + digits_sum(j)
         if s <= 19:
             total += 1
 
-print total * 4 + 1
+print(total * 4 + 1)

@@ -5,7 +5,7 @@
 def coroutine(func):
     def start(*args, **kwargs):
         g = func(*args, **kwargs)
-        g.next()
+        next(g)
         return g
     return start
 
@@ -14,14 +14,14 @@ def coroutine(func):
 def printer():
     while True:
         msg = yield
-        print 'printing %s' % msg
+        print('printing %s' % msg)
 
 
 @coroutine
 def logger():
     while True:
         msg = yield
-        print 'logging %s' % msg
+        print('logging %s' % msg)
 
 
 targets = [printer(), logger()]

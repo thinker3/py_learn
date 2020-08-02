@@ -4,19 +4,19 @@
 #2013年 04月 23日 星期二 16:21:13 CST
 
 def Gen1(x, y):
-		for i in xrange(x):
-				for j in xrange(y):
+		for i in range(x):
+				for j in range(y):
 						yield(i, j)
 
 def Gen2(x, y):
-		return ((i, j) for i in xrange(x) for j in xrange(y))
+		return ((i, j) for i in range(x) for j in range(y))
 
 g = Gen1(2,3)
 for i in g:
-		print i
+		print(i)
 
 h = Gen2(2,3)
-print
+print()
 for i in h:
-		print i
+		print(i)
 		

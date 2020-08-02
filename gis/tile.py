@@ -25,26 +25,26 @@ def tile2degree(xtile, ytile, zoom):
 zoom = 22
 # chongqing
 lng, lat = 106.516034, 29.543124
-print lng, lat
+print(lng, lat)
 tile = mercantile.tile(lng, lat, zoom)
-print tile
-print mercantile.ul(*tile)
+print(tile)
+print(mercantile.ul(*tile))
 box = mercantile.bounds(*tile)
-print box
+print(box)
 distance = great_circle((lat, box.west), (lat, box.east))
-print distance.meters, 'm'
+print(distance.meters, 'm')
 distance = great_circle((box.north, lng), (box.south, lng))
-print distance.meters, 'm'
+print(distance.meters, 'm')
 
 # beijing
 lng, lat = 116.324662, 39.961028
 xtile, ytile = degree2tile(lng, lat, zoom)
-print lng, lat
-print xtile, ytile
-print tile2degree(xtile, ytile, zoom)
+print(lng, lat)
+print(xtile, ytile)
+print(tile2degree(xtile, ytile, zoom))
 box = mercantile.bounds(xtile, ytile, zoom)
-print box
+print(box)
 distance = great_circle((lat, box.west), (lat, box.east))
-print distance.meters, 'm'
+print(distance.meters, 'm')
 distance = great_circle((box.north, lng), (box.south, lng))
-print distance.meters, 'm'
+print(distance.meters, 'm')

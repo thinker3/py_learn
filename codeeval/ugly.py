@@ -25,7 +25,7 @@ def get_ugly_numbers(one):
         temp = ''
         for i, j in zip(one, option):
             temp += i + j
-        temp = map(int, temp.split(','))
+        temp = list(map(int, temp.split(',')))
         t = sum(temp)
         if is_ugly(t):
             total += 1
@@ -35,5 +35,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print get_ugly_numbers(one)
+        print(get_ugly_numbers(one))
 f.close()

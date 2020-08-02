@@ -10,9 +10,9 @@ samples = [
 for sample in samples:
     result = re.match("\s*(\d+)\s*(\w*)\s*-\s*(\d+)\s*(\w+)\s*", sample)
     if result:
-        print result.group()
-        print result.groups()
-print '*' * 30
+        print(result.group())
+        print(result.groups())
+print('*' * 30)
 
 s = (
     '''
@@ -30,4 +30,4 @@ def process_match(m):
     return '<li></li>'
 
 p = re.compile(r'<li>(.*?)</li>')
-print p.sub(process_match, s, re.S)
+print(p.sub(process_match, s, re.S))

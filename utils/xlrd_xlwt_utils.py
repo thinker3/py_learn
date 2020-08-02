@@ -6,7 +6,7 @@ from datetime import (
 )
 import xlrd
 from xlwt import Workbook
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from utils import get_abs_path
 try:
     from django.http import HttpResponse
@@ -75,14 +75,14 @@ def index_of(key, list_2d):
 
 def write_xls_one_line(sheet, columns):
     l = len(sheet.rows)
-    for i in xrange(len(columns)):
+    for i in range(len(columns)):
         sheet.write(l, i, columns[i])
 
 
 def write_xls_lines(sheet, data_of_columns):
     l = len(sheet.rows)
     for columns in data_of_columns:
-        for i in xrange(len(columns)):
+        for i in range(len(columns)):
             sheet.write(l, i, columns[i])
         l += 1
 
@@ -90,7 +90,7 @@ def write_xls_lines(sheet, data_of_columns):
 def write_xls_1d(sheet, columns=[], objs=[]):
     attrs = get_attrs(columns)
     l = len(sheet.rows)
-    for i in xrange(len(columns)):
+    for i in range(len(columns)):
         sheet.write(l, i, columns[i][1])
         sheet.col(i).width = columns[i][2] * 256
     for i, obj in enumerate(objs, start=l + 1):
@@ -134,7 +134,7 @@ def make_workbook_with_one_sheet(sheetname, filename, columns, objs):
     book = Workbook()
     sheet = book.add_sheet(sheetname)
     attrs = get_attrs(columns)
-    for i in xrange(len(columns)):
+    for i in range(len(columns)):
         sheet.write(0, i, columns[i][1])
         sheet.col(i).width = columns[i][2] * 256
     for i, obj in enumerate(objs, start=1):
@@ -170,7 +170,7 @@ def make_xls_response(sheetname='1', filename=None, columns=[], objs=[]):
     response = HttpResponse(mimetype='application/vnd.ms-excel')
     # "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
     response = HttpResponse(content_type='application/vnd.ms-excel')
-    filename = urllib.quote(unicode(filename).encode('utf8'))
+    filename = urllib.parse.quote(str(filename).encode('utf8'))
     response['Content-Disposition'] = 'attachment; filename=%s' % filename
     book.save(response)
     return response
@@ -197,12 +197,12 @@ def merged_test():
     file_contents = file('merged.xls').read()
     data = read_merged_xls(file_contents)
     for one in data:
-        print one
+        print(one)
 
 
 def sheets_test():
     filepath = get_abs_path(['utils', 'sheets.xlsx'])
-    print read_excel(filepath)
+    print(read_excel(filepath))
 
 
 if __name__ == '__main__':

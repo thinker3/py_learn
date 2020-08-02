@@ -25,8 +25,8 @@ def arrangestr(s):
         temp = []
         for j in range(n):
             temp.append(list_s[L[j]])
-        print "".join(temp)
-    print len(list_n)
+        print("".join(temp))
+    print(len(list_n))
 
 
 arrangestr('abcdefg')

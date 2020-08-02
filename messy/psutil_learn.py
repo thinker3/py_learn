@@ -14,8 +14,8 @@ keys = [
 for proc in psutil.process_iter():
     d = proc.as_dict()
     for key in keys:
-        print '%s: %s' % (key, d[key])
-    print
+        print('%s: %s' % (key, d[key]))
+    print()
 
 '''
 pid: 895

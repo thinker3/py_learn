@@ -28,7 +28,7 @@ def mercator_to_lnglat(x, y):
 
 
 lng, lat = 116.324662, 39.961028
-print lng, lat
+print(lng, lat)
 x, y = lnglat_to_mercator(lng, lat)
-print x, y
-print mercator_to_lnglat(x, y)
+print(x, y)
+print(mercator_to_lnglat(x, y))

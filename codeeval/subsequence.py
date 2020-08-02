@@ -17,16 +17,16 @@ def multiply(a, b):
 def get_num(one):
     case, word = one.split(',')
     if not (case and word):
-        print 0
+        print(0)
         return
     if len(case) < len(word):
-        print 0
+        print(0)
         return
     if len(case) == len(word):
         if case == word:
-            print 1
+            print(1)
         else:
-            print 0
+            print(0)
         return
     occurrences = []
     for ch in word:
@@ -34,7 +34,7 @@ def get_num(one):
         occurrences.append(indexes)
     while len(occurrences) >= 2:
         occurrences = multiply(occurrences[0], occurrences[1]) + occurrences[2:]
-    print len(occurrences[0])
+    print(len(occurrences[0]))
 
 
 f = open(argv[1], 'r')

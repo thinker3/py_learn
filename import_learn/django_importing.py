@@ -6,4 +6,4 @@ setup_environ(settings)
 
 from django.contrib.auth.models import User
 user = User.objects.filter(username='xiaofei')
-print user
+print(user)

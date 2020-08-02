@@ -15,7 +15,7 @@ i z e w x
 o n a o z
 """
 
-matrix = filter(None, s.split('\n'))
+matrix = [_f for _f in s.split('\n') if _f]
 matrix = [row.split() for row in matrix]
 dim = len(matrix)
 wanted = []
@@ -47,7 +47,7 @@ def main():
             num += 1
             matrix[a][b] = None
             start = move_up_right(start)
-    print ''.join(wanted)
+    print(''.join(wanted))
 
 
 main()

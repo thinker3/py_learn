@@ -15,7 +15,7 @@ def main():
     jFont = "JapaneseNext"
 
     #sheet.Cells(1, 1).Value = 'ź'
-    sheet.Cells(1, 1).Value = u'ź'
+    sheet.Cells(1, 1).Value = 'ź'
     sheet.Cells(1, 1).Font.Name = gFont
 
     sheet.Cells(2, 2).Value = 'A'

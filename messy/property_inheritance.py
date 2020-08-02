@@ -15,5 +15,5 @@ class B(A):
 
 
 b = B()
-print b.name
-print b.length
+print(b.name)
+print(b.length)

@@ -14,7 +14,7 @@ def levenshtein(s1, s2):
     if len(s2) == 0:
         return len(s1)
 
-    previous_row = xrange(len(s2) + 1)
+    previous_row = range(len(s2) + 1)
     for i, c1 in enumerate(s1):
         current_row = [i + 1]
         for j, c2 in enumerate(s2):
@@ -34,7 +34,7 @@ def get_segments(one):
     segment, m, dna = one.split()
     m = int(m)
     less, more = len(segment), len(dna)
-    for i in xrange(more - less + 1):
+    for i in range(more - less + 1):
         temp = dna[i: i + less]
         d = levenshtein(segment, temp)
         if d <= m:
@@ -50,7 +50,7 @@ for one in f:
         if ans:
             ans.sort(key=operator.itemgetter(0, 1))
             ans = [x[1] for x in ans]
-            print ' '.join(ans)
+            print(' '.join(ans))
         else:
-            print 'No match'
+            print('No match')
 f.close()

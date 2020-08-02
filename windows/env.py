@@ -4,7 +4,7 @@
 import os
 import sys
 
-print sys.argv
-print os.environ['home']
+print(sys.argv)
+print(os.environ['home'])
 #print os.environ['cd']
-print os.getcwd()
+print(os.getcwd())

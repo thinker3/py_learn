@@ -11,11 +11,11 @@ def get_min(n,k,a,b,c,r):
             j += 1
         m.append(j)
         m.pop(0)
-    print m[-1]
+    print(m[-1])
 
 f = open(argv[1], 'r')
 for one in f:
     if one != '\n':
-        get_min(*map(int, one.split(',')))
+        get_min(*list(map(int, one.split(','))))
 f.close()
 

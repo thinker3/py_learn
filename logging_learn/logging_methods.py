@@ -16,7 +16,7 @@ def show(level):
     logging.warning('warning')
     logging.critical('critical')
     logging.exception('exception')
-    print '*' * 30
+    print('*' * 30)
 
 show(logging.WARNING)
 show(logging.DEBUG)

@@ -8,31 +8,27 @@ class SingletonMetaClass(type):
         return cls.obj
 
 
-class Foo(object):
+class Foo(object, metaclass=SingletonMetaClass):
     #pass
-    __metaclass__ = SingletonMetaClass
-
     def __init__(self, a, b):
         self.a = a
         self.b = b
 
 g = Foo(1, 2)
 h = Foo(2, 3)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)
 
 
-class Bar(object):
-    __metaclass__ = SingletonMetaClass
-
+class Bar(object, metaclass=SingletonMetaClass):
     def __init__(self, a, b):
         self.a = a
         self.b = b
 
 g = Bar(10, 20)
 h = Bar(20, 30)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)
 
 
 def singleton_decorator(cls):
@@ -54,8 +50,8 @@ class Foo(object):
 
 g = Foo(1, 2)
 h = Foo(2, 3)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)
 
 
 @singleton_decorator
@@ -67,8 +63,8 @@ class Bar(object):
 
 g = Bar(10, 20)
 h = Bar(20, 30)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)
 
 
 class SingletonDecorator(object):
@@ -101,8 +97,8 @@ class Foo(object):
 
 g = Foo(1, 2)
 h = Foo(2, 3)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)
 
 
 @SingletonDecorator
@@ -114,5 +110,5 @@ class Bar(object):
 
 g = Bar(10, 20)
 h = Bar(20, 30)
-print g == h
-print h.a, h.b
+print(g == h)
+print(h.a, h.b)

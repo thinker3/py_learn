@@ -11,10 +11,10 @@ def test():
     }
     obj = Munch(**data)
     assert isinstance(obj, dict)
-    for k, v in obj.iteritems():
-        print k, v
-    print obj.keys()
-    print obj.values()
+    for k, v in obj.items():
+        print(k, v)
+    print(list(obj.keys()))
+    print(list(obj.values()))
     assert obj.a == 1
     obj.update(b=-2)
     data = dict(**obj)
@@ -34,7 +34,7 @@ def test_DictObject():  # noqa
     }
     obj = DictObject(data)
     assert obj.a == 1
-    print obj._data
+    print(obj._data)
     assert obj._data is obj
 
 

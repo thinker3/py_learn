@@ -24,5 +24,5 @@ for one in f:
     if one != '\n':
         n, s = one[:-1].split(',')
         n = int(n)
-        print get_strings(n, s)
+        print(get_strings(n, s))
 f.close()

@@ -29,8 +29,8 @@ while temp:
             if route[-1] == (n-1, n-1):
                 routes[i] = None
                 total += 1
-        routes = filter(None, routes)
+        routes = [_f for _f in routes if _f]
         ans.extend(routes)
     temp = ans 
 
-print total
+print(total)

@@ -65,7 +65,7 @@ class FrameWithHotKey(wx.Frame):
         time.sleep(0.5)  # at least 0.3
         self.send_ctrl_c()
         time.sleep(0.1)
-        print get_selected_text()
+        print(get_selected_text())
 
 app = wx.App()
 FrameWithHotKey(None)

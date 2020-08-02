@@ -31,7 +31,7 @@ def get_max_subsequence(a, b):
     a, b = order_by_len(*remove_non_relevant(a, b))
     if not a:
         return 0
-    for i in xrange(len(a), 0, -1):
+    for i in range(len(a), 0, -1):
         for one in itertools.combinations(a, i):
             if one[-1] == ' ':
                 continue
@@ -43,5 +43,5 @@ for one in f:
     one = one.strip()
     if one:
         s1, s2 = one.split(';')
-        print get_max_subsequence(s1, s2)
+        print(get_max_subsequence(s1, s2))
 f.close()

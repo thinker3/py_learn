@@ -9,13 +9,13 @@ def new_number(a):
 
 a = '983497829489328492'
 a = list(new_number(a))
-print a
-print ''.join(a)
+print(a)
+print(''.join(a))
 
 a = '98349782948932849229'
 a = list(new_number(a))
-print a
-print ''.join(a)
+print(a)
+print(''.join(a))
 
 a = '98349782948932849229'
-print ''.join(new_number(a))
+print(''.join(new_number(a)))

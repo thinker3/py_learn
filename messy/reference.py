@@ -28,7 +28,7 @@ class Line(object):
             t.x = 0
 
     def print_points(self):
-        print [str(p) for p in self.points]
+        print([str(p) for p in self.points])
 
 
 points = [(1, 2), (3, 4)]
@@ -42,4 +42,4 @@ line.print_points()
 line.change()
 line.print_points()  # not changed?
 
-print [p.point_property for p in temp]  # do changed
+print([p.point_property for p in temp])  # do changed

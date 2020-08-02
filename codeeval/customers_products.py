@@ -9,7 +9,7 @@ def prepare(one):
     return customers, products 
 
 def get_letters(name):
-    if cache.has_key(name+'_l'):
+    if name+'_l' in cache:
         return cache[name+'_l']
     num = 0
     for i in name:
@@ -19,7 +19,7 @@ def get_letters(name):
     return num
 
 def get_vowels(name):
-    if cache.has_key(name+'_v'):
+    if name+'_v' in cache:
         return cache[name+'_v']
     vowels = 'aeiouy'
     vowels += vowels.upper()
@@ -32,7 +32,7 @@ def get_vowels(name):
     
 
 def get_ss(product, customer):
-    if cache.has_key('%s_%s' % (product, customer)):
+    if '%s_%s' % (product, customer) in cache:
         return cache['%s_%s' % (product, customer)]
     if get_letters(product) % 2 == 0: # even
         ss = get_vowels(customer) * 1.5
@@ -46,7 +46,7 @@ def get_ss(product, customer):
 def has_common_factor(less, more):
     if less>more:
         less, more = more, less
-    if cache.has_key('%s_%s' % (less, more)):
+    if '%s_%s' % (less, more) in cache:
         return cache['%s_%s' % (less, more)]
     for i in range(2, less/2+1):
         if less%i == more%i == 0:
@@ -64,14 +64,14 @@ def get_max_ss(customers, products):
     max_ss = 0
     if len(customers) <= len(products):
         for one in itertools.permutations(products, len(customers)):
-            option = zip(one, customers) 
+            option = list(zip(one, customers)) 
             ss = 0
             for product, customer in option:
                 ss += get_ss(product, customer)
             max_ss = ss if ss > max_ss else max_ss
     else:
         for one in itertools.permutations(customers, len(products)):
-            option = zip(products, one) 
+            option = list(zip(products, one)) 
             ss = 0
             for product, customer in option:
                 ss += get_ss(product, customer)
@@ -85,10 +85,10 @@ for one in f:
         cache = {}
         customers, products = prepare(one)
         max_ss = get_max_ss(customers, products)
-        print '%.2f' % max_ss
+        print('%.2f' % max_ss)
 f.close()
 delta = (datetime.datetime.now() - now)
-print delta.total_seconds()
+print(delta.total_seconds())
 
 
 

@@ -8,12 +8,11 @@ class ClassPropertyMeta(type):
         return cls.x
 
 
-class Foo(object):
-    __metaclass__ = ClassPropertyMeta
+class Foo(object, metaclass=ClassPropertyMeta):
     x = 1
 
 
-print Foo.number
+print(Foo.number)
 # AttributeError: 'Foo' object has no attribute 'number'
 # print Foo().number
 
@@ -34,5 +33,5 @@ class Foo(object):
         return cls.x
 
 
-print Foo().number
-print Foo.number
+print(Foo().number)
+print(Foo.number)

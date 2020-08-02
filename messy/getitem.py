@@ -7,7 +7,7 @@ assert data.__getitem__('a') == data['a'] == 'alpha'
 try:
     object.__getitem__(data, 'b')
 except Exception as e:
-    print e
+    print(e)
 
 array = ['alpha', 'beta', 'gamma']
 assert array.__getitem__(0) == array[0] == 'alpha'

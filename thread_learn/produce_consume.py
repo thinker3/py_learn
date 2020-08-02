@@ -9,8 +9,8 @@ class producer(threading.Thread):
 		while 1:
 				time.sleep(10)
 				num += 10
-				print 10, 'made'
-				print num, 'total'
+				print(10, 'made')
+				print(num, 'total')
 
 class consumer(threading.Thread):
 	def run(self):
@@ -20,9 +20,9 @@ class consumer(threading.Thread):
 				sold = random.randint(1,5)
 				if num >= sold:
 						num -= sold
-						print sold, 'sold'
+						print(sold, 'sold')
 				time.sleep(3)
-				print num, 'left'
+				print(num, 'left')
 
 producer().start()
 time.sleep(1)

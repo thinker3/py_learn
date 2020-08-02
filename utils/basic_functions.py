@@ -4,7 +4,7 @@ import os
 import time
 import codecs
 import string
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import socket
 from datetime import (
     date,
@@ -31,19 +31,19 @@ def get_html(url, callback=None, headers=None):
     }
     if headers and isinstance(headers, dict):
         _headers.update(headers)
-    req = urllib2.Request(url, None, _headers)
+    req = urllib.request.Request(url, None, _headers)
     try:
-        html = urllib2.urlopen(req, timeout=8).read()
-    except urllib2.URLError:
+        html = urllib.request.urlopen(req, timeout=8).read()
+    except urllib.error.URLError:
         try:
-            html = urllib2.urlopen(url, timeout=8).read()
-        except urllib2.URLError:
+            html = urllib.request.urlopen(url, timeout=8).read()
+        except urllib.error.URLError:
             html = None
-            print url + ' error...'
+            print(url + ' error...')
             if callback:
                 callback()
     except socket.timeout:
-        print url + ' socket timeout...'
+        print(url + ' socket timeout...')
         time.sleep(5)
         html = None
     return html
@@ -127,7 +127,7 @@ def check_html_length(html, length_needed):
 
 
 def sleeping(seconds):
-    print 'sleeping %d seconds' % seconds
+    print('sleeping %d seconds' % seconds)
     time.sleep(seconds)
 
 
@@ -143,5 +143,5 @@ def date_diff(s):
 
 def wrap_by_len(text, length):
     while text:
-        print text[:length]
+        print(text[:length])
         text = text[length:]

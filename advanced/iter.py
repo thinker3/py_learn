@@ -21,6 +21,6 @@ class Iter(object):
         return 'Iter(%s)' % self.children
 
 
-it = Iter(range(1, 5))
-for one in it.add(*range(8, 12)):
-    print one
+it = Iter(list(range(1, 5)))
+for one in it.add(*list(range(8, 12))):
+    print(one)

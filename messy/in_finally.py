@@ -23,7 +23,7 @@ def test_not_return_in_finally(divisor):
     else:
         return 'else'
     finally:
-        print 'finally'
+        print('finally')
 
 
 assert test_return_in_finally(0) == 'finally'

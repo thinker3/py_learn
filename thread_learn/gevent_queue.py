@@ -10,7 +10,7 @@ tasks = Queue()
 def worker(name):
     while not tasks.empty():
         task = tasks.get()
-        print('Worker %s got task %s' % (name, task))
+        print(('Worker %s got task %s' % (name, task)))
         # SystemError: (libev) select: Unknown error
         #gevent.sleep(1)
         gevent.sleep(0)
@@ -19,8 +19,8 @@ def worker(name):
 
 
 def boss():
-    for i in xrange(1, 25):
-        print "Put in task %d" % i
+    for i in range(1, 25):
+        print("Put in task %d" % i)
         # SystemError: (libev) select: Unknown error
         #gevent.sleep(1)
         tasks.put_nowait(i)

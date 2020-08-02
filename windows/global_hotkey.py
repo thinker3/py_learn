@@ -54,7 +54,7 @@ def main():
 
     @GlobalHotKey.register('c', GlobalHotKey.MOD_ALT)
     def test():
-        print 'hello'
+        print('hello')
 
 
     GlobalHotKey.listen()

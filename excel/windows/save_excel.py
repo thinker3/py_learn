@@ -22,7 +22,7 @@ def copy_save_xls(data):
         workBook.SaveAs(destinationPath)
         workBook.Close(SaveChanges=0)
     except Exception as e:
-        print e
+        print(e)
 
 
 def save_xls():
@@ -37,6 +37,6 @@ def save_xls():
         workBook.SaveAs(destinationPath, FileFormat=56)  # 2003
         workBook.Close(SaveChanges=0)
     except Exception as e:
-        print e
+        print(e)
 
 save_xls()

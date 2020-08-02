@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import peewee
-import config
+from . import config
 from playhouse.pool import PooledMySQLDatabase
 
 mysqldb = PooledMySQLDatabase(
@@ -22,7 +22,7 @@ class Bar(peewee.Model):
 
 
 def init_models():
-    for cls in globals().values():
+    for cls in list(globals().values()):
         if type(cls) == peewee.BaseModel:
             try:
                 if hasattr(cls, 'create_table'):

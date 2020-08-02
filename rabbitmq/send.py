@@ -13,6 +13,6 @@ channel = connection.channel()
 for i in range(3):
     time.sleep(1)
     channel.basic_publish(exchange='', routing_key='hello', body=str(i))
-    print "Sending %s" % i
+    print("Sending %s" % i)
 
 connection.close()

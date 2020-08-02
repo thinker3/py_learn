@@ -18,15 +18,15 @@ obj.weight = 60
 _dict = {'name': 'chenkun', 'age': 27, 'height': 163, 'weight': 61.5}
 
 columns = [
-    ['name', u'姓名', 8],
-    ['age', u'年龄', 6],
-    ['height', u'身高', 6],
-    ['weight', u'体重', 6],
+    ['name', '姓名', 8],
+    ['age', '年龄', 6],
+    ['height', '身高', 6],
+    ['weight', '体重', 6],
 ]
 
 dicts = []
 objs = []
-for i in xrange(12):
+for i in range(12):
     objs.append(obj)
     dicts.append(_dict)
 
@@ -70,7 +70,7 @@ def write_xls_1d(sheet, columns=[], objs=[]):
         attrs.append(inner_list[0])
 
     l = len(sheet.rows)
-    for i in xrange(len(columns)):
+    for i in range(len(columns)):
         sheet.write(l, i, columns[i][1])
         sheet.col(i).width = columns[i][2] * 256
     for i, obj in enumerate(objs, start=l + 1):

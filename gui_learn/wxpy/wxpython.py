@@ -2,8 +2,8 @@
 # encoding: utf-8
 
 import wx
-print 'wx version: %s' % wx.version()
-print wx.PlatformInfo
+print('wx version: %s' % wx.version())
+print(wx.PlatformInfo)
 
 from time import sleep
 

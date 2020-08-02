@@ -18,22 +18,22 @@ def make_container():
 
 
 def main():
-    print gc.garbage
+    print(gc.garbage)
     collected = gc.collect()
-    print "Garbage collector: collected %d objects." % (collected)
+    print("Garbage collector: collected %d objects." % (collected))
     make_container()
-    print gc.garbage
+    print(gc.garbage)
     collected = gc.collect()
-    print "Garbage collector: collected %d objects." % (collected)
-    print "Creating cycles..."
+    print("Garbage collector: collected %d objects." % (collected))
+    print("Creating cycles...")
     for i in range(10):
         make_cycle()
-    print gc.garbage
+    print(gc.garbage)
     collected = gc.collect()
-    print "Garbage collector: collected %d objects." % (collected)
-    print gc.garbage
+    print("Garbage collector: collected %d objects." % (collected))
+    print(gc.garbage)
     collected = gc.collect()
-    print "Garbage collector: collected %d objects." % (collected)
+    print("Garbage collector: collected %d objects." % (collected))
 
 
 if __name__ == "__main__":

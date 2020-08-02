@@ -3,7 +3,7 @@
 
 import json
 import string
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import shortuuid
 from datetime import (
     datetime,
@@ -45,7 +45,7 @@ class DictObject(object):
 
 def dict2query(params):
     query = []
-    for k, v in params.iteritems():
+    for k, v in params.items():
         if type(v) in ['list', 'tuple', 'set']:
             for i in v:
                 temp = '%s=%s' % (k, i)
@@ -58,10 +58,10 @@ def dict2query(params):
 
 
 def get_url(base_url, params=None):
-    base_url = urllib.quote(base_url.encode('utf-8'), safe=':/')
+    base_url = urllib.parse.quote(base_url.encode('utf-8'), safe=':/')
     if not params:
         return base_url
-    query_string = urllib.urlencode(params, doseq=True)
+    query_string = urllib.parse.urlencode(params, doseq=True)
     url = '%s?%s' % (base_url, query_string)
     return url
 
@@ -77,26 +77,26 @@ class Dict(dict):
 
 def test_DictObject():  # noqa
     do = DictObject(a=1, b=2)
-    print do
+    print(do)
     do.update(c=3)
-    print do
+    print(do)
     dao = DictObject(**do._data)
-    print dao
+    print(dao)
 
 
 def test_Dict():  # noqa
     do = Dict(a=1, b=2)
-    print do
+    print(do)
     temp = {'a': 1, 'b': 2}
     do = Dict(temp)
-    print do
+    print(do)
     do = Dict(**do)
-    print do
+    print(do)
     do = Dict()
     do.a = 1
-    print do.a
+    print(do.a)
     do.update(b=2)
-    print do.b
+    print(do.b)
 
 
 def format_time(t, fmt=defines.COMMON_TIME_FMT):
@@ -131,7 +131,7 @@ def get_uuid(length=10, letters_only=False):
 
 
 def convert_to_string(value):
-    if isinstance(value, unicode):
+    if isinstance(value, str):
         return value.encode('utf-8')
     if isinstance(value, (list, tuple, dict)):
         return json.dumps(value, ensure_ascii=False)

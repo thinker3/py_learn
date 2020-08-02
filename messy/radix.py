@@ -17,7 +17,7 @@ def invert(i):
         '0': '1',
         '1': '0',
     }
-    s = map(lambda v: d[v], bin(i)[2:])
+    s = [d[v] for v in bin(i)[2:]]
     s = '0b' + ''.join(s)
     i = convert_binary_string_to_decimal_int(s)
     return s, i
@@ -29,20 +29,20 @@ quick_edit = 0x40
 
 # ~: complement, invert, inverse, inversion, bitwise not
 # ^: bitwise xor, exclusive or
-print mode_with_quick_edit & (~quick_edit)
-print mode_without_quick_edit | quick_edit
-print quick_edit  # 64
-print ~quick_edit  # -65, ~n = -n - 1
-print bin(~64)
-print bin(64)
+print(mode_with_quick_edit & (~quick_edit))
+print(mode_without_quick_edit | quick_edit)
+print(quick_edit)  # 64
+print(~quick_edit)  # -65, ~n = -n - 1
+print(bin(~64))
+print(bin(64))
 s, i = invert(quick_edit)
-print s, i
-print mode_with_quick_edit & (~64)
-print mode_without_quick_edit | 64
-print mode_with_quick_edit & i  # so, does not work
-print mode_with_quick_edit & (-65)
+print(s, i)
+print(mode_with_quick_edit & (~64))
+print(mode_without_quick_edit | 64)
+print(mode_with_quick_edit & i)  # so, does not work
+print(mode_with_quick_edit & (-65))
 
 v = hex(mode_with_quick_edit)
-print type(v), v
+print(type(v), v)
 v = convert_hex_string_to_decimal_int(v)
-print type(v), v
+print(type(v), v)

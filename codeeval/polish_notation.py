@@ -23,5 +23,5 @@ f = open(argv[1], 'r')
 for one in f:
     one = one.strip()
     if one:
-        print evaluate(one.split())
+        print(evaluate(one.split()))
 f.close()

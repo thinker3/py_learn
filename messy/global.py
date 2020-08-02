@@ -2,13 +2,13 @@ num = 100
 
 
 def func():
-    print num  # global 'num' used
+    print(num)  # global 'num' used
 func()
 
 
 def foo():
     num = 1  # local 'num' defined
-    print num
+    print(num)
 foo()
 
 
@@ -26,12 +26,12 @@ total = 0
 
 def add(n):
     global total
-    for i in xrange(n):
+    for i in range(n):
         total += (i + 1)  # global 'total' changed
-    print total
+    print(total)
 add(100)
-print '-' * 20
-print num
+print('-' * 20)
+print(num)
 
 
 '''
@@ -44,10 +44,10 @@ def outer(num):
     def inner():
         global num
         num = 2  # global 'num' changed
-        print num, 'inner'
+        print(num, 'inner')
     # swap the following two lines
-    print num, 'outer'  # local 'num' used
+    print(num, 'outer')  # local 'num' used
     inner()
 
 outer(1)
-print num + 1
+print(num + 1)

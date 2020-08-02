@@ -4,12 +4,12 @@ import re
 
 
 def prepare(one):
-    weight_limit, packages = map(str.strip, one.split(':'))
+    weight_limit, packages = list(map(str.strip, one.split(':')))
     weight_limit = float(weight_limit)
     if weight_limit > 100:
         weight_limit = 100
     packages = re.findall(r'\((.+?)\)', packages.replace('$', ''))
-    packages = map(lambda x: x.split(','), packages)
+    packages = [x.split(',') for x in packages]
 
     def my_filter(t):
         t = t[0], float(t[1]), float(t[2])
@@ -17,7 +17,7 @@ def prepare(one):
             return None
         return t
 
-    packages = filter(None, map(my_filter, packages))
+    packages = [_f for _f in map(my_filter, packages) if _f]
     return weight_limit, packages
 
 
@@ -26,7 +26,7 @@ def choose(weight_limit, packages):
         return '-'
     temp = None
     n = len(packages)
-    for i in xrange(n, 0, -1):
+    for i in range(n, 0, -1):
         for one in itertools.combinations(packages, i):
             total_weight = sum([x[1] for x in one])
             if total_weight > weight_limit:
@@ -42,5 +42,5 @@ for one in f:
     one = one.strip()
     if one:
         weight_limit, packages = prepare(one)
-        print choose(weight_limit, packages)
+        print(choose(weight_limit, packages))
 f.close()

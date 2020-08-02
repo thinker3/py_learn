@@ -11,6 +11,6 @@ cur.execute('''insert into days values('%s')''' % day)
 conn.commit()
 cur.execute('''select day from days''')
 day = cur.fetchone()
-print day
+print(day)
 conn.close()
 

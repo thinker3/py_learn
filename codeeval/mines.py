@@ -19,8 +19,8 @@ f = open(argv[1], 'r')
 for one in f:
     if one != '\n':
         mn, s = one.split(';')
-        m, n = map(int, mn.split(','))
-        print ''.join(get_mines(m, n, s))
+        m, n = list(map(int, mn.split(',')))
+        print(''.join(get_mines(m, n, s)))
 f.close()
 
 

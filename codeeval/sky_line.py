@@ -165,14 +165,14 @@ class SkyLine(object):
             previous = building
         building = building or previous
         sky_line += [building.right, 0]
-        sky_line = map(str, sky_line)
+        sky_line = list(map(str, sky_line))
         return ' '.join(sky_line)
 
 
 def to_buildings(one):
     buildings = []
     for building in one:
-        line = map(int, re.findall(r'\d+', building))
+        line = list(map(int, re.findall(r'\d+', building)))
         building = Building(*line)
         buildings.append(building)
     return buildings
@@ -195,5 +195,5 @@ for one in f:
         #if one.startswith('#'):
         #    continue
         buildings = to_buildings(one.split(';'))
-        print to_sky_line(buildings)
+        print(to_sky_line(buildings))
 f.close()

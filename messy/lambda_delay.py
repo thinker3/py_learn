@@ -8,15 +8,15 @@ d = {
     'now': datetime.datetime.now(),
 }
 
-print d['now']
+print(d['now'])
 time.sleep(0.5)
-print d['now']
+print(d['now'])
 
 
 d = {
     'now': lambda: datetime.datetime.now(),
 }
 
-print d['now']()
+print(d['now']())
 time.sleep(0.5)
-print d['now']()
+print(d['now']())

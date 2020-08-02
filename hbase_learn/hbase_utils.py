@@ -3,7 +3,7 @@
 
 import happybase
 
-import config
+from . import config
 
 host = config.host
 port = 9090  # default
@@ -31,7 +31,7 @@ def get_count(table):
 
 def row_to_dicts(row):
     dicts = {}
-    for k, v in row.iteritems():
+    for k, v in row.items():
         k1, k2 = k.split(':')
         dicts.setdefault(k1, {}).update({k2: v})
     return dicts

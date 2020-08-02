@@ -50,7 +50,7 @@ if __name__ == "__main__":
     code = get_source_code(br()._factory.forms)
     non_methods = get_non_methods(br)
     for one in non_methods:
-        print one
+        print(one)
     code = get_source_code(br.click)
     code = get_source_code(mechanize.HTMLForm.click)
     #print code

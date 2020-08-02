@@ -25,8 +25,8 @@ def do_something_with_timeout(timeout, callback, **kwargs):
     return 'time out'
 
 def main():
-    print 'hello'
-    print do_something_with_timeout(3, do_something_else, time=2)
-    print 'world'
+    print('hello')
+    print(do_something_with_timeout(3, do_something_else, time=2))
+    print('world')
 
 main()

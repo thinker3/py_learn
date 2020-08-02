@@ -200,34 +200,34 @@ def main(db_name):
     """
     """
     obj = ChangeDB(db_name)
-    print 1
+    print(1)
     obj.allocate()
-    print 2
+    print(2)
     obj.goods_return()
-    print 3
+    print(3)
     obj.approvee()
-    print 4
+    print(4)
     obj.sale_refund()
-    print 5
+    print(5)
     obj.crm_partner()
-    print 6
+    print(6)
     obj.custom_quote()
-    print 7
+    print(7)
     obj.close()
-    print '%s done' % db_name
+    print('%s done' % db_name)
 
 def test_is_column_exists():
     obj = ChangeDB('jiayou3')
-    print obj.is_column_exists('auth_user', 'username')
-    print obj.is_column_exists('auth_user', 'email')
-    print obj.is_column_exists('auth_user', 'name')
+    print(obj.is_column_exists('auth_user', 'username'))
+    print(obj.is_column_exists('auth_user', 'email'))
+    print(obj.is_column_exists('auth_user', 'name'))
     obj.close()
 
 def test_is_table_exists():
     obj = ChangeDB('jiayou3')
-    print obj.is_table_exists('auth_user')
-    print obj.is_table_exists('auth_abc')
-    print obj.is_table_exists('approvals_shiporderpayment')
+    print(obj.is_table_exists('auth_user'))
+    print(obj.is_table_exists('auth_abc'))
+    print(obj.is_table_exists('approvals_shiporderpayment'))
     obj.close()
 
 if __name__=='__main__':

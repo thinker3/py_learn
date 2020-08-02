@@ -10,12 +10,12 @@ def int_to_binary_string(i):
 
 
 def convert(ip):
-    ip = map(int, ip.split('.'))
-    ip = map(int_to_binary_string, ip)
+    ip = list(map(int, ip.split('.')))
+    ip = list(map(int_to_binary_string, ip))
     ip = ''.join(ip)
-    print ip
+    print(ip)
     ip = int(ip, 2)  # binary string to int
-    print 'http://%s/' % ip
+    print('http://%s/' % ip)
 
 
 def main():

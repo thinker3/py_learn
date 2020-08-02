@@ -4,7 +4,7 @@ f = open(argv[1], 'r')
 matrix = []
 for one in f:
     if one != '\n':
-        matrix.append(map(int, one.split(' ')))
+        matrix.append(list(map(int, one.split(' '))))
 f.close()
 
 n = len(matrix)
@@ -16,7 +16,7 @@ def get_all_max():
             one_max = get_one_max(i,j)
             if ans is None or one_max > ans:
                 ans = one_max
-    print ans
+    print(ans)
 
 def sub_sum(a,b, c,d):
     total = 0

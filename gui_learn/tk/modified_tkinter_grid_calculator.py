@@ -1,6 +1,6 @@
-from Tkinter import Tk, W, E
-from ttk import Frame, Button, Label, Style
-from ttk import Entry
+from tkinter import Tk, W, E
+from tkinter.ttk import Frame, Button, Label, Style
+from tkinter.ttk import Entry
 
 
 class Example(Frame):
@@ -43,7 +43,7 @@ class Example(Frame):
 
         entry = Entry(self)
         entry.grid(row=0, columnspan=4, sticky=W+E)
-        for k, v in matrix.items():
+        for k, v in list(matrix.items()):
             v.append(Button(self, text=k))
             v[2].grid(row=v[0], column=v[1])
         self.matrix = matrix

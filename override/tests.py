@@ -2,10 +2,11 @@
 # encoding: utf-8
 
 import overridee
+import importlib
 
 
 def line():
-    print '*' * 50
+    print('*' * 50)
 
 
 def test0():
@@ -24,8 +25,8 @@ def test1():
     line()
     from overrider import aclass
     aclass.show(1, 2, 3)
-    reload(overridee)  # has no effects
-    print 'overridee reloaded'
+    importlib.reload(overridee)  # has no effects
+    print('overridee reloaded')
     aclass.show(1, 2, 3)
     from overridee import aclass
     aclass.show(1, 2, 3)
@@ -36,10 +37,10 @@ def test2():
     from overridee import aclass
     aclass.show(1, 2, 3)
     from overrider import before
-    print before
+    print(before)
     aclass.show(1, 2, 3)
     from overrider import after  # has no effects
-    print after
+    print(after)
     aclass.show(1, 2, 3)
 
 test0()

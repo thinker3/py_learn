@@ -1,15 +1,15 @@
 i = 0
 while True:
     if i > 10:
-        print i
+        print(i)
         break
     else:
         i += 1
 
-print
+print()
 i = 0
 while i > 10:
-    print i
+    print(i)
 else:
     i += 1
-print i
+print(i)

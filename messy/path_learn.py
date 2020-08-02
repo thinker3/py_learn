@@ -9,19 +9,19 @@ from path import Path as pathpy  # noqa
 
 def path_file_operations():
     testdir = pathpy('~/testdir').expanduser()
-    print type(testdir)
+    print(type(testdir))
 
     assert isinstance(testdir, pathpy)
     testdir = testdir.normpath()
-    print type(testdir)
+    print(type(testdir))
 
     abspath = testdir.abspath()
     basename = testdir.basename()
-    print type(abspath)
-    print type(basename)
+    print(type(abspath))
+    print(type(basename))
 
-    print testdir[2:]
-    print 'test' in basename
+    print(testdir[2:])
+    print('test' in basename)
 
     if not testdir.exists():
         testdir.makedirs()
@@ -46,17 +46,17 @@ def path_file_operations():
     if not testfile.exists():
         testfile.touch()
         r = pathpy.copy(testfile, testdir)
-        print 'New path is %s' % r  # None
+        print('New path is %s' % r)  # None
         #testfile.rename('abcd')  # move to the working folder and renamed
 
         # TypeError: descriptor 'join' requires a 'unicode' object but received a 'list'
         #new_name = pathpy.join([testfile.dirname(), 'abcd'])
 
         new_name = pathpy.join(testfile.dirname(), 'abcd')  # problematic
-        print new_name  # a/Users/kenb/Users/kenc/Users/kend
+        print(new_name)  # a/Users/kenb/Users/kenc/Users/kend
 
         new_name = os.path.join(testfile.dirname(), 'abcd')
-        print new_name
+        print(new_name)
         testfile.rename(new_name)  # no error even the file exists
 
     testfile.remove_p()
@@ -89,7 +89,7 @@ def path_dir_operations():
     inner.move(outer)
     for d in outer.dirs():
         assert isinstance(d, pathpy)
-        print d.dirname(), d.basename(), d
+        print(d.dirname(), d.basename(), d)
         #d.copy(copydir)  # IOError: [Errno 21] Is a directory
         dst = os.path.join(copydir, d.basename())
         d.copytree(dst)  # The destination directory must not already exist

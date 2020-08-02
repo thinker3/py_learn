@@ -44,7 +44,7 @@ def get_min():
         total = get_num_list(one, False)
         if ans is None or ans > total:
             ans = total 
-    print ans + matrix[n-1][n-1]
+    print(ans + matrix[n-1][n-1])
 
 f = open(argv[1], 'r')
 n = i = 0 
@@ -54,12 +54,12 @@ for one in f:
         if i == 0:
             n = i = int(one)
         elif i == 1:
-            matrix.append(map(int, one.split(',')))
+            matrix.append(list(map(int, one.split(','))))
             get_min()
             i = 0
             matrix = []
         else:
-            matrix.append(map(int, one.split(',')))
+            matrix.append(list(map(int, one.split(','))))
             i -= 1
 f.close()
 

@@ -14,4 +14,4 @@ while message:
         char = caps[int(one)]
         i = keyed_alphabet.index(char)
         ans.append(caps[i])
-print ''.join(ans)
+print(''.join(ans))

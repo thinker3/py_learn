@@ -26,7 +26,7 @@ def we_are_friends(a, b):
     len_b = len(b)
     if len_a == len_b:
         diff = 0
-        for i in xrange(len_a):
+        for i in range(len_a):
             if a[i] != b[i]:
                 diff += 1
         if diff == 1:
@@ -45,7 +45,7 @@ def we_are_friends(a, b):
         m = len_b
         more = b
         less = a
-    for i in xrange(m):
+    for i in range(m):
         temp = more[:i] + more[i+1:]
         if less == temp:
             return True
@@ -76,7 +76,7 @@ def find_all_friends(new_friends):
 for one in cases:
     old_friends = [one]
     new_friends = find_friends(one)
-    print find_all_friends(new_friends)
+    print(find_all_friends(new_friends))
 
 
 

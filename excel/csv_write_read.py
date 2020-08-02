@@ -31,14 +31,14 @@ def test():
                 delimiter='\t', encoding='utf-8',
                 quotechar='"', quoting=csv.QUOTE_ALL)
         for row in reader:
-            print row
+            print(row)
 
 
 def test_gbk():
     with open('excel/gbk.csv', 'rb') as f:
         reader = csv.reader(f, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
         for row in reader:
-            print row
+            print(row)
 
 
 if __name__ == '__main__':

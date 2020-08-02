@@ -11,7 +11,7 @@ def factorial(n):
 def arrange(n):
     aSet = set()
     while len(aSet) < factorial(n):
-        l = range(n)
+        l = list(range(n))
         temp = []
         for i in range(n):
             index = random.randint(0, len(l) - 1)
@@ -30,8 +30,8 @@ def arrangestr(s):
         temp = []
         for j in range(n):
             temp.append(list_s[T[j]])
-        print "".join(temp)
-    print len(set_n)
+        print("".join(temp))
+    print(len(set_n))
 
 
 arrangestr('abcdefg')

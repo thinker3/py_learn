@@ -6,4 +6,4 @@ from blinker_test import custom_signal
 
 @custom_signal.connect
 def callback(sender, **kwargs):
-    print sender
+    print(sender)

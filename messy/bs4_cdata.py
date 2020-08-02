@@ -12,7 +12,7 @@ xml = \
 '''
 builder=LXMLTreeBuilderForXML()
 soup = BeautifulSoup(xml, "xml") 
-print(soup.new_string)
+print((soup.new_string))
 soup.foo.bar.string = CData(soup.foo.bar.string)
 soup = soup.prettify(formatter="xml")
 print(soup)

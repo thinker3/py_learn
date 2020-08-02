@@ -10,7 +10,7 @@ def init_conn(db=None, what='mysql'):
             conn = lite.connect(db)
             return conn
         else:
-            print 'db is None'
+            print('db is None')
             return None
     HOST = '192.168.0.6'
     DB = 'chenkun_digikey' if db is None else db
@@ -39,7 +39,7 @@ def close_cur_conn(cur, conn):
         if conn:
             conn.close()
     except:
-        print 'close cur, conn error'
+        print('close cur, conn error')
 
 
 
@@ -60,7 +60,7 @@ def test(db=None,table=None,id=1):
     cur, conn = get_cur_conn(db)
     cur.execute(sql)
     r = cur.fetchone()
-    print r
+    print(r)
     close_cur_conn(cur, conn)
 
 if __name__ == '__main__':

@@ -9,7 +9,7 @@ def done(one):
         row_num, col_num = col_num, row_num
     row_num = remove_rows_if_possible(row_num, col_num)
     max_ss = 0
-    for one in itertools.permutations(range(row_num), col_num):
+    for one in itertools.permutations(list(range(row_num)), col_num):
         total = 0
         for i in range(col_num):
             total += matrix[one[i]][i]
@@ -20,8 +20,8 @@ def done(one):
 
 def transpose(row_num, col_num):
     temp = []
-    for i in xrange(col_num):
-        row = tuple(map(lambda j: matrix[j][i], range(row_num)))
+    for i in range(col_num):
+        row = tuple([matrix[j][i] for j in range(row_num)])
         temp.append(row)
     global matrix
     matrix = temp
@@ -44,7 +44,7 @@ def remove_rows_if_possible(row_num, col_num):
 def fill_matrix(one):
     customers, products = one.split(';')
     customers = customers.split(',')
-    products = map(get_letters, products.split(','))
+    products = list(map(get_letters, products.split(',')))
     row_num = len(customers)
     col_num = len(products)
     for customer in customers:
@@ -103,5 +103,5 @@ for one in f:
     if one.strip():
         matrix = []
         max_ss = done(one)
-        print '%.2f' % max_ss
+        print('%.2f' % max_ss)
 f.close()

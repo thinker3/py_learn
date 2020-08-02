@@ -11,14 +11,14 @@ def right():
 
     key = 'python'
     ciphertext = encrypt(key, plaintext)
-    print ciphertext
+    print(ciphertext)
 
     key = 'password'
     ciphertext = encrypt(key, plaintext)
-    print ciphertext
+    print(ciphertext)
 
     plaintext = decrypt(key, ciphertext)
-    print plaintext
+    print(plaintext)
 
 
 def wrong():
@@ -26,21 +26,21 @@ def wrong():
 
     key = 'password'
     ciphertext = encrypt(key, plaintext)
-    print ciphertext
+    print(ciphertext)
 
     key = 'python'
     plaintext = decrypt(key, ciphertext)
-    print plaintext
+    print(plaintext)
 
 
 def size(n):
     plaintext = 'a' * n
     key = 'python'
     ciphertext = encrypt(key, plaintext)
-    print n, len(ciphertext)
+    print(n, len(ciphertext))
     plaintext = decrypt(key, ciphertext)
     #print ciphertext
-    print '[%s]' % plaintext
+    print('[%s]' % plaintext)
 
 
 def test_size():

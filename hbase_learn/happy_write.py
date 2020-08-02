@@ -60,12 +60,12 @@ def test_put_batch(table):
 
 def test_delete_row(table):
     row = table.row('3')
-    print row
+    print(row)
     with table.batch() as bat:
         bat.delete('1')
         bat.delete('2')
     rows = list(table.scan())
-    print len(rows)
+    print(len(rows))
 
 
 if __name__ == '__main__':

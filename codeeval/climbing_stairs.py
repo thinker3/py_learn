@@ -9,5 +9,5 @@ def how_many_steps(n):
 f = open(argv[1], 'r')
 for one in f:
     if one != '\n':
-        print how_many_steps(int(one))
+        print(how_many_steps(int(one)))
 f.close()

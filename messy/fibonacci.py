@@ -9,9 +9,9 @@ def fibonacci_generator(n):
         yield b
 
 t = fibonacci_generator(9)
-print type(t)
+print(type(t))
 for one in t:
-    print one
+    print(one)
 
 
 def fibonacci_list(n):
@@ -26,11 +26,11 @@ def fibonacci_list(n):
         temp.append(b)
     return temp
 
-print
+print()
 t = fibonacci_list(9)
-print type(t)
+print(type(t))
 for one in t:
-    print one
+    print(one)
 
 
 def fibonacci(n):
@@ -41,7 +41,7 @@ def fibonacci(n):
         i += 1
     return temp
 
-print
+print()
 t = fibonacci(9)
 for one in t:
-    print one
+    print(one)

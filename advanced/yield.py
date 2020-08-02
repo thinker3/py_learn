@@ -3,23 +3,23 @@
 
 
 def grep(pattern):
-    print "looking for %s" % pattern
+    print("looking for %s" % pattern)
     while True:
         line = yield
         if pattern in line:
-            print line
+            print(line)
 
 g = grep("python")
 # g.next()
 g.send(None)
 g.send("Yeah, but no, but yeah, but no.")
 g.send("python generators rock!")
-print '*' * 30
+print('*' * 30)
 
 
 def test():
     while True:
-        print 'here'
+        print('here')
         yield
 
 c = test()

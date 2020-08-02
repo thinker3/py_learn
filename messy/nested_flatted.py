@@ -8,14 +8,14 @@ def flatten(nested):
 		else:yield sub
 
 for i in flatten(a):
-	print i
+	print(i)
 
-print
+print()
 
 def myprint(nested):
 	for sub in nested:
 		if not isinstance(sub,list):
-			print sub
+			print(sub)
 		else: myprint(sub)
 
 myprint(a)

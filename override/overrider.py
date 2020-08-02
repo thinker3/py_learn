@@ -9,7 +9,7 @@ _aclass_show = aclass.show
 
 def aclass_show(a, b=0, c=None):
     if b > 0:
-        print a, b
+        print(a, b)
     else:
         _aclass_show(a, b, c)
 aclass.show = aclass_show

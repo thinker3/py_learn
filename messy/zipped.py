@@ -2,21 +2,21 @@
 # encoding: utf-8
 
 
-a = xrange(2)
-b = xrange(5)
-print zip(a, b)
-zip()
+a = range(2)
+b = range(5)
+print(list(zip(a, b)))
+list(zip())
 
 
 import itertools
 
-x = itertools.izip_longest(a, b)
-print list(x)
+x = itertools.zip_longest(a, b)
+print(list(x))
 
 
-x = itertools.izip_longest(a, b, '')
-print list(x)
+x = itertools.zip_longest(a, b, '')
+print(list(x))
 
 
-x = itertools.izip_longest(a, b, fillvalue='')
-print list(x)
+x = itertools.zip_longest(a, b, fillvalue='')
+print(list(x))

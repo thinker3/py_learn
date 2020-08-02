@@ -1,9 +1,9 @@
-from Tkinter import Tk, W, E
+from tkinter import Tk, W, E
 #import ttk
-from ttk import Frame
-from ttk import Button
-from ttk import Style
-from ttk import Entry
+from tkinter.ttk import Frame
+from tkinter.ttk import Button
+from tkinter.ttk import Style
+from tkinter.ttk import Entry
 
 
 class Example(Frame):

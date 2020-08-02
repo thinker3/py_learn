@@ -20,10 +20,10 @@ for i, row in enumerate(y):
 
 
 equ = []
-for i in xrange(4):
+for i in range(4):
     temp1 = []
     temp2 = []
-    for j in xrange(4):
+    for j in range(4):
         temp1.append(x[i][j])
         temp2.append(x[j][i])
     temp2.append(B[i])
@@ -35,7 +35,7 @@ for one in equ:
     equtions.append(s)
 
 for one in equtions:
-    print one
+    print(one)
 
 def solve(eq, var='x'):
     c = eval(eq.replace("=", "-(") + ")", {var: 1j})
@@ -50,7 +50,7 @@ equ_bak = deepcopy(equtions)
 ans = {}
 while(len(equtions) != 0):
     for i, one in enumerate(equtions):
-        for k, v in ans.items():
+        for k, v in list(ans.items()):
             one = one.replace(k, str(v))
         try:
             var = re.search(r'x\d\d', one).group()
@@ -61,8 +61,8 @@ while(len(equtions) != 0):
             equtions.pop(i)
         except:
             pass
-    print equtions
-    print ans
+    print(equtions)
+    print(ans)
     sleep(1)
 
 
@@ -95,8 +95,8 @@ for one in equ_bak:
 import numpy as np
 A = np.array(effs)
 x = np.linalg.lstsq(A,B)
-print vars
-print x[0]
+print(vars)
+print(x[0])
 
 
 
