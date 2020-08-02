@@ -2,14 +2,26 @@
 # -*- coding: utf-8 -*-
 
 import json
+import uuid
 import string
+from struct import (
+    pack,
+    unpack,
+)
 import urllib.request, urllib.parse, urllib.error
 import shortuuid
 from datetime import (
     datetime,
 )
-
+import collections
 from utils import defines
+
+
+class JustObject(object): pass
+
+
+def get_an_obj():
+    return JustObject()
 
 
 class DictObject(object):
@@ -67,7 +79,6 @@ def get_url(base_url, params=None):
 
 
 class Dict(dict):
-
     def __setattr__(self, name, value):
         self[name] = value
 
@@ -97,6 +108,23 @@ def test_Dict():  # noqa
     print(do.a)
     do.update(b=2)
     print(do.b)
+
+
+def deep_update(source, override):
+    for key, override_value in override.items():
+        source_value = source.get(key)
+        if all([
+            isinstance(source_value, collections.Mapping),
+            isinstance(override_value, collections.Mapping),
+        ]):
+            deep_update(source_value, override_value)
+        else:
+            source[key] = override[key]
+    return source
+
+
+def get_uuid4():
+    return str(uuid.uuid4())
 
 
 def format_time(t, fmt=defines.COMMON_TIME_FMT):
@@ -138,7 +166,61 @@ def convert_to_string(value):
     return str(value)
 
 
+def pack_json_objects_to_length_limited_stream(data, encoding='utf-8'):
+    data = [json.dumps(one, ensure_ascii=False).encode(encoding) for one in data]
+    data = [(len(one), one) for one in data]
+    data = [pack(">I", length) + bstr for (length, bstr) in data]
+    data = b''.join(data)
+    return data
+
+
+def unpack_length_limited_stream_to_json_objects(data, encoding='utf-8'):
+    objs = []
+    while data:
+        length, data = data[:4], data[4:]
+        length = unpack('>I', length)[0]
+        jd, data = data[:length], data[length:]
+        jd = jd.decode(encoding)
+        obj = json.loads(jd)
+        objs.append(obj)
+    return objs
+
+
+def pack_json_object_to_length_comma_limited_stream(obj, encoding='utf-8'):
+    byte_data = json.dumps(obj, ensure_ascii=False).encode(encoding)
+    length = str(len(byte_data)).encode()
+    stream = length + b',' + byte_data
+    return stream
+
+
+def pack_json_objects_to_length_comma_limited_stream(data, encoding='utf-8'):
+    data = [json.dumps(one, ensure_ascii=False).encode(encoding) for one in data]
+    data = [(len(one), one) for one in data]
+    data = [str(length).encode() + b',' + bstr for (length, bstr) in data]
+    data = b''.join(data)
+    return data
+
+
+def unpack_length_comma_limited_stream_to_json_objects(data, encoding='utf-8'):
+    objs = []
+    while data:
+        index = data.find(b',')
+        if index > 0:
+            length, data = data[:index], data[index + 1:]
+            length = int(length.decode())
+            jd, data = data[:length], data[length:]
+            if len(jd) == length:
+                jd = jd.decode(encoding)
+                obj = json.loads(jd)
+                objs.append(obj)
+            else:
+                data = str(length).encode() + b',' + jd
+                break
+        else:
+            break
+    return objs, data
+
+
 if __name__ == '__main__':
-    # test_DictObject()
-    # test_Dict()
+    __import__('ipdb').set_trace()
     pass
