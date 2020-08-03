@@ -3,6 +3,7 @@
 
 from time import sleep
 from datetime import date, timedelta, datetime
+from dateutil.relativedelta import relativedelta  # pip install python-dateutil
 
 from utils.decorators import isolate
 from utils.functions import divide
@@ -74,4 +75,13 @@ def compare_test():
     print('now - before > delta is %s' % (now - before > delta))
     print('before < now - delta is %s' % (before < now - delta))
 
-compare_test()
+
+def add_months(the_day, months):
+    return the_day + relativedelta(months=months)
+
+
+if __name__ == '__main__':
+    compare_test()
+    the_day = date(2019, 8, 31)
+    assert add_months(the_day, 1) == date(2019, 9, 30)
+    assert add_months(the_day, 2) == date(2019, 10, 31)

@@ -26,3 +26,8 @@ print(random.random())
 random.seed(0)
 print(random.random())
 print(random.random())
+
+a = list(range(10))
+print(a)
+random.shuffle(a)
+print(a)
