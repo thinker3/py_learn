@@ -25,6 +25,15 @@ logging.Logger.addHandler = addHandler
 logging.Handler.handle = handle
 
 
+class MyFilter(logging.Filter):
+    def __init__(self, projectid=0):
+        self.projectid = projectid
+
+    def filter(self, record):
+        record.projectid = self.projectid
+        return True
+
+
 def get_logger(name, propagate=False):
     logger = logging.getLogger(name)
     logger.setLevel(logging.DEBUG)
@@ -38,5 +47,6 @@ def get_logger(name, propagate=False):
         )
         handler.setLevel(logging.DEBUG)
         handler.setFormatter(formatter)
+        handler.addFilter(MyFilter())
         logger.addHandler(handler)
     return logger

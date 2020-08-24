@@ -4,55 +4,36 @@
 import logging
 
 
-def get_logger(time_stamp):
+def get_logger(timestamp):
     # the root logger is created with level WARNING
-    if time_stamp:
+    if timestamp:
         # https://docs.python.org/2/library/logging.html#logging.basicConfig
         # This function does nothing if the root logger already has handlers configured for it
         logging.basicConfig(format='[%(asctime)s] %(levelname)s: %(message)s', level=logging.DEBUG)
     else:
-        logging.basicConfig(format='%(message)s', level=logging.DEBUG)
+        logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.DEBUG)
     return logging
 
 # TypeError: info() takes at least 1 argument
-#get_logger(time_stamp=True).info('hello')
-#get_logger(time_stamp=False).info('')
+#get_logger(timestamp=True).info('hello')
+#get_logger(timestamp=False).info('')
 
 
-def get_logger(time_stamp):
-    if time_stamp:
-        logger = logging.getLogger('time_stamp')
+def get_logger(timestamp):
+    if timestamp:
+        logger = logging.getLogger('with-timestamp')
         formatter = logging.Formatter('[%(asctime)s] %(levelname)s: %(message)s')
     else:
-        logger = logging.getLogger('empty_line')
-        formatter = logging.Formatter('%(message)s')
-    '''
-    # or use singleton handlers
-    if logger.handlers:
-        return logger
-    '''
-    handler = logging.StreamHandler()
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+        logger = logging.getLogger('without-timestamp')
+        formatter = logging.Formatter('%(levelname)s: %(message)s')
     logger.setLevel(logging.DEBUG)
+    if not logger.handlers:
+        handler = logging.StreamHandler()
+        handler.setFormatter(formatter)
+        logger.addHandler(handler)
     return logger
 
-get_logger(time_stamp=True).info('hello')
-get_logger(time_stamp=False).info('')
-get_logger(time_stamp=True).info('world')
-get_logger(time_stamp=False).info('')
-get_logger(time_stamp=True).info('what happened?')
-
-handler = logging.StreamHandler()
-formatter = logging.Formatter('[%(asctime)s] %(levelname)s: %(message)s')
-handler.setFormatter(formatter)
-
-
-def get_logger_with_singleton_handler():
-    logger = logging.getLogger('singleton')
-    logger.addHandler(handler)
-    logger.setLevel(logging.DEBUG)
-    return logger
-
-get_logger_with_singleton_handler().info('hello')
-get_logger_with_singleton_handler().info('world')
+get_logger(timestamp=True).info('hello')
+get_logger(timestamp=False).info('hello')
+get_logger(timestamp=True).info('world')
+get_logger(timestamp=False).info('world')

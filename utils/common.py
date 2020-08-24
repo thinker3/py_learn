@@ -221,6 +221,17 @@ def unpack_length_comma_limited_stream_to_json_objects(data, encoding='utf-8'):
     return objs, data
 
 
+def get_dotted_attr(obj, dotted_attr):
+    attrs = dotted_attr.split('.')
+    while attrs:
+        attr = attrs.pop(0)
+        try:
+            obj = getattr(obj, attr)
+        except:
+            return ''
+    return obj
+
+
 if __name__ == '__main__':
     __import__('ipdb').set_trace()
     pass

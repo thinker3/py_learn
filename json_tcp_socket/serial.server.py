@@ -51,10 +51,10 @@ class Consumer(threading.Thread):
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self.data = b''
         self.objs = []
         self.request_thread_map = {}
+        super().__init__(*args, **kwargs)
 
     def handle_queue(self, device):
         thread = Consumer(self.request, device)

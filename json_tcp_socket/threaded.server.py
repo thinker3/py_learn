@@ -16,10 +16,6 @@ def send_all(request, obj):
     request.sendall(pack_json_object_to_length_comma_limited_stream(obj))
 
 
-class MyThreadingTCPServer(socketserver.ThreadingTCPServer):
-    pass
-
-
 class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
     def __init__(self, *args, **kwargs):
         self.data = b''
@@ -58,12 +54,15 @@ class ThreadedTCPRequestHandler(socketserver.BaseRequestHandler):
             send_all(self.request, response)
 
 
+class MyThreadingTCPServer(socketserver.ThreadingTCPServer):
+    daemon_threads = True
+    allow_reuse_address = True
+
+
 if __name__ == "__main__":
     host, port = "localhost", 8765
     server = MyThreadingTCPServer((host, port), ThreadedTCPRequestHandler)
     try:
         server.serve_forever()
     except KeyboardInterrupt:
-        pass
-    finally:
-        server.shutdown()
+        print('server shutdown ...')
