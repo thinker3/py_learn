@@ -6,10 +6,6 @@ class Slot(object):
     __slots__ = ('x', 'y')
 
 
-obj = Slot()
-# obj.__slots__ = ('x', 'y', 'z')  # AttributeError: 'Slot' object attribute '__slots__' is read-only
-
-
 class ListSlot(object):
     __slots__ = ['x', 'y']
 
@@ -18,4 +14,7 @@ class ListSlot(object):
         self.y = 2
         # self.z = 3  # AttributeError: 'ListSlot' object has no attribute 'z'
 
+
+obj = Slot()
+# obj.__slots__ = ('x', 'y', 'z')  # AttributeError: 'Slot' object attribute '__slots__' is read-only
 obj = ListSlot()

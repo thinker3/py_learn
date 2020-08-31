@@ -54,6 +54,7 @@ def main_dead_worker_join():
     print(('worker.is_alive()', worker.is_alive()))
     worker.join()
 
+
 if __name__ == '__main__':
     # main_wait()
     main_no_wait()
