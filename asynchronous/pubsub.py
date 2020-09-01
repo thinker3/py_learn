@@ -1,13 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import argparse
+import random
 import asyncio
+import argparse
+
 import asyncio_redis
+
 from utils import redis_utils
 
 redis_conn = redis_utils.get_redis_conn(db=0)
 channel_name = 'asynchronous.queue'
+
+
+async def handle(reply):
+    await asyncio.sleep(random.randint(1, 3))
+    print('Received: ', repr(reply.value), 'on channel', reply.channel)
 
 
 async def consume():
@@ -15,9 +23,15 @@ async def consume():
     subscriber = await connection.start_subscribe()
     await subscriber.subscribe([channel_name])
     while True:
-        reply = await subscriber.next_published()
-        print('Received: ', repr(reply.value), 'on channel', reply.channel)
-    connection.close()
+        try:
+            reply = await subscriber.next_published()
+            #task = asyncio.ensure_future(handle(reply))
+            task = asyncio.create_task(handle(reply))
+            print(task)
+        except RuntimeError:
+            #connection.close()
+            print()
+            break
 
 
 def test_server():
@@ -25,7 +39,7 @@ def test_server():
     try:
         loop.run_until_complete(consume())
     except KeyboardInterrupt:
-        print()
+        loop.close()
 
 
 def test_client():
