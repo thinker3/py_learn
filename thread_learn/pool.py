@@ -13,11 +13,8 @@ queue_name = 'thread_learn.pool'
 
 
 class Worker(threading.Thread):
-    sleepInterval = 0.1
-
-    def __init__(self, pool, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.__pool = pool
         self.__isIdle = True
         self.__isDying = False
         self.start()
@@ -28,15 +25,18 @@ class Worker(threading.Thread):
 
     def run(self):
         while self.__isDying is False:
-            value = redis_utils.get_in_queue(queue_name, redis_conn)
+            print(f'{self.name} running ...')
+            value = redis_utils.get_in_queue(queue_name, timeout=3, redis_conn=redis_conn)
             if value:
                 self.__isIdle = False
                 self.__handle(value)
+        else:
+            print(f'{self.name} quitting ...')
 
     def __handle(self, value):
-        print(f'handling "{value}" ...')
+        #print(f'handling "{value}" ...')
         sleep(random.randint(1, 3))
-        print(f'handling "{value}" done')
+        #print(f'handling "{value}" done')
         self.__isIdle = True
 
     def goAway(self):
@@ -62,7 +62,7 @@ class Manager(object):
         return [one for one in self.__threads if one.isIdle]
 
     def __initOneThread(self):
-        worker = Worker(self)
+        worker = Worker()
         self.__threads.append(worker)
 
     def __initThreads(self):
@@ -70,28 +70,30 @@ class Manager(object):
             self.__initOneThread()
 
     def __removeOneThread(self, t):
-        self.__threads.remove(t)
         t.goAway()
+        if not t.is_alive():
+            self.__threads.remove(t)
 
     def shutdown(self):
-        print(self.__threads)
         for t in self.__threads:
             self.__removeOneThread(t)
+        print(self.__threads)
 
     def serve_for_ever(self):
         while True:
             print(f'pool size: {self.poolSize}')
             sleep(self.sleepInterval)
-            if len(self.__idleThreads) < 1 and len(self.__threads) < self.__maxSize:
+            while len(self.__idleThreads) < 1 and len(self.__threads) < self.__maxSize:
                 self.__initOneThread()
+                sleep(0.1)
             if len(self.__idleThreads) > 1:
                 last = self.__idleThreads[-1]
                 if last.isIdle:
                     self.__removeOneThread(last)
 
 
-def test_server():
-    manager = Manager(minSize=1, maxSize=9)
+def test_server(size):
+    manager = Manager(minSize=1, maxSize=size)
     try:
         manager.serve_for_ever()
     except KeyboardInterrupt:
@@ -115,8 +117,9 @@ def test_client():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-r', '--role', default='server')
+    parser.add_argument('-s', '--size', type=int, default=3)
     options = parser.parse_args()
     if options.role == 'server':
-        test_server()
+        test_server(options.size)
     elif options.role == 'client':
         test_client()
